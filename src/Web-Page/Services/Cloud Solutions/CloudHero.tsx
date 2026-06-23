@@ -162,9 +162,9 @@ const CloudHero = () => {
           initial={{ x: 80, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, type: "spring", delay: 0.4 }}
-          className="relative w-full max-w-full pr-6 md:pr-12 lg:pr-16 xl:pr-24 mt-6 lg:-mt-16 overflow-hidden sm:overflow-visible flex items-center justify-end"
+          className="relative w-full max-w-full px-6 sm:px-0 sm:pr-6 md:pr-12 lg:pr-16 xl:pr-24 mt-6 lg:-mt-16 overflow-visible flex items-center justify-center sm:justify-end"
         >
-          <div className="bg-gradient-to-br from-[#EEF3FF] to-[#E0EEFF] rounded-2xl sm:rounded-[28px] p-3 sm:p-8 min-h-[260px] sm:min-h-[460px] max-w-[380px] lg:max-w-none w-full border-2 border-dashed border-[#1A7FD4]/15 shadow-[12px_12px_32px_rgba(26,127,212,0.15),-6px_-6px_16px_rgba(255,255,255,0.95)] relative flex flex-col items-center justify-center">
+          <div className="bg-gradient-to-br from-[#EEF3FF] to-[#E0EEFF] rounded-2xl sm:rounded-[28px] p-3 sm:p-8 min-h-[200px] sm:min-h-[460px] max-w-[280px] sm:max-w-[380px] lg:max-w-none w-full border-2 border-dashed border-[#1A7FD4]/15 shadow-[12px_12px_32px_rgba(26,127,212,0.15),-6px_-6px_16px_rgba(255,255,255,0.95)] relative flex flex-col items-center justify-center mx-auto sm:mx-0">
             
             {/* Diagram */}
             <div className="w-full flex flex-col items-center gap-6 sm:gap-10 relative -translate-y-4">

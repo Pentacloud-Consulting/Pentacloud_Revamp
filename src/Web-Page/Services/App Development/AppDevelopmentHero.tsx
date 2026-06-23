@@ -105,12 +105,12 @@ const AppDevelopmentHero = () => {
         </div>
 
         {/* Right Column — pinned to right edge */}
-        <div className="relative flex items-center justify-end w-full max-w-full pr-6 md:pr-12 lg:pr-16 xl:pr-24 lg:-ml-6 xl:-ml-12 mt-8 lg:mt-0 overflow-visible lg:pt-6">
+        <div className="relative flex items-center justify-center sm:justify-end w-full max-w-full px-6 sm:px-0 sm:pr-6 md:pr-12 lg:pr-16 xl:pr-24 lg:-ml-6 xl:-ml-12 mt-8 lg:mt-0 overflow-visible lg:pt-6">
           <motion.div
             initial={{ opacity: 0, x: 80, rotateY: 20 }}
             animate={{ opacity: 1, x: 0, rotateY: 0 }}
             transition={{ duration: 1, type: "spring", delay: 0.3 }}
-            className="relative w-full max-w-[380px] lg:max-w-[460px] xl:max-w-[520px] min-h-[340px] sm:min-h-[460px] bg-background rounded-[20px] sm:rounded-[28px] border-2 border-dashed border-[#1A7FD4]/20 flex items-center justify-center shadow-[20px_20px_60px_rgba(163,185,210,0.2),-10px_-10px_40px_rgba(255,255,255,0.95)] overflow-visible"
+            className="relative w-full max-w-[280px] sm:max-w-[380px] lg:max-w-[460px] xl:max-w-[520px] min-h-[300px] sm:min-h-[460px] bg-background rounded-[20px] sm:rounded-[28px] border-2 border-dashed border-[#1A7FD4]/20 flex items-center justify-center shadow-[20px_20px_60px_rgba(163,185,210,0.2),-10px_-10px_40px_rgba(255,255,255,0.95)] overflow-visible mx-auto sm:mx-0"
           >
             {/* Phone Mockups */}
             <div className="relative scale-[0.8] md:scale-95">

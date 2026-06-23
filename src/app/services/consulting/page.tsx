@@ -4,7 +4,7 @@ import Footer from "@/Component/Footer";
 
 export default function ConsultingPage() {
   return (
-    <main className="w-full min-h-screen overflow-x-hidden">
+    <main className="w-full min-h-screen overflow-x-clip">
       <Navbar />
       <ConsultingAndTraining />
       <Footer />

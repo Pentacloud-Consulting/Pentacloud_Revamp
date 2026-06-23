@@ -9,7 +9,7 @@ import Footer from "@/Component/Footer";
 
 export default function WebPage() {
   return (
-    <main className="w-full bg-[#F0F6FF] min-h-screen overflow-x-hidden">
+    <main className="w-full bg-[#F0F6FF] min-h-screen overflow-x-clip">
       <Navbar />
       <WebDevelopmentHero />
       <WebWhatWeBuild />

@@ -62,69 +62,72 @@ const ZohoHero = () => {
             initial={{ opacity: 0, scale: 0.9, x: 50 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative w-full max-w-full pr-6 md:pr-12 lg:pr-16 xl:pr-24 mt-8 lg:mt-0 overflow-visible"
+            className="relative flex items-center justify-center sm:justify-end w-full max-w-full px-6 sm:px-0 sm:pr-6 md:pr-12 lg:pr-16 xl:pr-24 mt-8 lg:mt-0 overflow-visible"
           >
-            {/* Main Image Area */}
-            <div className="bg-white p-2 rounded-[24px] sm:rounded-[48px] shadow-2xl border border-white/80 relative overflow-hidden aspect-[4/3] flex items-center justify-center group">
-               <img 
-                 src="/Images/Zoho Images/Zoho-Hero.webp" 
-                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                 alt="Zoho Dashboard" 
-               />
-               <div className="absolute inset-0 bg-gradient-to-br from-blue-50/20 to-indigo-50/10" />
+            {/* Wrapper for Image and Cards so they scale together */}
+            <div className="relative w-full max-w-[280px] sm:max-w-[420px] lg:max-w-none mx-auto sm:mx-0">
+              {/* Main Image Area */}
+              <div className="bg-white p-2 rounded-[24px] sm:rounded-[48px] shadow-2xl border border-white/80 relative overflow-hidden aspect-[4/3] flex items-center justify-center group w-full">
+                 <img 
+                   src="/Images/Zoho Images/Zoho-Hero.webp" 
+                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                   alt="Zoho Dashboard" 
+                 />
+                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50/20 to-indigo-50/10" />
+              </div>
+
+              {/* Floating Stat Cards */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-[24px] border border-slate-100 shadow-[0_10px_30px_rgba(163,185,210,0.25)] absolute -top-2 right-1 sm:-top-4 sm:right-2 p-2 sm:p-5 flex flex-col items-center gap-1 sm:gap-3 z-20 min-w-[70px] sm:min-w-[130px]"
+              >
+                 <div className="w-5 h-5 sm:w-10 sm:h-10 rounded-lg sm:rounded-2xl bg-white shadow-sm border border-slate-100/50 flex items-center justify-center">
+                   <Globe className="w-3 h-3 sm:w-5 sm:h-5 text-blue-500" />
+                 </div>
+                 <div className="flex flex-col items-center">
+                   <h4 className="text-sm sm:text-[32px] font-nunito font-black text-[#0D1B2A] leading-none mb-0.5 sm:mb-1">
+                     10<span className="text-blue-500">+</span>
+                   </h4>
+                   <p className="text-[6px] sm:text-[11px] font-bold text-[#0D1B2A] leading-none text-center">Industries Served</p>
+                 </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8 }}
+                className="bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-[24px] border border-slate-100 shadow-[0_10px_30px_rgba(163,185,210,0.25)] absolute bottom-4 -left-2 sm:bottom-12 sm:-left-6 p-2 sm:p-5 flex flex-col items-center gap-1 sm:gap-3 z-20 min-w-[70px] sm:min-w-[140px]"
+              >
+                 <div className="w-5 h-5 sm:w-10 sm:h-10 rounded-lg sm:rounded-2xl bg-white shadow-sm border border-slate-100/50 flex items-center justify-center">
+                   <Briefcase className="w-3 h-3 sm:w-5 sm:h-5 text-indigo-500" />
+                 </div>
+                 <div className="flex flex-col items-center">
+                   <h4 className="text-sm sm:text-[32px] font-nunito font-black text-[#0D1B2A] leading-none mb-0.5 sm:mb-1">
+                     25<span className="text-blue-500">+</span>
+                   </h4>
+                   <p className="text-[6px] sm:text-[11px] font-bold text-[#0D1B2A] leading-none text-center">Projects Completed</p>
+                 </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.0 }}
+                className="bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-[24px] border border-slate-100 shadow-[0_10px_30px_rgba(163,185,210,0.25)] absolute -bottom-2 right-1 sm:-bottom-4 sm:right-6 p-2 sm:p-5 flex flex-col items-center gap-1 sm:gap-3 z-20 min-w-[70px] sm:min-w-[130px]"
+              >
+                 <div className="w-5 h-5 sm:w-10 sm:h-10 rounded-lg sm:rounded-2xl bg-white shadow-sm border border-slate-100/50 flex items-center justify-center">
+                   <TrendingUp className="w-3 h-3 sm:w-5 sm:h-5 text-[#34C98A]" />
+                 </div>
+                 <div className="flex flex-col items-center">
+                   <h4 className="text-sm sm:text-[32px] font-nunito font-black text-[#0D1B2A] leading-none mb-0.5 sm:mb-1">
+                     300<span className="text-blue-500">%</span>
+                   </h4>
+                   <p className="text-[6px] sm:text-[11px] font-bold text-[#0D1B2A] leading-none text-center">Average ROI</p>
+                 </div>
+              </motion.div>
             </div>
-
-            {/* Floating Stat Cards */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="bg-white/95 backdrop-blur-sm rounded-[24px] border border-slate-100 shadow-[0_10px_30px_rgba(163,185,210,0.25)] absolute top-2 right-2 sm:-top-4 sm:right-2 p-3 sm:p-5 flex flex-col items-center gap-2 sm:gap-3 z-20 min-w-[90px] sm:min-w-[130px]"
-            >
-               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl bg-white shadow-sm border border-slate-100/50 flex items-center justify-center">
-                 <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
-               </div>
-               <div className="flex flex-col items-center">
-                 <h4 className="text-xl sm:text-[32px] font-nunito font-black text-[#0D1B2A] leading-none mb-1">
-                   10<span className="text-blue-500">+</span>
-                 </h4>
-                 <p className="text-[8px] sm:text-[11px] font-bold text-[#0D1B2A] leading-none">Industries Served</p>
-               </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8 }}
-              className="bg-white/95 backdrop-blur-sm rounded-[24px] border border-slate-100 shadow-[0_10px_30px_rgba(163,185,210,0.25)] absolute bottom-4 left-2 sm:bottom-12 sm:-left-6 p-3 sm:p-5 flex flex-col items-center gap-2 sm:gap-3 z-20 min-w-[90px] sm:min-w-[140px]"
-            >
-               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl bg-white shadow-sm border border-slate-100/50 flex items-center justify-center">
-                 <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-500" />
-               </div>
-               <div className="flex flex-col items-center">
-                 <h4 className="text-xl sm:text-[32px] font-nunito font-black text-[#0D1B2A] leading-none mb-1">
-                   25<span className="text-blue-500">+</span>
-                 </h4>
-                 <p className="text-[8px] sm:text-[11px] font-bold text-[#0D1B2A] leading-none">Projects Completed</p>
-               </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0 }}
-              className="bg-white/95 backdrop-blur-sm rounded-[24px] border border-slate-100 shadow-[0_10px_30px_rgba(163,185,210,0.25)] absolute bottom-2 right-2 sm:-bottom-4 sm:right-6 p-3 sm:p-5 flex flex-col items-center gap-2 sm:gap-3 z-20 min-w-[90px] sm:min-w-[130px]"
-            >
-               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl bg-white shadow-sm border border-slate-100/50 flex items-center justify-center">
-                 <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-[#34C98A]" />
-               </div>
-               <div className="flex flex-col items-center">
-                 <h4 className="text-xl sm:text-[32px] font-nunito font-black text-[#0D1B2A] leading-none mb-1">
-                   300<span className="text-blue-500">%</span>
-                 </h4>
-                 <p className="text-[8px] sm:text-[11px] font-bold text-[#0D1B2A] leading-none">Average ROI</p>
-               </div>
-            </motion.div>
           </motion.div>
 
         </div>

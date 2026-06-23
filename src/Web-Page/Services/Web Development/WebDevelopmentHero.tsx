@@ -107,12 +107,12 @@ const WebDevelopmentHero = () => {
         </div>
 
         {/* Right Column — pinned to right edge */}
-        <div className="relative flex items-start justify-end w-full max-w-full pr-6 md:pr-12 lg:pr-16 xl:pr-24 mt-6 lg:mt-0 overflow-visible lg:self-start lg:pt-8 xl:pt-12">
+        <div className="relative flex items-start justify-center sm:justify-end w-full max-w-full px-6 sm:px-0 sm:pr-6 md:pr-12 lg:pr-16 xl:pr-24 mt-6 lg:mt-0 overflow-visible lg:self-start lg:pt-8 xl:pt-12">
            <motion.div
             initial={{ opacity: 0, x: 80 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, type: "spring", delay: 0.3 }}
-            className={`relative w-full max-w-[400px] lg:max-w-[460px] xl:max-w-[500px] aspect-[16/10] bg-white rounded-2xl sm:rounded-[28px] shadow-[12px_12px_40px_rgba(26,127,212,0.15)] group`}
+            className={`relative w-full max-w-[280px] sm:max-w-[400px] lg:max-w-[460px] xl:max-w-[500px] aspect-[16/10] bg-white rounded-2xl sm:rounded-[28px] shadow-[12px_12px_40px_rgba(26,127,212,0.15)] group mx-auto sm:mx-0`}
           >
             {/* Browser Content Wrapper (Clipped) */}
             <div className="absolute inset-0 rounded-2xl sm:rounded-[28px] overflow-hidden">

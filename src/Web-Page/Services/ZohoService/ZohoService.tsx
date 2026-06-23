@@ -6,8 +6,6 @@ import ZohoApps from "./ZohoApps";
 import ZohoOurServices from "./ZohoOurServices";
 import ZohoIndustries from "./ZohoIndustries";
 import ZohoFAQ from "./ZohoFAQ";
-import ZohoPackages from "./ZohoPackages";
-import ZohoCTA from "./ZohoCTA";
 
 const ZohoService = () => {
   return (
@@ -24,14 +22,12 @@ const ZohoService = () => {
       {/* ─── Industries Section ──────────────────────────────────── */}
       <ZohoIndustries />
 
-      {/* ─── Packages Section ────────────────────────────────────── */}
-      <ZohoPackages />
+
 
       {/* ─── FAQ Section ─────────────────────────────────────────── */}
       <ZohoFAQ />
 
-      {/* ─── CTA Section ─────────────────────────────────────────── */}
-      <ZohoCTA />
+
     </main>
   );
 };

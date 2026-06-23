@@ -320,13 +320,13 @@ const OurExpertise = () => {
   const activeCloud = clouds[activeIndex];
 
   return (
-    <section className="pt-10 pb-6 px-4 sm:px-6 bg-background relative overflow-hidden flex items-center">
+    <section className="pt-6 sm:pt-10 pb-4 sm:pb-6 px-3 sm:px-6 bg-background relative overflow-hidden flex items-center">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#1A7FD4]/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#1A7FD4]/3 rounded-full blur-[120px] pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10 w-full">
-        <div className="text-center mb-6 sm:mb-10 flex flex-col items-center">
+        <div className="text-center mb-4 sm:mb-10 flex flex-col items-center">
           <div className="text-[#1A7FD4] font-nunito font-bold text-[9px] sm:text-[11px] tracking-[4px] uppercase mb-2 leading-none">OUR EXPERTISE</div>
           <h2 className="font-nunito font-extrabold text-2xl sm:text-[36px] md:text-[42px] text-[#0D1B2A] leading-tight">
             Salesforce Clouds <span className="text-[#1A7FD4]">We Master</span>
@@ -337,7 +337,7 @@ const OurExpertise = () => {
         <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] lg:grid-cols-[320px_1fr] gap-0 rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[20px_20px_60px_rgba(163,185,210,0.2),-10px_-10px_40px_rgba(255,255,255,0.9)] border border-slate-200/40 bg-background">
           
           {/* Left Sidebar: Folder Tabs */}
-          <div className="bg-background/80 p-4 sm:p-6 border-b md:border-b-0 md:border-r border-slate-200/60 flex flex-row md:flex-col overflow-x-auto overflow-y-hidden md:overflow-x-hidden md:overflow-y-auto shrink-0 w-full md:w-auto">
+          <div className="bg-slate-50/50 md:bg-background/80 p-3 sm:p-6 border-b md:border-b-0 md:border-r border-slate-200/60 flex flex-col shrink-0 w-full md:w-auto">
             <div className="hidden md:flex items-center gap-3 mb-6 pb-4 border-b border-slate-300/30 shrink-0">
               <div className="w-10 h-10 bg-[#1A7FD4] rounded-xl flex items-center justify-center text-white shadow-md">
                 <Files size={20} />
@@ -345,7 +345,7 @@ const OurExpertise = () => {
               <span className="font-nunito font-black text-[10px] uppercase tracking-[2px] text-[#0D1B2A]">Solutions Catalog</span>
             </div>
 
-            <div className="flex flex-row md:flex-col gap-2 md:space-y-1.5 overflow-x-auto overflow-y-hidden md:overflow-x-hidden md:overflow-y-auto pr-1 flex-1 custom-scrollbar w-full whitespace-nowrap">
+            <div className="flex flex-row md:flex-col gap-2 md:space-y-1.5 overflow-x-auto md:overflow-x-hidden overflow-y-hidden md:overflow-y-auto pb-2 md:pb-0 px-1 md:px-0 flex-1 w-full whitespace-nowrap snap-x snap-mandatory custom-scrollbar">
               {clouds.map((cloud, i) => {
                 const isActive = activeIndex === i;
                 return (
@@ -353,24 +353,24 @@ const OurExpertise = () => {
                     key={i}
                     onClick={() => setActiveIndex(i)}
                     whileHover={{ x: 3 }}
-                    className={`relative p-2.5 md:p-3 rounded-lg md:rounded-xl cursor-pointer transition-all duration-300 flex flex-row items-center gap-2 md:gap-4 group shrink-0 ${
+                    className={`relative px-4 py-2.5 md:p-3 rounded-full md:rounded-xl cursor-pointer transition-all duration-300 flex flex-row items-center gap-2 md:gap-4 group shrink-0 snap-center border ${
                       isActive 
-                        ? 'bg-white shadow-[4px_4px_15px_rgba(0,0,0,0.05)] md:translate-x-3 z-20' 
-                        : 'hover:bg-slate-200/50 z-10'
+                        ? 'bg-white shadow-sm md:translate-x-3 z-20 border-[#1A7FD4]/20 md:border-transparent' 
+                        : 'bg-white/40 md:bg-transparent border-white/50 md:border-transparent hover:bg-slate-200/50 z-10'
                     }`}
                   >
                     {isActive && (
                       <motion.div 
                         layoutId="activeTabIndicator"
-                        className="absolute left-2 right-2 bottom-0 h-[3px] md:left-0 md:top-2 md:bottom-2 md:w-1.5 md:h-auto rounded-full"
+                        className="absolute hidden md:block md:left-0 md:top-2 md:bottom-2 md:w-1.5 md:h-auto rounded-full"
                         style={{ backgroundColor: cloud.color }}
                       />
                     )}
 
                     <div 
-                      className={`w-7 h-7 md:w-9 md:h-9 rounded-lg flex items-center justify-center transition-all duration-300 shrink-0 ${
+                      className={`w-6 h-6 md:w-9 md:h-9 rounded-md md:rounded-lg flex items-center justify-center transition-all duration-300 shrink-0 ${
                         isActive ? 'scale-110 shadow-sm' : 'opacity-60 grayscale'
-                      } [&_svg]:w-4 [&_svg]:h-4 [&_svg]:md:w-[18px] [&_svg]:md:h-[18px]`}
+                      } [&_svg]:w-3.5 [&_svg]:h-3.5 [&_svg]:md:w-[18px] [&_svg]:md:h-[18px]`}
                       style={{ backgroundColor: isActive ? cloud.bg : 'transparent', color: isActive ? cloud.color : '#64748B' }}
                     >
                       <cloud.icon />
@@ -398,7 +398,7 @@ const OurExpertise = () => {
           </div>
 
           {/* Right Area: Content Sheet */}
-          <div className="p-5 sm:p-10 lg:p-12 bg-background relative flex items-center justify-center min-h-[450px] md:min-h-[550px] overflow-hidden w-full">
+          <div className="p-4 sm:p-10 lg:p-12 bg-background relative flex items-center justify-center min-h-auto sm:min-h-[450px] md:min-h-[550px] overflow-hidden w-full py-6 sm:py-10">
             
             {/* Floating Clouds Background Animation */}
             <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
@@ -437,7 +437,7 @@ const OurExpertise = () => {
                     <motion.div 
                       initial={{ scale: 0.8, rotate: -10 }}
                       animate={{ scale: 1, rotate: 0 }}
-                      className="w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-[24px] flex items-center justify-center shadow-2xl relative bg-white border-4 border-white overflow-hidden shrink-0 [&_svg]:w-8 [&_svg]:h-8 [&_svg]:md:w-10 [&_svg]:md:h-10"
+                      className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl md:rounded-[24px] flex items-center justify-center shadow-2xl relative bg-white border-2 sm:border-4 border-white overflow-hidden shrink-0 [&_svg]:w-6 [&_svg]:h-6 [&_svg]:sm:w-8 [&_svg]:sm:h-8 [&_svg]:md:w-10 [&_svg]:md:h-10"
                       style={{ boxShadow: `0 20px 40px ${activeCloud.bg}80`, color: activeCloud.color }}
                     >
                       <div className="absolute inset-0 opacity-10" style={{ backgroundColor: activeCloud.bg }} />
@@ -450,7 +450,7 @@ const OurExpertise = () => {
                         <span className="text-[#1A7FD4] font-nunito font-black text-[8.5px] sm:text-[10px] tracking-[3px] uppercase leading-none">Expertise Module</span>
                         <div className="w-8 h-[1px] bg-[#1A7FD4]/30" />
                       </div>
-                      <h3 className="font-nunito font-black text-xl sm:text-[32px] md:text-[40px] text-[#0D1B2A] leading-tight mb-2 sm:mb-4 truncate">
+                      <h3 className="font-nunito font-black text-lg sm:text-[32px] md:text-[40px] text-[#0D1B2A] leading-tight mb-2 sm:mb-4 truncate">
                         {activeCloud.title}
                       </h3>
                       <motion.div 
@@ -465,33 +465,26 @@ const OurExpertise = () => {
                     </div>
                   </div>
 
-                  <p className="font-inter text-xs sm:text-[16px] md:text-[18px] text-[#4A6080] leading-[1.6] mb-8 max-w-xl">
+                  <p className="font-inter text-[11px] sm:text-[16px] md:text-[18px] text-[#4A6080] leading-[1.6] mb-4 sm:mb-8 max-w-xl">
                     {activeCloud.desc}
                   </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4 mb-5 sm:mb-8">
                     {activeCloud.features.map((feature, i) => (
                       <motion.div 
                         key={i}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: i * 0.1 }}
-                        className="flex items-center gap-3 bg-slate-50/50 p-3 rounded-xl border border-slate-100/50"
+                        className="flex items-center gap-2 sm:gap-3 bg-slate-50/50 p-2 sm:p-3 rounded-xl border border-slate-100/50"
                       >
                          <CheckCircle2 size={16} className="text-[#34C98A] shrink-0" />
-                         <span className="text-[12px] sm:text-[13px] font-bold text-[#4A6080]">{feature}</span>
+                         <span className="text-[10.5px] sm:text-[13px] font-bold text-[#4A6080]">{feature}</span>
                       </motion.div>
                     ))}
                   </div>
 
-                  <motion.button
-                    whileHover={{ gap: "1.25rem" }}
-                    className="flex items-center gap-3 text-white font-nunito font-black text-xs sm:text-sm px-6 py-3 rounded-xl transition-all duration-300 w-fit group"
-                    style={{ backgroundColor: activeCloud.color }}
-                  >
-                    <span>Transform your business</span>
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                  </motion.button>
+
                 </div>
 
                 {/* Right Visual Area (Desktop Only) */}
@@ -536,9 +529,17 @@ const OurExpertise = () => {
           height: 0px;
           width: 0px;
         }
+        .custom-scrollbar {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
         @media (min-width: 768px) {
           .custom-scrollbar::-webkit-scrollbar {
             width: 4px;
+            height: 4px;
+          }
+          .custom-scrollbar {
+            scrollbar-width: thin;
           }
           .custom-scrollbar::-webkit-scrollbar-track {
             background: transparent;

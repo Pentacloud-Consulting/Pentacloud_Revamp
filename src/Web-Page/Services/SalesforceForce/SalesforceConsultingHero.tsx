@@ -114,12 +114,12 @@ const SalesforceConsultingHero = () => {
         </div>
 
         {/* Right Column — pinned to right edge */}
-        <div className="relative flex items-center justify-end w-full max-w-full pr-6 md:pr-12 lg:pr-16 xl:pr-24 mt-8 lg:mt-0 overflow-hidden sm:overflow-visible">
+        <div className="relative flex items-center justify-center sm:justify-end w-full max-w-full px-6 sm:px-0 sm:pr-6 md:pr-12 lg:pr-16 xl:pr-24 mt-8 lg:mt-0 overflow-visible">
           <motion.div
             initial={{ opacity: 0, x: 80 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, type: "spring", delay: 0.3 }}
-            className={`relative w-full max-w-[380px] lg:max-w-[440px] aspect-[4/5] bg-background rounded-[20px] sm:rounded-[28px] border-2 border-dashed border-[#1A7FD4]/20 flex items-center justify-center shadow-[10px_10px_20px_rgba(163,185,210,0.5),-10px_-10px_20px_rgba(255,255,255,0.95)] group`}
+            className={`relative w-full max-w-[280px] sm:max-w-[380px] lg:max-w-[440px] aspect-[4/5] bg-background rounded-[20px] sm:rounded-[28px] border-2 border-dashed border-[#1A7FD4]/20 flex items-center justify-center shadow-[10px_10px_20px_rgba(163,185,210,0.5),-10px_-10px_20px_rgba(255,255,255,0.95)] group mx-auto sm:mx-0`}
           >
             {/* Hero Image */}
             <div className="absolute inset-0 rounded-[24px] sm:rounded-[32px] overflow-hidden">

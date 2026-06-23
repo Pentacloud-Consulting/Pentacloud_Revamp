@@ -114,47 +114,51 @@ const Footer = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-0 mb-8 sm:mb-10 w-full"
+            className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-8 mb-8 sm:mb-12 w-full"
           >
             {/* Brand Info */}
-            <motion.div variants={itemVariants} className="flex flex-col items-start gap-4 sm:gap-6 w-full lg:w-[35%] lg:pr-8">
-              <Image 
-                src="/Logo/Pentacloud logo.png" 
-                alt="Pentacloud Logo" 
-                width={150} 
-                height={38} 
-                className="h-8 sm:h-10 w-auto object-contain brightness-0 invert"
-              />
-              <p className="text-slate-400 text-xs sm:text-sm md:text-base leading-relaxed max-w-[280px] lg:max-w-[320px]">
-                Architecting the future of business with cutting-edge cloud infrastructure, automation, and enterprise integrations.
-              </p>
+            <motion.div variants={itemVariants} className="flex flex-col items-start gap-3 sm:gap-4 w-full lg:max-w-[320px]">
+              {/* Logo + tagline on same row */}
               <div className="flex items-center gap-3">
-                {socialLinks.map((social) => (
-                  <a 
-                    key={social.name} 
-                    href={social.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="relative w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 overflow-hidden group"
-                  >
-                    <div className="absolute inset-0 bg-blue-600 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-                    <span className="relative z-10 group-hover:text-white transition-colors duration-300">
-                      {social.icon}
-                    </span>
-                  </a>
-                ))}
+                <Image 
+                  src="/Logo/Pentacloud logo.png" 
+                  alt="Pentacloud Logo" 
+                  width={150} 
+                  height={38} 
+                  className="h-8 sm:h-10 w-auto object-contain brightness-0 invert shrink-0"
+                />
+                <p className="text-white/90 text-sm sm:text-base leading-tight font-serif italic tracking-wide font-medium whitespace-nowrap">
+                  Journey Towards Success.
+                </p>
               </div>
+              <p className="text-white/50 text-xs sm:text-sm leading-relaxed max-w-[280px] lg:max-w-full -mt-1">
+                Empowering businesses with cloud, automation &amp; integrations.
+              </p>
+              
+              <ul className="flex flex-col gap-3 mt-2">
+                <li className="flex items-center gap-2.5 group cursor-pointer">
+                  <div className="w-6 h-6 rounded-md bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-indigo-500/20 group-hover:border-indigo-500/50 transition-all duration-300 shrink-0">
+                    <Phone className="w-3 h-3 text-white/70 group-hover:text-white transition-colors" />
+                  </div>
+                  <span className="text-white/70 text-xs group-hover:text-white transition-colors">
+                    +971 545 132 807
+                  </span>
+                </li>
+                <li className="flex items-center gap-2.5 group cursor-pointer">
+                  <div className="w-6 h-6 rounded-md bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-purple-500/20 group-hover:border-purple-500/50 transition-all duration-300 shrink-0">
+                    <Mail className="w-3 h-3 text-white/70 group-hover:text-white transition-colors" />
+                  </div>
+                  <span className="text-white/70 text-xs group-hover:text-white transition-colors break-all">
+                    contactus@pentacloudconsulting.com
+                  </span>
+                </li>
+              </ul>
 
-              {/* Big Background Text - Desktop */}
-              <div className="hidden lg:block w-[1200px] lg:w-[1400px] pointer-events-none select-none z-0 mt-2 sm:mt-6 -ml-1">
-                <span className="text-[16vw] sm:text-[140px] lg:text-[9vw] leading-[0.75] font-black text-white/5 tracking-tight text-left block">
-                  PENTACLOUD
-                </span>
-              </div>
+
             </motion.div>
 
             {/* Explore Links */}
-            <motion.div variants={itemVariants} className="flex flex-col gap-3 sm:gap-4 w-full lg:w-[12%]">
+            <motion.div variants={itemVariants} className="flex flex-col gap-3 sm:gap-4 w-full lg:w-auto">
               <h4 className="text-white font-bold text-base sm:text-lg lg:text-xl tracking-wide mb-1 sm:mb-2">Explore</h4>
               <ul className="flex flex-col gap-2.5">
                 {[
@@ -163,9 +167,9 @@ const Footer = () => {
                   { name: 'Contact', href: '/contact' }
                 ].map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href} className="text-slate-400 hover:text-blue-400 transition-all duration-300 inline-flex items-center group">
-                      <ArrowRight className="w-3.5 h-3.5 mr-0 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:mr-2 group-hover:translate-x-0 transition-all duration-300 text-blue-400" />
-                      <span className="text-xs sm:text-sm group-hover:translate-x-1 transition-transform duration-300">{link.name}</span>
+                    <Link href={link.href} className="text-white/90 hover:text-white transition-all duration-300 inline-flex items-center group">
+                      <ArrowRight className="w-3.5 h-3.5 mr-0 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:mr-2 group-hover:translate-x-0 transition-all duration-300 text-white" />
+                      <span className="text-xs sm:text-sm group-hover:translate-x-1 transition-transform duration-300 whitespace-nowrap">{link.name}</span>
                     </Link>
                   </li>
                 ))}
@@ -173,7 +177,7 @@ const Footer = () => {
             </motion.div>
 
             {/* Services Links */}
-            <motion.div variants={itemVariants} className="flex flex-col gap-3 sm:gap-4 w-full lg:w-[28%]">
+            <motion.div variants={itemVariants} className="flex flex-col gap-3 sm:gap-4 w-full lg:w-auto">
               <h4 className="text-white font-bold text-base sm:text-lg lg:text-xl tracking-wide mb-1 sm:mb-2">Services</h4>
               <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5">
                 {[
@@ -187,81 +191,118 @@ const Footer = () => {
                   { name: 'Consulting And Training', href: '/services/consulting' }
                 ].map((service) => (
                   <li key={service.name}>
-                    <Link href={service.href} className="text-slate-400 hover:text-indigo-400 transition-all duration-300 inline-flex items-center group">
-                      <ArrowRight className="w-3.5 h-3.5 mr-0 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:mr-2 group-hover:translate-x-0 transition-all duration-300 text-indigo-400" />
-                      <span className="text-xs sm:text-sm group-hover:translate-x-1 transition-transform duration-300">{service.name}</span>
+                    <Link href={service.href} className="text-white/90 hover:text-white transition-all duration-300 inline-flex items-center group">
+                      <ArrowRight className="w-3.5 h-3.5 mr-0 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:mr-2 group-hover:translate-x-0 transition-all duration-300 text-white" />
+                      <span className="text-xs sm:text-sm group-hover:translate-x-1 transition-transform duration-300 whitespace-nowrap">{service.name}</span>
                     </Link>
                   </li>
                 ))}
               </ul>
             </motion.div>
 
-            {/* Contact Info */}
-            <motion.div variants={itemVariants} className="flex flex-col gap-3 sm:gap-4 w-full lg:w-[25%]">
-              <h4 className="text-white font-bold text-base sm:text-lg lg:text-xl tracking-wide mb-1 sm:mb-2">Contact</h4>
+            {/* Location Info */}
+            <motion.div variants={itemVariants} className="flex flex-col gap-3 sm:gap-4 w-full lg:w-auto">
+              <h4 className="text-white font-bold text-base sm:text-lg lg:text-xl tracking-wide mb-1 sm:mb-2">Location</h4>
               <ul className="flex flex-col gap-4">
-                <li className="flex flex-col gap-2 group cursor-pointer w-full">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-blue-500/20 group-hover:border-blue-500/50 transition-all duration-300 shrink-0">
-                      <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                <li className="flex flex-col gap-2 group cursor-default w-full">
+                  <div className="flex flex-col gap-4 text-white/90 text-xs sm:text-sm mt-1">
+                    <div className="flex items-center gap-3 hover:text-white transition-colors group/loc cursor-pointer">
+                      <img src="https://flagcdn.com/w20/in.png" alt="India Flag" className="w-5 h-auto rounded-[2px] opacity-90 group-hover/loc:opacity-100 transition-opacity" />
+                      <span className="whitespace-nowrap">Bangalore, India</span>
                     </div>
-                    <span className="text-slate-400 text-xs sm:text-sm font-semibold group-hover:text-white transition-colors">Locations</span>
-                  </div>
-                  <div className="flex flex-col gap-3 pl-[44px] sm:pl-[56px] text-slate-400 text-xs sm:text-sm mt-1">
-                    <div className="flex items-center gap-3 hover:text-white transition-colors group/loc">
-                      <img src="https://flagcdn.com/w20/in.png" alt="India Flag" className="w-4 h-auto rounded-[2px] opacity-70 group-hover/loc:opacity-100 transition-opacity" />
-                      <span>Bangalore, India</span>
+                    <div className="flex items-center gap-3 hover:text-white transition-colors group/loc cursor-pointer">
+                      <img src="https://flagcdn.com/w20/ae.png" alt="Dubai Flag" className="w-5 h-auto rounded-[2px] opacity-90 group-hover/loc:opacity-100 transition-opacity" />
+                      <span className="whitespace-nowrap">Dubai, UAE</span>
                     </div>
-                    <div className="flex items-center gap-3 hover:text-white transition-colors group/loc">
-                      <img src="https://flagcdn.com/w20/ae.png" alt="Dubai Flag" className="w-4 h-auto rounded-[2px] opacity-70 group-hover/loc:opacity-100 transition-opacity" />
-                      <span>Dubai, UAE</span>
-                    </div>
-                    <div className="flex items-center gap-3 hover:text-white transition-colors group/loc">
-                      <img src="https://flagcdn.com/w20/qa.png" alt="Qatar Flag" className="w-4 h-auto rounded-[2px] opacity-70 group-hover/loc:opacity-100 transition-opacity" />
-                      <span>Doha, Qatar</span>
+                    <div className="flex items-center gap-3 hover:text-white transition-colors group/loc cursor-pointer">
+                      <img src="https://flagcdn.com/w20/qa.png" alt="Qatar Flag" className="w-5 h-auto rounded-[2px] opacity-90 group-hover/loc:opacity-100 transition-opacity" />
+                      <span className="whitespace-nowrap">Doha, Qatar</span>
                     </div>
                   </div>
-                </li>
-                <li className="flex items-center gap-3 sm:gap-4 group cursor-pointer">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-indigo-500/20 group-hover:border-indigo-500/50 transition-all duration-300 shrink-0">
-                    <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-indigo-400 transition-colors" />
-                  </div>
-                  <span className="text-slate-400 text-xs sm:text-sm group-hover:text-white transition-colors">
-                    +971 545 132 807
-                  </span>
-                </li>
-                <li className="flex items-center gap-3 sm:gap-4 group cursor-pointer">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-purple-500/20 group-hover:border-purple-500/50 transition-all duration-300 shrink-0">
-                    <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-purple-400 transition-colors" />
-                  </div>
-                  <span className="text-slate-400 text-xs sm:text-sm group-hover:text-white transition-colors">
-                    contactus@pentacloudconsulting.com
-                  </span>
                 </li>
               </ul>
             </motion.div>
           </motion.div>
 
+          {/* Big Background Text - Desktop */}
+          <div className="hidden lg:flex w-full justify-center pointer-events-none select-none z-0 mb-12 relative mt-4">
+            <div className="relative inline-block">
+              <span 
+                className="text-[9.5vw] leading-[0.8] font-black tracking-tight text-center block"
+                style={{
+                  color: '#151d39ff',
+                  textShadow: `
+                    -1px -1px 0 rgba(255, 255, 255, 0.08),
+                     1px -1px 0 rgba(255, 255, 255, 0.08),
+                    -1px  1px 0 rgba(255, 255, 255, 0.03),
+                     1px  1px 0 rgba(255, 255, 255, 0.03),
+                     0 -2px 6px rgba(255, 255, 255, 0.04)
+                  `
+                }}
+              >
+                PENTACLOUD
+              </span>
+            </div>
+          </div>
+
           {/* Big Background Text - Mobile */}
-          <div className="block lg:hidden w-full pointer-events-none select-none z-0 overflow-hidden mb-6 mt-4">
-            <span className="text-[10.5vw] sm:text-[9vw] leading-[0.75] font-black text-white/5 tracking-tight text-center block w-full">
+          <div className="block lg:hidden w-full pointer-events-none select-none z-0 overflow-hidden mb-6 mt-4 relative">
+            <span 
+              className="text-[11vw] sm:text-[9vw] leading-[0.75] font-black tracking-tight text-center block w-full"
+              style={{
+                color: '#191e30',
+                textShadow: `
+                  -1px -1px 0 rgba(255, 255, 255, 0.08),
+                   1px -1px 0 rgba(255, 255, 255, 0.08),
+                  -1px  1px 0 rgba(255, 255, 255, 0.03),
+                   1px  1px 0 rgba(255, 255, 255, 0.03),
+                   0 -2px 6px rgba(255, 255, 255, 0.04)
+                `
+              }}
+            >
               PENTACLOUD
             </span>
           </div>
 
           {/* Bottom Bar */}
-          <div className="relative border-t border-white/10 pt-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-slate-500 text-xs sm:text-sm text-center md:text-left">
-              © {new Date().getFullYear()} Pentacloud Consulting. All rights reserved.
-            </p>
-            <div className="flex items-center gap-4 text-xs sm:text-sm text-slate-500">
-              <Link href="/terms" className="hover:text-blue-400 transition-colors duration-300">
-                Terms of Service
-              </Link>
-              <span className="text-slate-700">|</span>
-              <Link href="/privacy" className="hover:text-blue-400 transition-colors duration-300">
-                Privacy Policy
-              </Link>
+          <div className="relative border-t border-white/10 pt-6 pb-4 flex flex-col lg:flex-row items-center justify-between gap-6">
+            
+            {/* Copyright - Left */}
+            <div className="flex-1 flex justify-center lg:justify-start">
+              <p className="text-white/90 text-xs sm:text-sm text-center lg:text-left">
+                © {new Date().getFullYear()} Pentacloud Consulting. All rights reserved.
+              </p>
+            </div>
+
+            {/* Social Icons Centered */}
+            <div className="flex-shrink-0 flex items-center justify-center gap-4">
+              {socialLinks.map((social) => (
+                <a 
+                  key={social.name} 
+                  href={social.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/90 overflow-hidden group"
+                >
+                  <div className="absolute inset-0 bg-blue-600 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                  <span className="relative z-10 group-hover:text-white transition-colors duration-300">
+                    {social.icon}
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            {/* Links - Right */}
+            <div className="flex-1 flex justify-center lg:justify-end">
+              <div className="flex items-center gap-4 text-xs sm:text-sm text-white/90">
+                <Link href="/terms" className="hover:text-white transition-colors duration-300">
+                  Terms of Service
+                </Link>
+                <span className="text-white/40">|</span>
+                <Link href="/privacy" className="hover:text-white transition-colors duration-300">
+                  Privacy Policy
+                </Link>
+              </div>
             </div>
           </div>
         </div>
