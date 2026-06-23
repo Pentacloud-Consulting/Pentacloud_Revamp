@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+:root {
+  --background: #E8F0F8;
+  --foreground: #0f172a; /* slate-900 */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-nunito: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-inter: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Salesforce Journey Card Animation */
+.journey-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.journey-card::before,
+.journey-card::after {
+  position: absolute;
+  content: "";
+  width: 0%;
+  height: 0%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  z-index: 1;
+  opacity: 0;
+}
+
+.journey-card::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 28px 0 100%;
+  background: #1A7FD4; /* Fixed blue theme color */
+  filter: opacity(0.12);
+}
+
+.journey-card::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100% 0 28px;
+  background: #1A7FD4; /* Fixed blue theme color */
+  filter: opacity(0.12);
+}
+
+.journey-card:hover::before,
+.journey-card:hover::after {
+  width: 100%;
+  height: 100%;
+  border-radius: 28px;
+  opacity: 1;
+}
+
+.journey-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Premium Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 0px; /* Hide horizontal scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(26, 127, 212, 0.1);
+  border-radius: 20px;
+  border: 1px solid transparent;
+  background-clip: content-box;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(26, 127, 212, 0.3);
+  background-clip: content-box;
+}
