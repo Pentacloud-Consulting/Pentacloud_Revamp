@@ -53,7 +53,7 @@ const CustomSelect = ({ label, options, placeholder, value, onChange }: any) => 
   );
 };
 
-const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setFormData }: any) => {
+const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setFormData, errorMessage }: any) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -70,22 +70,49 @@ const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setF
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-8">
           <div className="space-y-1.5">
             <label className="font-nunito font-black text-[#0D1B2A] text-xs sm:text-sm ml-2">Full Name *</label>
-            <input required minLength={2} type="text" placeholder="Your full name" className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`} />
+            <input
+              required
+              minLength={2}
+              type="text"
+              placeholder="Your full name"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`}
+            />
           </div>
           <div className="space-y-1.5">
             <label className="font-nunito font-black text-[#0D1B2A] text-xs sm:text-sm ml-2">Work Email *</label>
-            <input required type="email" placeholder="your@company.com" className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`} />
+            <input
+              required
+              type="email"
+              placeholder="your@company.com"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`}
+            />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-8">
           <div className="space-y-1.5">
             <label className="font-nunito font-black text-[#0D1B2A] text-xs sm:text-sm ml-2">Phone Number</label>
-            <input type="tel" placeholder="+91 or +971 ..." className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`} />
+            <input
+              type="tel"
+              placeholder="+91 or +971 ..."
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`}
+            />
           </div>
           <div className="space-y-1.5">
             <label className="font-nunito font-black text-[#0D1B2A] text-xs sm:text-sm ml-2">Company Name</label>
-            <input type="text" placeholder="Your company name" className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`} />
+            <input
+              type="text"
+              placeholder="Your company name"
+              value={formData.company}
+              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+              className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`}
+            />
           </div>
         </div>
 
@@ -113,6 +140,13 @@ const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setF
           </label>
         </div>
 
+        {/* Error message */}
+        {formStatus === "error" && errorMessage && (
+          <div className="px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-red-600 font-inter text-xs sm:text-sm">
+            ⚠️ {errorMessage}
+          </div>
+        )}
+
         <button 
           type="submit"
           disabled={formStatus === "loading" || !agreed}
@@ -134,20 +168,41 @@ const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setF
 };
 
 const ContactInfoForm = () => {
-  const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [agreed, setAgreed] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
     service: "",
-    source: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus("loading");
-    // Simulate API call
-    setTimeout(() => {
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
       setFormStatus("success");
-    }, 2000);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Failed to send message. Please try again.";
+      setErrorMessage(message);
+      setFormStatus("error");
+    }
   };
 
   return (
@@ -223,6 +278,7 @@ const ContactInfoForm = () => {
                   setAgreed={setAgreed}
                   formData={formData}
                   setFormData={setFormData}
+                  errorMessage={errorMessage}
                 />
               </div>
 
@@ -331,6 +387,7 @@ const ContactInfoForm = () => {
                 setAgreed={setAgreed}
                 formData={formData}
                 setFormData={setFormData}
+                errorMessage={errorMessage}
               />
             </div>
           </div>
