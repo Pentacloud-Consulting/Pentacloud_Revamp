@@ -16,7 +16,7 @@ const nunito = Nunito({
 
 export const metadata: Metadata = {
   title: "Pentacloud Consulting",
-  description: "Bengaluru-based technology consulting firm dedicated to driving digital transformation.",
+  description: "Dubai-based technology consulting firm dedicated to driving digital transformation.",
   icons: {
     icon: "/Logo/Penta Favicon.png",
     shortcut: "/Logo/Penta Favicon.png",
