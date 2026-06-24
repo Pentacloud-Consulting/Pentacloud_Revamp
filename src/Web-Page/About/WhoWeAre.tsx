@@ -186,7 +186,7 @@ const WhoWeAre = () => {
 
           <div className="space-y-4 sm:space-y-6 font-inter text-xs sm:text-sm md:text-[17px] text-[#4A6080] leading-relaxed sm:leading-[1.8] mb-6 sm:mb-10 max-w-xl">
             <p>
-              Pentacloud Consulting is a Bengaluru-based technology consulting firm dedicated to driving digital transformation through AI-powered solutions and a human-centric approach.
+              Pentacloud Consulting is a global technology consulting firm delivering AI-powered digital transformation.
             </p>
             <p>
               As a certified Salesforce and Zoho partner with 16+ industry certifications, we deliver end-to-end services that empower businesses across Healthcare, Retail, Finance, and Enterprise sectors.

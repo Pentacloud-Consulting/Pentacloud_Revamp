@@ -337,7 +337,7 @@ const OurExpertise = () => {
         <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] lg:grid-cols-[320px_1fr] gap-0 rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[20px_20px_60px_rgba(163,185,210,0.2),-10px_-10px_40px_rgba(255,255,255,0.9)] border border-slate-200/40 bg-background">
           
           {/* Left Sidebar: Folder Tabs */}
-          <div className="bg-slate-50/50 md:bg-background/80 p-3 sm:p-6 border-b md:border-b-0 md:border-r border-slate-200/60 flex flex-col shrink-0 w-full md:w-auto">
+          <div className="bg-slate-50/50 md:bg-background/80 p-3 sm:p-6 border-b md:border-b-0 md:border-r border-slate-200/60 flex flex-col shrink-0 w-full md:w-auto relative">
             <div className="hidden md:flex items-center gap-3 mb-6 pb-4 border-b border-slate-300/30 shrink-0">
               <div className="w-10 h-10 bg-[#1A7FD4] rounded-xl flex items-center justify-center text-white shadow-md">
                 <Files size={20} />
@@ -345,55 +345,64 @@ const OurExpertise = () => {
               <span className="font-nunito font-black text-[10px] uppercase tracking-[2px] text-[#0D1B2A]">Solutions Catalog</span>
             </div>
 
-            <div className="flex flex-row md:flex-col gap-2 md:space-y-1.5 overflow-x-auto md:overflow-x-hidden overflow-y-hidden md:overflow-y-auto pb-2 md:pb-0 px-1 md:px-0 flex-1 w-full whitespace-nowrap snap-x snap-mandatory custom-scrollbar">
-              {clouds.map((cloud, i) => {
-                const isActive = activeIndex === i;
-                return (
-                  <motion.div
-                    key={i}
-                    onClick={() => setActiveIndex(i)}
-                    whileHover={{ x: 3 }}
-                    className={`relative px-4 py-2.5 md:p-3 rounded-full md:rounded-xl cursor-pointer transition-all duration-300 flex flex-row items-center gap-2 md:gap-4 group shrink-0 snap-center border ${
-                      isActive 
-                        ? 'bg-white shadow-sm md:translate-x-3 z-20 border-[#1A7FD4]/20 md:border-transparent' 
-                        : 'bg-white/40 md:bg-transparent border-white/50 md:border-transparent hover:bg-slate-200/50 z-10'
-                    }`}
-                  >
-                    {isActive && (
-                      <motion.div 
-                        layoutId="activeTabIndicator"
-                        className="absolute hidden md:block md:left-0 md:top-2 md:bottom-2 md:w-1.5 md:h-auto rounded-full"
-                        style={{ backgroundColor: cloud.color }}
-                      />
-                    )}
-
-                    <div 
-                      className={`w-6 h-6 md:w-9 md:h-9 rounded-md md:rounded-lg flex items-center justify-center transition-all duration-300 shrink-0 ${
-                        isActive ? 'scale-110 shadow-sm' : 'opacity-60 grayscale'
-                      } [&_svg]:w-3.5 [&_svg]:h-3.5 [&_svg]:md:w-[18px] [&_svg]:md:h-[18px]`}
-                      style={{ backgroundColor: isActive ? cloud.bg : 'transparent', color: isActive ? cloud.color : '#64748B' }}
+            <div className="relative">
+              <div className="flex flex-row md:flex-col gap-2 md:space-y-1.5 overflow-x-auto md:overflow-x-hidden overflow-y-hidden md:overflow-y-auto pb-2 md:pb-0 px-1 md:px-0 flex-1 w-full whitespace-nowrap snap-x snap-mandatory custom-scrollbar">
+                {clouds.map((cloud, i) => {
+                  const isActive = activeIndex === i;
+                  return (
+                    <motion.div
+                      key={i}
+                      onClick={() => setActiveIndex(i)}
+                      whileHover={{ x: 3 }}
+                      className={`relative px-4 py-2.5 md:p-3 rounded-full md:rounded-xl cursor-pointer transition-all duration-300 flex flex-row items-center gap-2 md:gap-4 group shrink-0 snap-center border ${
+                        isActive 
+                          ? 'bg-white shadow-sm md:translate-x-3 z-20 border-[#1A7FD4]/20 md:border-transparent' 
+                          : 'bg-white/40 md:bg-transparent border-white/50 md:border-transparent hover:bg-slate-200/50 z-10'
+                      }`}
                     >
-                      <cloud.icon />
-                    </div>
+                      {isActive && (
+                        <motion.div 
+                          layoutId="activeTabIndicator"
+                          className="absolute hidden md:block md:left-0 md:top-2 md:bottom-2 md:w-1.5 md:h-auto rounded-full"
+                          style={{ backgroundColor: cloud.color }}
+                        />
+                      )}
 
-                    <span className={`font-nunito font-bold text-xs md:text-[14px] transition-colors whitespace-nowrap ${
-                      isActive ? 'text-[#0D1B2A]' : 'text-[#64748B]'
-                    }`}>
-                      {cloud.title}
-                    </span>
-
-                    {isActive && (
-                      <motion.div 
-                        initial={{ opacity: 0, x: -5 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="ml-auto text-[#1A7FD4] hidden md:block"
+                      <div 
+                        className={`w-6 h-6 md:w-9 md:h-9 rounded-md md:rounded-lg flex items-center justify-center transition-all duration-300 shrink-0 ${
+                          isActive ? 'scale-110 shadow-sm' : 'opacity-60 grayscale'
+                        } [&_svg]:w-3.5 [&_svg]:h-3.5 [&_svg]:md:w-[18px] [&_svg]:md:h-[18px]`}
+                        style={{ backgroundColor: isActive ? cloud.bg : 'transparent', color: isActive ? cloud.color : '#64748B' }}
                       >
-                        <ChevronRight size={16} />
-                      </motion.div>
-                    )}
-                  </motion.div>
-                );
-              })}
+                        <cloud.icon />
+                      </div>
+
+                      <span className={`font-nunito font-bold text-xs md:text-[14px] transition-colors whitespace-nowrap ${
+                        isActive ? 'text-[#0D1B2A]' : 'text-[#64748B]'
+                      }`}>
+                        {cloud.title}
+                      </span>
+
+                      {isActive && (
+                        <motion.div 
+                          initial={{ opacity: 0, x: -5 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          className="ml-auto text-[#1A7FD4] hidden md:block"
+                        >
+                          <ChevronRight size={16} />
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Mobile scroll indicator arrow */}
+              <div className="md:hidden absolute right-0 top-0 bottom-2 w-16 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent pointer-events-none flex items-center justify-end pr-1 z-20">
+                <div className="w-7 h-7 bg-white rounded-full shadow-[0_2px_8px_rgba(26,127,212,0.15)] border border-slate-100 flex items-center justify-center animate-pulse">
+                  <ArrowRight size={14} className="text-[#1A7FD4]" />
+                </div>
+              </div>
             </div>
           </div>
 
