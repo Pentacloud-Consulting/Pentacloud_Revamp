@@ -7,7 +7,7 @@ import { useState } from "react";
 const WhatsApp = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const phoneNumber = "1234567890"; // Replace with actual number
+  const phoneNumber = "971545132807";
   const message = "Hi Pentacloud! I'd like to learn more about your services.";
 
   React.useEffect(() => {
