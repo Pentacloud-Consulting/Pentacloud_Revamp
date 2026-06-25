@@ -44,7 +44,7 @@ const industries = [
     icon: <ShoppingCart className="w-5 h-5 sm:w-8 sm:h-8" />,
     description: "Scalable architectures to handle peak traffic and personalize shopping experiences.",
     color: "from-orange-500 to-pink-500",
-    bgImage: "bg-[url('/Industries/Retail%20&%20eCommerce.webp')]"
+    bgImage: "bg-[url('/Industries/Retail_eCommerce.webp')]"
   },
   {
     id: 4,
@@ -52,7 +52,7 @@ const industries = [
     icon: <Target className="w-5 h-5 sm:w-8 sm:h-8" />,
     description: "Data-driven platforms for real-time analytics and global campaign delivery.",
     color: "from-purple-600 to-pink-400",
-    bgImage: "bg-[url('/Industries/Marketing%20&%20Advertising.webp')]"
+    bgImage: "bg-[url('/Industries/Marketing_Advertising.webp')]"
   },
   {
     id: 5,

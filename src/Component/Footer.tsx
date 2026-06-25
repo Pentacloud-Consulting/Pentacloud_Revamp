@@ -123,11 +123,11 @@ const Footer = () => {
                 <Image 
                   src="/Logo/Pentacloud logo.png" 
                   alt="Pentacloud Logo" 
-                  width={150} 
-                  height={38} 
-                  className="h-8 sm:h-10 w-auto object-contain brightness-0 invert shrink-0"
+                  width={200} 
+                  height={50} 
+                  className="h-10 sm:h-14 w-auto object-contain brightness-0 invert shrink-0"
                 />
-                <p className="text-white/90 text-sm sm:text-base leading-tight font-serif italic tracking-wide font-medium whitespace-nowrap">
+                <p className="mt-1 sm:mt-2 text-white/90 text-xs sm:text-sm leading-tight font-serif italic tracking-wide font-medium whitespace-nowrap">
                   Journey Towards Success.
                 </p>
               </div>

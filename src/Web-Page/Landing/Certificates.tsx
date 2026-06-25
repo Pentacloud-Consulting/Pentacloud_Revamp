@@ -260,8 +260,8 @@ const Certificates = () => {
 
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes scrollCerts {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
         }
         .animate-scrollCerts {
           animation: scrollCerts 85s linear infinite;
