@@ -27,7 +27,7 @@ const ContactFAQ = () => {
     },
     {
       q: "Are you a certified Salesforce and Zoho partner?",
-      a: "Yes, Pentacloud is an official partner with over 16+ active certifications. This means our work is validated by the vendors themselves and we have direct access to priority support and roadmap insights.",
+      a: "Yes, Pentacloud is an official partner with over 35+ active certifications. This means our work is validated by the vendors themselves and we have direct access to priority support and roadmap insights.",
       image: "/Images/Contactpage/Contact Q-4.webp"
     },
     {
@@ -44,6 +44,7 @@ const ContactFAQ = () => {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="bg-background shadow-[3px_3px_8px_rgba(163,185,210,0.3),-3px_-3px_8px_rgba(255,255,255,0.85)] text-[#1A7FD4] font-nunito font-bold text-[10px] sm:text-[11px] tracking-[2px] uppercase mb-4 w-fit mx-auto px-4 py-1.5 rounded-full"
           >
             COMMON QUESTIONS

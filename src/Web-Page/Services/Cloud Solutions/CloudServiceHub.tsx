@@ -204,6 +204,7 @@ const CloudServiceHub = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="text-[#1A7FD4] font-nunito font-black text-[9px] sm:text-[11px] tracking-[4px] uppercase mb-3 sm:mb-4"
           >
             Service Ecosystem
@@ -211,6 +212,7 @@ const CloudServiceHub = () => {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             className="font-nunito font-extrabold text-2xl sm:text-[36px] md:text-[52px] text-[#0D1B2A] leading-tight"
           >

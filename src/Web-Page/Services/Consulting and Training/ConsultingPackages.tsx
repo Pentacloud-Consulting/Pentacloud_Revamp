@@ -66,6 +66,7 @@ const ConsultingPackages = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           className="inline-block px-4 py-1.5 bg-blue-50 text-[#1A7FD4] rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-[2px] sm:tracking-[3px] mb-4 sm:mb-6"
         >
           ENGAGEMENT OPTIONS
@@ -86,6 +87,7 @@ const ConsultingPackages = () => {
               key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
               className={`${CLAY_CARD} p-6 sm:p-8 flex flex-col rounded-[20px] sm:rounded-[32px] relative ${pkg.featured ? 'border-2 border-[#1A7FD4]' : ''}`}
             >
@@ -124,6 +126,7 @@ const ConsultingPackages = () => {
               key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
               className={`${CLAY_CARD} p-6 sm:p-8 flex flex-col rounded-[20px] sm:rounded-[32px] relative ${pkg.featured ? 'border-2 border-[#1A7FD4]' : ''}`}
             >
@@ -157,6 +160,7 @@ const ConsultingPackages = () => {
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         className="bg-gradient-to-r from-blue-900 to-[#0D1B2A] rounded-[24px] sm:rounded-[48px] p-8 sm:p-16 text-center shadow-2xl relative overflow-hidden"
       >
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=2000')] opacity-10 mix-blend-overlay bg-cover bg-center" />

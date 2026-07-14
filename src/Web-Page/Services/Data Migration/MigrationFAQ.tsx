@@ -52,6 +52,7 @@ const MigrationFAQ = () => {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="px-4 py-1.5 bg-white/40 backdrop-blur-md rounded-full border border-white/60 shadow-sm text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-[4px] uppercase mb-4"
           >
             MIGRATION RECORD
@@ -67,6 +68,7 @@ const MigrationFAQ = () => {
               key={i} 
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               className="bg-white/40 backdrop-blur-sm rounded-[32px] p-6 border border-white/60 shadow-[10px_10px_25px_rgba(163,185,210,0.1)] text-center group transition-all duration-500"
             >

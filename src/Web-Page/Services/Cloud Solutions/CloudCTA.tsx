@@ -71,6 +71,7 @@ const CloudCTA = () => {
                 key={i}
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
                 transition={{ delay: i * 0.05, type: "spring" }}
                 whileHover={{ y: -5, scale: 1.01 }}
                 className="bg-[#E8F0F8] rounded-[20px] p-5 sm:p-8 shadow-[8px_8px_16px_rgba(163,185,210,0.6),-8px_-8px_16px_rgba(255,255,255,0.9)] flex flex-col items-center text-center group border border-white/40 min-w-0"
@@ -95,6 +96,7 @@ const CloudCTA = () => {
         <motion.div 
           initial={{ scale: 0.88, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
           className="max-w-5xl mx-auto bg-gradient-to-br from-[#0D1B2A] via-[#1A3A5C] to-[#1A7FD4] rounded-[20px] sm:rounded-[40px] p-6 sm:p-12 md:p-20 shadow-[0_32px_80px_rgba(13,27,42,0.30)] relative flex flex-col items-center text-center border border-white/10"
         >
           {/* Floating Particles */}

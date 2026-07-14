@@ -6,7 +6,7 @@ import { ShieldCheck, Zap, Star, LayoutDashboard, Globe, MessageCircle, Heart, G
 
 const differentiators = [
   { title: "Expert Led", icon: Award, color: "#1A7FD4", body: "Certified practitioners who build and scale implementations daily." },
-  { title: "Active Certs", icon: ShieldCheck, color: "#34C98A", body: "16+ active certifications across Salesforce and major Cloud platforms." },
+  { title: "Active Certs", icon: ShieldCheck, color: "#34C98A", body: "35+ active certifications across Salesforce and major Cloud platforms." },
   { title: "Vendor Neutral", icon: Globe, color: "#8B5CF6", body: "Independent, honest advice driven strictly by your business goals." },
   { title: "Personalised", icon: Star, color: "#EC4899", body: "Training and strategy tailored using your actual system configurations." },
   { title: "Full Support", icon: Zap, color: "#F59E0B", body: "One partner covering everything from roadmap design to post-live training." },
@@ -54,6 +54,7 @@ const ConsultingWhyPentacloud = () => {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="px-4 py-1.5 bg-white/40 backdrop-blur-md rounded-full border border-white/60 shadow-sm text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-[4px] uppercase mb-4 w-fit"
           >
             WHY PENTACLOUD
@@ -68,6 +69,7 @@ const ConsultingWhyPentacloud = () => {
                 key={i}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
                 className="group flex gap-3"
               >

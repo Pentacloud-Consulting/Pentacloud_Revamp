@@ -107,7 +107,7 @@ const WhoWeAre = () => {
 
       <div className="grid grid-cols-3 gap-1.5 sm:gap-2 pt-3 sm:pt-4 border-t border-slate-100 text-center w-full">
         <div className="flex flex-col">
-          <span className="text-xs sm:text-base text-[#1A7FD4] font-black leading-none">16+</span>
+          <span className="text-xs sm:text-base text-[#1A7FD4] font-black leading-none">35+</span>
           <span className="text-[7px] sm:text-[9px] text-slate-400 font-bold uppercase tracking-wider mt-1">Certs</span>
         </div>
         <div className="flex flex-col border-x border-slate-100">
@@ -174,6 +174,7 @@ const WhoWeAre = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="px-4 py-1.5 bg-background shadow-[2px_2px_6px_rgba(163,185,210,0.15),-2px_-2px_6px_rgba(255,255,255,0.7)] border border-white/40 text-[#1A7FD4] text-[10px] sm:text-xs font-bold tracking-[3px] uppercase mb-4 sm:mb-8 inline-block rounded-full"
           >
             WHO WE ARE
@@ -189,7 +190,7 @@ const WhoWeAre = () => {
               Pentacloud Consulting is a global technology consulting firm delivering AI-powered digital transformation.
             </p>
             <p>
-              As a certified Salesforce and Zoho partner with 16+ industry certifications, we deliver end-to-end services that empower businesses across Healthcare, Retail, Finance, and Enterprise sectors.
+              As a certified Salesforce and Zoho partner with 35+ industry certifications, we deliver end-to-end services that empower businesses across Healthcare, Retail, Finance, and Enterprise sectors.
             </p>
           </div>
 

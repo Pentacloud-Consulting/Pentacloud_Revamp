@@ -156,6 +156,7 @@ const CloudVisual = ({ type, color }: { type: string, color: string }) => {
                key={i}
                initial={{ height: 0 }}
                whileInView={{ height: `${h}%` }}
+               viewport={{ once: true }}
                transition={{ duration: 1, delay: i * 0.1 }}
                className="w-8 rounded-t-lg"
                style={{ backgroundColor: color }}

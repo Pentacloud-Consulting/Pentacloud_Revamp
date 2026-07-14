@@ -22,7 +22,7 @@ const SalesforceQuestions = () => {
     },
     { 
       question: "What Salesforce certifications does your team hold?", 
-      answer: "Our team collectively holds 16+ active Salesforce certifications spanning Salesforce Certified Administrator, Platform Developer I & II, Sales Cloud Consultant, and more.",
+      answer: "Our team collectively holds 35+ active Salesforce certifications spanning Salesforce Certified Administrator, Platform Developer I & II, Sales Cloud Consultant, and more.",
       icon: Shield,
       color: "#1A7FD4",
       image: "/Images/Salesforce/Sales-Queston-3.webp"
@@ -52,6 +52,7 @@ const SalesforceQuestions = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="px-4 py-1.5 sm:px-6 sm:py-2 bg-white/60 shadow-[inset_2px_2px_5px_rgba(163,185,210,0.25)] rounded-full text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-widest uppercase mb-3 sm:mb-6"
           >
             COMMON QUESTIONS
@@ -68,6 +69,7 @@ const SalesforceQuestions = () => {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
               className={`bg-[#E8F0F8] rounded-[20px] sm:rounded-[32px] overflow-hidden transition-all duration-500 ${
                 activeIndex === i 

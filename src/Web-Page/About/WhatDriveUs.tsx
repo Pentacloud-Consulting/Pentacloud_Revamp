@@ -28,7 +28,7 @@ const WhatDriveUs = () => {
       icon: Award, 
       color: '#EC4899', 
       title: 'Excellence', 
-      text: 'Backed by 16+ certifications, we uphold the highest standards of technical excellence.' 
+      text: 'Backed by 35+ certifications, we uphold the highest standards of technical excellence.' 
     },
   ];
 

@@ -38,6 +38,7 @@ const ConsultingProcess = () => {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="px-4 py-1.5 bg-white/40 backdrop-blur-md rounded-full border border-white/60 shadow-sm text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-[4px] uppercase mb-4"
           >
             OUR METHODOLOGY
@@ -61,6 +62,7 @@ const ConsultingProcess = () => {
               key={idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.5 }}
               whileHover={{ y: -8 }}
               className="group relative bg-white/40 backdrop-blur-sm rounded-[32px] p-6 border border-white/60 shadow-[15px_15px_30px_rgba(163,185,210,0.1),-15px_-15px_30px_rgba(255,255,255,0.5)] transition-all duration-500 flex flex-col h-full overflow-hidden"

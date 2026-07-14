@@ -7,7 +7,7 @@ import { Shield, Zap, Users, RefreshCw, Globe, Heart } from "lucide-react";
 const WhyPentacloud = () => {
   const [activeWhy, setActiveWhy] = useState(0);
   const differentiators = [
-    { title: "16+ Active Salesforce Certifications", icon: Shield, bg: "#EEF3FF", color: "#1A7FD4", desc: "Our team holds certifications across Admin, Developer, Architect, and Consultant tracks.", image: "/Images/Salesforce/Sales-WhyPenta-1.webp" },
+    { title: "35+ Active Salesforce Certifications", icon: Shield, bg: "#EEF3FF", color: "#1A7FD4", desc: "Our team holds certifications across Admin, Developer, Architect, and Consultant tracks.", image: "/Images/Salesforce/Sales-WhyPenta-1.webp" },
     { title: "48-Hour Response Guarantee", icon: Zap, bg: "#EEF3FF", color: "#1A7FD4", desc: "Every support request is acknowledged within 48 hours, with critical issues escalated immediately.", image: "/Images/Salesforce/Sales-WhyPenta-2.webp" },
     { title: "Industry-Specific Expertise", icon: Users, bg: "#EEF3FF", color: "#1A7FD4", desc: "Deep domain knowledge across Healthcare, Finance, Retail, and Corporate Enterprise.", image: "/Images/Salesforce/Sales-WhyPenta-3.webp" },
     { title: "Agile Delivery, Always On Time", icon: RefreshCw, bg: "#EEF3FF", color: "#1A7FD4", desc: "2-week sprint cycles with full client visibility, no black-box development.", image: "/Images/Salesforce/Sales-WhyPenta-4.webp" },
@@ -66,7 +66,7 @@ const WhyPentacloud = () => {
                 <Shield className="w-3.5 h-3.5 text-[#1A7FD4] shrink-0" />
                 <div>
                    <div className="font-nunito font-bold text-[14px] text-[#0D1B2A] leading-tight">Salesforce Certified</div>
-                   <div className="font-inter text-[12px] text-[#4A6080]">16+ Active Certifications</div>
+                   <div className="font-inter text-[12px] text-[#4A6080]">35+ Active Certifications</div>
                 </div>
               </motion.div>
             )}
@@ -121,6 +121,7 @@ const WhyPentacloud = () => {
               <motion.div 
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}
+                viewport={{ once: true }}
                 transition={{ duration: 1, delay: 0.5 }}
                 className="absolute -bottom-1 left-0 h-1 bg-[#1A7FD4] opacity-20 rounded-full"
               />
@@ -136,6 +137,7 @@ const WhyPentacloud = () => {
                 key={i}
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
                 onMouseEnter={() => setActiveWhy(i)}
                 onClick={() => setActiveWhy(i)}

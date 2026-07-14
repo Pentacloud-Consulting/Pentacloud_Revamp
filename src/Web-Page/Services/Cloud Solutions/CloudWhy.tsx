@@ -116,6 +116,7 @@ const CloudWhy = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               className="px-4 sm:px-6 py-1.5 sm:py-2 bg-white/60 shadow-[inset_2px_2px_5px_rgba(163,185,210,0.25)] rounded-full text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-widest uppercase mb-2 inline-block w-fit"
             >
               THE PENTACLOUD EDGE
@@ -135,6 +136,7 @@ const CloudWhy = () => {
                 key={i}
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
                 onMouseEnter={() => setActiveFeature(i)}
                 onClick={() => setActiveFeature(i)}

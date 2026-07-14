@@ -85,6 +85,7 @@ const WebWhatWeBuild = () => {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="px-4 py-1.5 bg-white/40 backdrop-blur-md rounded-full border border-white/60 shadow-[2px_2px_8px_rgba(163,185,210,0.15)] text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-[4px] uppercase mb-4 sm:mb-6"
           >
             WHAT WE BUILD
@@ -109,6 +110,7 @@ const WebWhatWeBuild = () => {
               key={i}
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
               whileHover={{ y: -8 }}
               className={`group relative bg-white/40 backdrop-blur-sm rounded-[32px] p-6 sm:p-8 border border-white/60 shadow-[15px_15px_30px_rgba(163,185,210,0.15),-15px_-15px_30px_rgba(255,255,255,0.6)] hover:shadow-[25px_25px_50px_rgba(163,185,210,0.25)] transition-all duration-500 flex flex-col overflow-hidden h-full ${service.isWide ? 'sm:col-span-2' : ''}`}
@@ -183,6 +185,7 @@ const WebWhatWeBuild = () => {
                         <motion.div 
                           initial={{ width: 0 }}
                           whileInView={{ width: "85%" }}
+                          viewport={{ once: true }}
                           transition={{ duration: 1.5, ease: "easeOut" }}
                           className="h-full bg-gradient-to-r from-[#34C98A] to-[#10B981] rounded-full" 
                         />
@@ -223,6 +226,7 @@ const WebWhatWeBuild = () => {
                 key={i}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -5 }}
                 className="bg-white/40 backdrop-blur-md rounded-[24px] p-5 sm:p-6 border border-white/60 shadow-[10px_10px_20px_rgba(163,185,210,0.1)] hover:shadow-[15px_15px_30px_rgba(163,185,210,0.2)] transition-all duration-300 flex flex-col items-center text-center group"

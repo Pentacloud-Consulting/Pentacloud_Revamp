@@ -87,6 +87,7 @@ const CloudProcess = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="px-4 py-1.5 sm:px-6 sm:py-2 bg-white/60 shadow-[inset_2px_2px_5px_rgba(163,185,210,0.25)] rounded-full text-[#1A7FD4] text-[9px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-6"
           >
             HOW WE WORK
@@ -94,6 +95,7 @@ const CloudProcess = () => {
           <motion.h2 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             className="text-2xl sm:text-4xl md:text-5xl font-nunito font-black text-[#0D1B2A] mb-2 sm:mb-4 leading-tight"
           >
             Your Cloud Journey <br />
@@ -108,6 +110,7 @@ const CloudProcess = () => {
             <motion.div 
               initial={{ height: 0 }}
               whileInView={{ height: '100%' }}
+              viewport={{ once: true }}
               transition={{ duration: 2, ease: "easeInOut" }}
               className="w-full bg-[#1A7FD4] shadow-[0_0_10px_#1A7FD4]"
             />
@@ -121,6 +124,7 @@ const CloudProcess = () => {
                 <motion.div 
                   initial={{ x: step.side === 'left' ? -50 : 50, opacity: 0 }}
                   whileInView={{ x: 0, opacity: 1 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.8, type: "spring" }}
                   whileHover={{ y: -6, scale: 1.01 }}
                   className={`w-[calc(100%-54px)] ml-[54px] sm:w-full sm:ml-0 md:w-[44%] bg-[#E8F0F8] rounded-[20px] sm:rounded-[24px] p-5 sm:p-8 shadow-[8px_8px_16px_rgba(163,185,210,0.6),-8px_-8px_16px_rgba(255,255,255,0.9)] relative group transition-all duration-500 overflow-hidden`}
@@ -167,6 +171,7 @@ const CloudProcess = () => {
                   <motion.div 
                     initial={{ scaleX: 0 }}
                     whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
                     transition={{ delay: 0.5, duration: 0.5 }}
                     className={`hidden md:block absolute h-[2px] w-12 bg-transparent border-t-2 border-dashed border-[#1A7FD4]/20 ${step.side === 'left' ? 'right-12 origin-right' : 'left-12 origin-left'}`}
                   />

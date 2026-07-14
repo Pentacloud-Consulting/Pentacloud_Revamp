@@ -107,7 +107,7 @@
 //     { 
 //       name: "Salesforce Lead", 
 //       role: "CRM & Integration", 
-//       bio: "16+ Salesforce certifications and deep expertise in CRM implementation, customisation, and enterprise system integrations across multiple industries.", 
+//       bio: "35+ Salesforce certifications and deep expertise in CRM implementation, customisation, and enterprise system integrations across multiple industries.", 
 //       tags: ["Salesforce CRM", "Integrations", "Training"],
 //       image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200",
 //       banner: "/Profile/Profile-Banner.jpg"

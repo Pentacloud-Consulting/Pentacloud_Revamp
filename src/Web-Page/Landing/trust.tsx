@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useInView, animate } from "framer-motion";
+import React, { useRef, useEffect } from "react";
+import { motion, useInView, animate } from "framer-motion";
 import { TrendingUp, Globe2, Briefcase } from "lucide-react";
 
 const stats = [
@@ -54,17 +54,8 @@ const Counter = ({ from, to, duration = 2 }: { from: number, to: number, duratio
 };
 
 const Trust = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.2], [100, 0]);
-
   return (
-    <section ref={containerRef} className="relative flex items-center justify-center py-6 sm:py-10 md:py-12 overflow-hidden bg-background">
+    <section className="relative flex items-center justify-center py-6 sm:py-10 md:py-12 overflow-hidden bg-background">
       {/* Background Video & Overlays */}
       <div className="absolute inset-0 z-0">
         <img
@@ -78,14 +69,12 @@ const Trust = () => {
         <div className="absolute inset-0 z-10 bg-[#E8F0F8]/10" />
       </div>
 
-      <motion.div 
-        style={{ opacity, y }}
-        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 relative z-20 w-full"
-      >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 relative z-20 w-full">
         <div className="text-center mb-6 sm:mb-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white border border-white shadow-[2px_2px_6px_#e2e8f0,-2px_-2px_6px_#ffffff,inset_1px_1px_2px_#ffffff,inset_-1px_-1px_2px_#e2e8f0] text-blue-700 text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-4 sm:mb-6"
           >
@@ -95,6 +84,7 @@ const Trust = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.2] px-2"
           >
@@ -108,6 +98,7 @@ const Trust = () => {
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.2 }}
           className="relative rounded-[1.5rem] sm:rounded-[3rem] border border-white/60 bg-white/30 backdrop-blur-2xl shadow-[15px_15px_30px_rgba(15,23,42,0.04),-8px_-8px_20px_rgba(255,255,255,0.35)] p-4 sm:p-8 lg:p-12"
         >
@@ -145,7 +136,7 @@ const Trust = () => {
             ))}
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 };

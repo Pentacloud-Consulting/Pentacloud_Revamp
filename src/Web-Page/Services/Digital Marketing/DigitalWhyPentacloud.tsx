@@ -55,6 +55,7 @@ const DigitalWhyPentacloud = () => {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="px-4 py-1.5 bg-white/40 backdrop-blur-md rounded-full border border-white/60 shadow-sm text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-[4px] uppercase mb-4 w-fit"
           >
             WHY PENTACLOUD
@@ -69,6 +70,7 @@ const DigitalWhyPentacloud = () => {
                 key={i}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
                 className="group flex gap-4"
               >

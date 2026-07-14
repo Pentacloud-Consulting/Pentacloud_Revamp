@@ -53,6 +53,7 @@ const HowWeWork = () => {
              <motion.div 
                initial={{ scaleX: 0 }}
                whileInView={{ scaleX: 1 }}
+               viewport={{ once: true }}
                transition={{ duration: 1.5, ease: "easeInOut" }}
                className="h-full bg-gradient-to-r from-[#1A7FD4] to-[#1A7FD4] origin-left"
              />

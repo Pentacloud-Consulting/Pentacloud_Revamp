@@ -121,6 +121,7 @@ const AppWhyPentacloud = () => {
               <motion.div 
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}
+                viewport={{ once: true }}
                 transition={{ duration: 1, delay: 0.5 }}
                 className="absolute -bottom-1 left-0 h-1 bg-[#1A7FD4] opacity-20 rounded-full"
               />
@@ -136,6 +137,7 @@ const AppWhyPentacloud = () => {
                 key={i}
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
                 onMouseEnter={() => setActiveWhy(i)}
                 onClick={() => setActiveWhy(i)}

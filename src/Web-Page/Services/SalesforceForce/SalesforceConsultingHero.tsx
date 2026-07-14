@@ -46,7 +46,7 @@ const SalesforceConsultingHero = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="bg-background shadow-[4px_4px_10px_rgba(163,185,210,0.2),-4px_-4px_10px_rgba(255,255,255,0.8)] text-[#34C98A] font-nunito font-bold text-[9px] sm:text-[13px] rounded-full px-3 py-1 sm:px-4 sm:py-1.5"
             >
-              ✓ 16+ Certifications
+              ✓ 35+ Certifications
             </motion.div>
           </div>
 

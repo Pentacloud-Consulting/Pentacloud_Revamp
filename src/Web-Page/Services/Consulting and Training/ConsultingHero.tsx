@@ -30,7 +30,7 @@ const ConsultingHero = () => {
 
         <div className="flex flex-wrap sm:flex-nowrap items-center justify-center sm:justify-start gap-2 sm:gap-4 py-2 sm:py-3 px-4 sm:px-6 bg-white/40 backdrop-blur-sm rounded-xl border border-white/40 w-full sm:w-fit shadow-[2px_2px_5px_rgba(163,185,210,0.15)]">
            <span className="text-[#4A6080] text-[10px] sm:text-xs font-bold flex items-center gap-1.5">
-             <Trophy className="w-3 h-3 text-[#F59E0B] shrink-0" /> 16+ Certifications
+             <Trophy className="w-3 h-3 text-[#F59E0B] shrink-0" /> 35+ Certifications
            </span>
            <span className="text-gray-300 hidden sm:inline">|</span>
            <span className="text-[#4A6080] text-[10px] sm:text-xs font-bold flex items-center gap-1.5">
@@ -86,7 +86,7 @@ const ConsultingHero = () => {
              className="absolute -top-3 right-4 sm:right-8 p-2 sm:p-4 bg-white rounded-xl sm:rounded-2xl shadow-xl border border-blue-50/50 z-20 w-[85px] sm:w-[130px]"
            >
               <p className="text-[7px] sm:text-[9px] uppercase font-bold text-slate-500 tracking-wider mb-0.5">Active Certifications</p>
-              <p className="text-xs sm:text-lg font-black text-[#1A7FD4]">16+</p>
+              <p className="text-xs sm:text-lg font-black text-[#1A7FD4]">35+</p>
               <p className="text-[6px] sm:text-[8px] text-slate-400 font-bold leading-none mt-0.5">Real expertise</p>
            </motion.div>
         </div>

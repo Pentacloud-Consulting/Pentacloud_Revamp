@@ -10,8 +10,8 @@ const CTA = () => {
       <motion.div 
         initial={{ scale: 0.9, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] as [number, number, number, number] }}
         viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] as [number, number, number, number] }}
         className="relative w-full max-w-5xl mx-auto rounded-[24px] p-6 md:p-8 lg:px-14 py-6 md:py-8 overflow-hidden shadow-xl"
         style={{ background: 'linear-gradient(135deg, #1A7FD4 0%, #0D5FA3 60%, #29C6E0 100%)' }}
       >

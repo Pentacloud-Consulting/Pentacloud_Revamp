@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { 
   Cloud, 
   Radio, 
@@ -420,6 +420,7 @@ const Process = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               className="text-blue-500 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-2"
             >
               Our Expertise
@@ -427,6 +428,7 @@ const Process = () => {
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: 0.1 }}
               className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.2] md:leading-[1.1]"
             >
@@ -436,6 +438,7 @@ const Process = () => {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="w-full max-w-4xl"
           >
@@ -451,6 +454,7 @@ const Process = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             className="bg-background border-2 border-[#1A7FD4]/10 shadow-[8px_8px_16px_rgba(163,185,210,0.5),-8px_-8px_16px_rgba(255,255,255,0.95)] rounded-[1.5rem] sm:rounded-[2rem] p-5 sm:p-6 flex flex-col hover:border-[#1A7FD4]/40 hover:shadow-[10px_10px_20px_rgba(163,185,210,0.6),-10px_-10px_20px_rgba(255,255,255,1)] transition-all duration-500 group relative overflow-hidden"
           >
             {/* Uniform Blue Glow Effect */}
@@ -475,6 +479,7 @@ const Process = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             className="bg-background border-2 border-[#1A7FD4]/10 shadow-[8px_8px_16px_rgba(163,185,210,0.5),-8px_-8px_16px_rgba(255,255,255,0.95)] rounded-[1.5rem] sm:rounded-[2rem] p-5 sm:p-6 flex flex-col hover:border-[#1A7FD4]/40 hover:shadow-[10px_10px_20px_rgba(163,185,210,0.6),-10px_-10px_20px_rgba(255,255,255,1)] transition-all duration-500 group relative overflow-hidden"
           >
@@ -500,6 +505,7 @@ const Process = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="md:col-span-2 bg-gradient-to-br from-blue-500 to-blue-700 rounded-[1.5rem] sm:rounded-3xl p-5 sm:p-6 flex flex-col relative overflow-hidden shadow-xl group cursor-pointer"
           >
@@ -526,6 +532,7 @@ const Process = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             className="md:col-span-2 bg-background border-2 border-[#1A7FD4]/10 shadow-[8px_8px_16px_rgba(163,185,210,0.5),-8px_-8px_16px_rgba(255,255,255,0.95)] rounded-[1.5rem] sm:rounded-[2rem] p-5 sm:p-6 flex flex-col hover:border-[#1A7FD4]/40 hover:shadow-[10px_10px_20px_rgba(163,185,210,0.6),-10px_-10px_20px_rgba(255,255,255,1)] transition-all duration-500 group relative overflow-hidden"
           >
             {/* Uniform Blue Glow Effect */}
@@ -550,6 +557,7 @@ const Process = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="bg-background border-2 border-[#1A7FD4]/10 shadow-[8px_8px_16px_rgba(163,185,210,0.5),-8px_-8px_16px_rgba(255,255,255,0.95)] rounded-[1.5rem] sm:rounded-[2rem] p-5 sm:p-6 flex flex-col hover:border-[#1A7FD4]/40 hover:shadow-[10px_10px_20px_rgba(163,185,210,0.6),-10px_-10px_20px_rgba(255,255,255,1)] transition-all duration-500 group relative overflow-hidden"
           >
@@ -575,6 +583,7 @@ const Process = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.3 }}
             className="bg-background border-2 border-[#1A7FD4]/10 shadow-[8px_8px_16px_rgba(163,185,210,0.5),-8px_-8px_16px_rgba(255,255,255,0.95)] rounded-[1.5rem] sm:rounded-[2rem] p-5 sm:p-6 flex flex-col hover:border-[#1A7FD4]/40 hover:shadow-[10px_10px_20px_rgba(163,185,210,0.6),-10px_-10px_20px_rgba(255,255,255,1)] transition-all duration-500 group relative overflow-hidden"
           >
@@ -602,6 +611,7 @@ const Process = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             className="md:col-span-2 lg:col-span-2 bg-background border-2 border-[#1A7FD4]/10 shadow-[8px_8px_16px_rgba(163,185,210,0.5),-8px_-8px_16px_rgba(255,255,255,0.95)] rounded-[1.5rem] sm:rounded-[2rem] p-5 sm:p-6 flex flex-col sm:flex-row gap-4 items-center justify-between hover:border-[#1A7FD4]/40 hover:shadow-[10px_10px_20px_rgba(163,185,210,0.6),-10px_-10px_20px_rgba(255,255,255,1)] transition-all duration-500 group relative overflow-hidden"
           >
             {/* Uniform Blue Glow Effect */}
@@ -628,6 +638,7 @@ const Process = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             className="md:col-span-2 lg:col-span-2 bg-background border-2 border-[#1A7FD4]/10 shadow-[8px_8px_16px_rgba(163,185,210,0.5),-8px_-8px_16px_rgba(255,255,255,0.95)] rounded-[1.5rem] sm:rounded-[2rem] p-5 sm:p-6 flex flex-col sm:flex-row gap-4 items-center justify-between hover:border-[#1A7FD4]/40 hover:shadow-[10px_10px_20px_rgba(163,185,210,0.6),-10px_-10px_20px_rgba(255,255,255,1)] transition-all duration-500 group relative overflow-hidden"
           >

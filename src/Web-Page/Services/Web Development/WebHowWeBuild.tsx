@@ -108,6 +108,7 @@ const WebHowWeBuild = () => {
             <motion.div 
               initial={{ height: 0 }}
               whileInView={{ height: '100%' }}
+              viewport={{ once: true }}
               transition={{ duration: 2, ease: "easeInOut" }}
               className="w-full bg-gradient-to-b from-[#1A7FD4] via-[#29C6E0] to-[#EC4899] shadow-[0_0_15px_rgba(26,127,212,0.4)]"
             />

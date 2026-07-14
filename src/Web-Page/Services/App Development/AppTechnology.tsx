@@ -104,6 +104,7 @@ const AppTechnology = () => {
                        <motion.div 
                          initial={{ width: 0 }}
                          whileInView={{ width: `${tech.level}%` }}
+                         viewport={{ once: true }}
                          transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
                          className="h-full group-hover:brightness-110" 
                          style={{ backgroundColor: cat.color }}

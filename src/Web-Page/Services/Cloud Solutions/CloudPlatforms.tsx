@@ -70,6 +70,7 @@ const CloudPlatforms = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="px-4 py-1.5 sm:px-6 sm:py-2 bg-white/60 shadow-[inset_2px_2px_5px_rgba(163,185,210,0.25)] rounded-full text-[#1A7FD4] text-[9px] sm:text-xs font-bold tracking-widest uppercase mb-3 sm:mb-6"
           >
             PLATFORMS WE MASTER
@@ -77,6 +78,7 @@ const CloudPlatforms = () => {
           <motion.h2 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             className="text-2xl sm:text-4xl md:text-[52px] font-nunito font-black text-[#0D1B2A] leading-tight"
           >
             Multi-Cloud Expertise <br />
@@ -95,6 +97,7 @@ const CloudPlatforms = () => {
                 key={i}
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: i * 0.05, type: "spring" }}
                 whileHover={{ y: -6, scale: 1.01 }}
                 className="bg-[#E8F0F8] rounded-[20px] sm:rounded-[40px] p-5 sm:p-8 shadow-[10px_10px_20px_rgba(163,185,210,0.6),-10px_-10px_20px_rgba(255,255,255,0.95)] hover:shadow-[20px_20px_40px_rgba(163,185,210,0.7),-20px_-20px_40px_rgba(255,255,255,1)] group transition-all duration-500 flex flex-col"
@@ -117,6 +120,7 @@ const CloudPlatforms = () => {
                     <motion.div 
                       initial={{ width: 0 }}
                       whileInView={{ width: `${cloud.level}%` }}
+                      viewport={{ once: true }}
                       transition={{ duration: 1.5, ease: "easeOut" }}
                       className="h-full rounded-full"
                       style={{ backgroundColor: cloud.color }}
@@ -139,6 +143,7 @@ const CloudPlatforms = () => {
                 key={i}
                 initial={{ scale: 0.9, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
                 transition={{ delay: i * 0.03 }}
                 whileHover={{ scale: 1.02 }}
                 className="bg-[#E8F0F8] rounded-xl sm:rounded-3xl p-3.5 sm:p-6 shadow-[6px_6px_12px_rgba(163,185,210,0.4),-6px_-6px_12px_rgba(255,255,255,0.85)] group flex flex-col items-center text-center transition-all duration-300"
@@ -152,6 +157,7 @@ const CloudPlatforms = () => {
                   <motion.div 
                     initial={{ width: 0 }}
                     whileInView={{ width: `${tool.level}%` }}
+                    viewport={{ once: true }}
                     className="h-full bg-[#1A7FD4]"
                   />
                 </div>

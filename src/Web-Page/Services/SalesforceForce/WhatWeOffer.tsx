@@ -76,6 +76,7 @@ const WhatWeOffer = () => {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="px-4 py-1.5 bg-white/40 backdrop-blur-md rounded-full border border-white/60 shadow-[2px_2px_8px_rgba(163,185,210,0.15)] text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-[3px] uppercase mb-4 sm:mb-6"
           >
             WHAT WE OFFER
@@ -100,6 +101,7 @@ const WhatWeOffer = () => {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
               whileHover={{ y: -8 }}
               className="group relative bg-white/40 backdrop-blur-sm rounded-[32px] p-6 sm:p-7 border border-white/60 shadow-[15px_15px_30px_rgba(163,185,210,0.15),-15px_-15px_30px_rgba(255,255,255,0.6)] hover:shadow-[25px_25px_50px_rgba(163,185,210,0.25),-15px_-15px_50px_rgba(255,255,255,0.8)] transition-all duration-500 flex flex-col overflow-hidden"
@@ -171,6 +173,7 @@ const WhatWeOffer = () => {
                           <motion.div 
                             initial={{ width: 0 }}
                             whileInView={{ width: "85%" }}
+                            viewport={{ once: true }}
                             transition={{ duration: 1.5, ease: "easeOut" }}
                             className="h-full bg-[#1A7FD4]" 
                           />
@@ -187,6 +190,7 @@ const WhatWeOffer = () => {
                         <motion.circle 
                           initial={{ strokeDashoffset: 100 }}
                           whileInView={{ strokeDashoffset: 13 }}
+                          viewport={{ once: true }}
                           cx="18" cy="18" r="16" fill="transparent" stroke="#1A7FD4" strokeWidth="4" strokeDasharray="100" className="transition-all duration-1000 ease-out" 
                         />
                       </svg>
@@ -238,6 +242,7 @@ const WhatWeOffer = () => {
                       <motion.div 
                         initial={{ width: 0 }}
                         whileInView={{ width: "94%" }}
+                        viewport={{ once: true }}
                         transition={{ duration: 1.5, ease: "circOut" }}
                         className="h-full bg-[#1A7FD4] rounded-full" 
                       />

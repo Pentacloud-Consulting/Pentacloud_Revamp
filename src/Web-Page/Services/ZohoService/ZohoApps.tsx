@@ -158,6 +158,7 @@ const ZohoApps = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="inline-block px-3 py-1 bg-blue-50 text-[#1A7FD4] rounded-full text-[8.5px] sm:text-[10px] font-black uppercase tracking-[3px] mb-4 sm:mb-6"
           >
             ZOHO ECOSYSTEM

@@ -47,6 +47,7 @@ const TechCard = ({ tech, index }: { tech: any, index: number }) => {
           <motion.div 
             initial={{ width: 0 }}
             whileInView={{ width: `${tech.level}%` }}
+            viewport={{ once: true }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
             className="h-full bg-gradient-to-r from-[#1A7FD4] to-[#29C6E0] rounded-full" 
           />
@@ -83,6 +84,7 @@ const WebTechnology = () => {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="px-4 py-1.5 bg-white/40 backdrop-blur-md rounded-full border border-white/60 shadow-sm text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-[4px] uppercase mb-4"
           >
             OUR TECHNOLOGY

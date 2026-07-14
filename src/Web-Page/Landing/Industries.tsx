@@ -85,6 +85,7 @@ const Industries = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="inline-block px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-3 sm:mb-4 shadow-sm"
           >
@@ -93,6 +94,7 @@ const Industries = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight"
           >
@@ -113,6 +115,7 @@ const Industries = () => {
                 layout
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ 
                   duration: 0.6, 
                   delay: index * 0.05,
