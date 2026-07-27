@@ -15,11 +15,11 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Pentacloud Consulting",
-  description: "Dubai-based technology consulting firm dedicated to driving digital transformation.",
+  title: "Pentacloud Consulting | Your Trusted Partner in Innovation & Technology",
+  description: "Empowering businesses with the right technology to innovate, grow, and succeed.",
   openGraph: {
-    title: "Pentacloud Consulting",
-    description: "Dubai-based technology consulting firm dedicated to driving digital transformation.",
+    title: "Pentacloud Consulting | Your Trusted Partner in Innovation & Technology",
+    description: "Empowering businesses with the right technology to innovate, grow, and succeed.",
     url: "https://pentacloud.me/",
     siteName: "Pentacloud Consulting",
     type: "website",
