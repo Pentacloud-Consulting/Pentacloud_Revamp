@@ -13,11 +13,11 @@ export default function SalesforcePage() {
     <main className="w-full bg-background min-h-screen overflow-x-clip">
       <Navbar />
       <SalesforceConsultingHero />
+      <SalesforcePartners />
       <WhatWeOffer />
       <OurExpertise />
       <HowWeWork />
       <WhyPentacloud />
-      <SalesforcePartners />
       <SalesforceQuestions />
       <Footer />
     </main>
