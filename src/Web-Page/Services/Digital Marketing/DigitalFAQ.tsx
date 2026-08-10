@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, BarChart2, Search, Target, Globe, Cloud } from "lucide-react";
+import Link from "next/link";
 
 const DigitalFAQ = () => {
   const faqs = [
@@ -115,12 +116,14 @@ const DigitalFAQ = () => {
                           <p className="font-inter text-[#4A6080] text-xs sm:text-base leading-relaxed">
                             {faq.answer}
                           </p>
-                          <motion.button
-                            whileHover={{ x: 5 }}
-                            className="mt-4 sm:mt-6 flex items-center gap-1.5 text-[#1A7FD4] font-nunito font-black text-xs sm:text-sm uppercase tracking-wider"
-                          >
-                            View more detail <span>→</span>
-                          </motion.button>
+                          <Link href="/contact">
+                            <motion.div
+                              whileHover={{ x: 5 }}
+                              className="mt-4 sm:mt-6 flex items-center gap-1.5 text-[#1A7FD4] font-nunito font-black text-xs sm:text-sm uppercase tracking-wider"
+                            >
+                              Contact us <span>→</span>
+                            </motion.div>
+                          </Link>
                        </div>
                     </div>
                   </motion.div>

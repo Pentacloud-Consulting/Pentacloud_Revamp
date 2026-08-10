@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const CLAY_CARD = "bg-background rounded-[20px] sm:rounded-[28px] shadow-[10px_10px_20px_rgba(163,185,210,0.5),-10px_-10px_20px_rgba(255,255,255,0.95)]";
 
@@ -98,9 +99,9 @@ const ConsultingFAQ = () => {
                            <p className="font-inter text-xs sm:text-[15px] text-[#4A6080] leading-relaxed">
                              {faq.a}
                            </p>
-                           <button className="text-[#1A7FD4] font-nunito font-bold text-xs sm:text-[14px] mt-4 sm:mt-6 flex items-center gap-2 hover:gap-3 transition-all group/btn w-fit">
-                             View more <ArrowRight size={14} className="transition-transform" />
-                           </button>
+                           <Link href="/contact" className="text-[#1A7FD4] font-nunito font-bold text-xs sm:text-[14px] mt-4 sm:mt-6 flex items-center gap-2 hover:gap-3 transition-all group/btn w-fit">
+                             Contact us <ArrowRight size={14} className="transition-transform" />
+                           </Link>
                          </div>
                       </div>
                     </div>

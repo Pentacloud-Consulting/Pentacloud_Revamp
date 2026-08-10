@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Cloud, Shield, Zap } from "lucide-react";
+import Link from "next/link";
 
 const CloudFAQ = () => {
   const faqs = [
@@ -108,13 +109,15 @@ const CloudFAQ = () => {
                            <p className="font-inter text-[#4A6080] text-xs sm:text-[16px] leading-relaxed">
                              {faq.answer}
                            </p>
-                           <motion.button
-                             whileHover={{ x: 3 }}
-                             className="mt-4 flex items-center gap-1.5 text-[#1A7FD4] font-nunito font-black text-xs uppercase tracking-wider cursor-pointer"
-                           >
-                             <span>View more detail</span>
-                             <span>→</span>
-                           </motion.button>
+                           <Link href="/contact">
+                             <motion.div
+                               whileHover={{ x: 3 }}
+                               className="mt-4 flex items-center gap-1.5 text-[#1A7FD4] font-nunito font-black text-xs uppercase tracking-wider cursor-pointer"
+                             >
+                               <span>Contact us</span>
+                               <span>→</span>
+                             </motion.div>
+                           </Link>
                         </div>
                      </div>
                    </motion.div>
