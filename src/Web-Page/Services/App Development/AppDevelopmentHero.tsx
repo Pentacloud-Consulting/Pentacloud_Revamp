@@ -121,7 +121,7 @@ const AppDevelopmentHero = () => {
                  className="absolute -translate-x-1/2 -translate-y-1/2 left-[calc(50%-40px)] top-1/2 w-[160px] h-[300px] bg-[#EEF3FF] rounded-[32px] border-2 border-[#1A7FD4]/20 -rotate-8 z-0 overflow-hidden"
                 >
                   <img 
-                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=400" 
+                    src="/Profile/Profile-Banner.jpg" 
                     className="w-full h-full object-cover opacity-30 blur-[2px]" 
                     alt="App Background" 
                   />
@@ -130,10 +130,10 @@ const AppDevelopmentHero = () => {
                <motion.div 
                  animate={{ y: [0, -16, 0] }}
                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                 className="relative w-[160px] h-[300px] bg-background rounded-[32px] border-2 border-[#1A7FD4]/15 shadow-[10px_10px_20px_rgba(163,185,210,0.4),-10px_-10px_20px_rgba(255,255,255,0.9)] z-10 flex flex-col overflow-hidden"
+                 className="relative w-[160px] h-[300px] bg-background rounded-[32px] border-[3px] border-white shadow-[10px_10px_20px_rgba(163,185,210,0.4),-10px_-10px_20px_rgba(255,255,255,0.9)] z-10 flex flex-col overflow-hidden ring-1 ring-[#1A7FD4]/10"
                >
                  {/* Status Bar */}
-                 <div className="h-6 flex justify-between px-6 items-center pt-2">
+                 <div className="h-6 shrink-0 flex justify-between px-5 items-center pt-2">
                      <div className="text-[8px] font-bold text-[#1A7FD4]/40">9:41</div>
                      <div className="flex gap-1">
                         <div className="w-1 h-1 rounded-full bg-[#1A7FD4]/40" />
@@ -141,10 +141,10 @@ const AppDevelopmentHero = () => {
                      </div>
                  </div>
                  {/* App Content */}
-                 <div className="px-4 py-3 flex-1 flex flex-col">
-                    <div className="flex items-center gap-2 mb-4">
+                 <div className="px-3.5 py-1 flex-1 flex flex-col min-h-0">
+                    <div className="flex items-center gap-2 mb-3 shrink-0">
                         <img 
-                          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100" 
+                          src="/Profile/Arshad.png" 
                           className="w-7 h-7 rounded-full object-cover border border-[#1A7FD4]/20" 
                           alt="User"
                         />
@@ -154,9 +154,9 @@ const AppDevelopmentHero = () => {
                         </div>
                     </div>
                     
-                    <div className="mb-3">
-                       <div className="text-[11px] font-black text-[#0D1B2A] mb-1">Monthly Growth</div>
-                       <div className="h-1.5 w-full bg-[#EEF3FF] rounded-full overflow-hidden">
+                    <div className="mb-2 shrink-0">
+                       <div className="text-[10px] font-black text-[#0D1B2A] mb-1">Monthly Growth</div>
+                       <div className="h-1 w-full bg-[#EEF3FF] rounded-full overflow-hidden">
                           <motion.div 
                             initial={{ width: 0 }} 
                             animate={{ width: "75%" }} 
@@ -166,22 +166,22 @@ const AppDevelopmentHero = () => {
                        </div>
                     </div>
 
-                    <div className="flex-1 rounded-2xl overflow-hidden mb-3 border border-[#1A7FD4]/10 shadow-sm">
+                    <div className="flex-1 min-h-0 rounded-[12px] overflow-hidden mb-2 relative shadow-inner border border-slate-100">
                        <img 
-                         src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&q=80&w=400" 
-                         className="w-full h-full object-cover" 
+                         src="/Images/App Devlopment Images/AppDevelopment-Why-3.webp" 
+                         className="absolute inset-0 w-full h-full object-cover" 
                          alt="Analytics UI"
                        />
                     </div>
 
-                    <div className="mt-auto bg-[#F0F6FF] p-2 rounded-xl border border-[#1A7FD4]/05">
-                       <div className="text-[8px] font-bold text-[#1A7FD4] mb-0.5">Active Projects</div>
-                       <div className="text-[10px] font-black text-[#0D1B2A]">12 Corporate Apps</div>
+                    <div className="shrink-0 bg-[#F0F6FF] p-2 rounded-[10px] border border-[#1A7FD4]/10">
+                       <div className="text-[7px] font-bold text-[#1A7FD4] mb-0.5">Active Projects</div>
+                       <div className="text-[9px] font-black text-[#0D1B2A]">12 Corporate Apps</div>
                     </div>
                  </div>
                  {/* Bottom Nav */}
-                 <div className="h-12 border-t border-[#1A7FD4]/05 flex justify-around items-center px-4">
-                    {[...Array(4)].map((_, i) => <div key={i} className="w-1.5 h-1.5 rounded-full bg-[#1A7FD4]/20" />)}
+                 <div className="h-8 shrink-0 flex justify-center items-start pb-2">
+                    <div className="w-10 h-1 rounded-full bg-slate-200" />
                  </div>
                </motion.div>
             </div>

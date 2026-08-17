@@ -11,13 +11,21 @@ const locations = [
     address: "Jagan Arcade, 4th Floor, 1st Main Road, Anandnagar, RT Nagar, Bengaluru, 560032, Karnataka, India",
     phone: "+971 545 132 807",
     iconColor: "text-[#1A7FD4]",
-    mapQuery: "Jagan Arcade, 4th Floor, 1st Main Road, Anandnagar, RT Nagar, Bengaluru, Karnataka, India"
+    // Jagan Arcade, Anandnagar, RT Nagar, Bengaluru
+    lat: 13.0155,
+    lon: 77.5888,
+    zoom: 16,
+    mapQuery: "Jagan Arcade, Anandnagar, Bengaluru, Karnataka"
   },
   {
     label: "UAE Presence",
     address: "Office No. 84, Owner Adel Mohammed Ali, Al Quoz 1, Al Quoz 1, Dubai, 0000, Dubai",
     phone: "+971 545 132 807",
     iconColor: "text-[#34C98A]",
+    // Al Quoz 1, Dubai
+    lat: 25.1480,
+    lon: 55.2250,
+    zoom: 15,
     mapQuery: "Al Quoz 1, Dubai, UAE"
   },
   {
@@ -25,13 +33,17 @@ const locations = [
     address: "Strategic presence across Doha & Qatar",
     phone: "+971 545 132 807",
     iconColor: "text-[#F59E0B]",
+    // Doha city centre
+    lat: 25.2854,
+    lon: 51.5310,
+    zoom: 13,
     mapQuery: "Doha, Qatar"
   }
 ];
 
 const ContactLocations = () => {
   const [activeLocation, setActiveLocation] = useState<number | null>(null);
-  const [isFindingLocation, setIsFindingLocation] = useState(false);
+  const [isLoadingMap, setIsLoadingMap] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const handleLocationClick = (idx: number) => {
@@ -41,22 +53,14 @@ const ContactLocations = () => {
     }
     
     setActiveLocation(idx);
-    
-    if (idx === 2) {
-      setIsFindingLocation(true);
-      setTimeout(() => {
-        setIsFindingLocation(false);
-      }, 2500);
-    } else {
-      setIsFindingLocation(false);
-    }
+    setIsLoadingMap(true);
     setCopied(false);
   };
 
   const handleShare = () => {
     if (activeLocation !== null) {
       const loc = locations[activeLocation];
-      const textToCopy = `${loc.label}\n${loc.address}\nPhone: ${loc.phone}\nGoogle Maps: https://maps.google.com/maps?q=${encodeURIComponent(loc.mapQuery)}`;
+      const textToCopy = `${loc.label}\n${loc.address}\nPhone: ${loc.phone}\nMap: https://www.openstreetmap.org/?mlat=${loc.lat}&mlon=${loc.lon}#map=${loc.zoom}/${loc.lat}/${loc.lon}`;
       navigator.clipboard.writeText(textToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
@@ -147,27 +151,25 @@ const ContactLocations = () => {
                 </div>
 
                 <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 relative border border-slate-200/50">
-                  {isFindingLocation ? (
+                  {isLoadingMap && (
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm z-10">
                       <Loader2 size={48} className="text-[#1A7FD4] animate-spin mb-4" />
                       <h4 className="font-nunito font-black text-[#0D1B2A] text-lg sm:text-xl mb-2 animate-pulse">
-                        Finding Location...
+                        Loading Map...
                       </h4>
                       <p className="text-[#4A6080] font-inter text-sm text-center max-w-xs">
-                        Searching for strategic presence across Doha & Qatar
+                        Locating our {locations[activeLocation].label}
                       </p>
                     </div>
-                  ) : (
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      loading="lazy"
-                      allowFullScreen
-                      referrerPolicy="no-referrer-when-downgrade"
-                      src={`https://maps.google.com/maps?q=${encodeURIComponent(locations[activeLocation].mapQuery)}&t=&z=13&ie=UTF8&iwloc=&output=embed`}
-                    ></iframe>
                   )}
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    src={`https://www.openstreetmap.org/export/embed.html?bbox=${locations[activeLocation].lon - 0.01}%2C${locations[activeLocation].lat - 0.008}%2C${locations[activeLocation].lon + 0.01}%2C${locations[activeLocation].lat + 0.008}&layer=mapnik&marker=${locations[activeLocation].lat}%2C${locations[activeLocation].lon}`}
+                    onLoad={() => setIsLoadingMap(false)}
+                  ></iframe>
                 </div>
               </div>
             </motion.div>

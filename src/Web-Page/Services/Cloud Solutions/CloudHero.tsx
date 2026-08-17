@@ -162,113 +162,110 @@ const CloudHero = () => {
           initial={{ x: 80, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, type: "spring", delay: 0.4 }}
-          className="relative w-full max-w-full px-6 sm:px-0 sm:pr-6 md:pr-12 lg:pr-16 xl:pr-24 mt-6 lg:-mt-16 overflow-visible flex items-center justify-center sm:justify-end"
+          className="relative w-full max-w-full px-6 sm:px-0 sm:pr-6 md:pr-12 lg:pr-16 xl:pr-24 mt-8 lg:-mt-10 overflow-visible flex items-center justify-center sm:justify-end"
         >
-          <div className="bg-gradient-to-br from-[#EEF3FF] to-[#E0EEFF] rounded-2xl sm:rounded-[28px] p-3 sm:p-8 min-h-[200px] sm:min-h-[460px] max-w-[280px] sm:max-w-[380px] lg:max-w-none w-full border-2 border-dashed border-[#1A7FD4]/15 shadow-[12px_12px_32px_rgba(26,127,212,0.15),-6px_-6px_16px_rgba(255,255,255,0.95)] relative flex flex-col items-center justify-center mx-auto sm:mx-0">
+          <div className="relative w-full max-w-[280px] sm:max-w-[400px] lg:max-w-[460px] aspect-[4/4.5] mx-auto sm:mx-0 group">
+            {/* Animated background glows */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-transparent to-indigo-400/20 rounded-[32px] sm:rounded-[48px] blur-2xl group-hover:blur-3xl transition-all duration-700 pointer-events-none" />
             
-            {/* Diagram */}
-            <div className="w-full flex flex-col items-center gap-6 sm:gap-10 relative -translate-y-4">
-              {/* Cloud Icon */}
-              <motion.div 
-                animate={{ boxShadow: ["0 0 0px rgba(26,127,212,0)", "0 0 20px rgba(26,127,212,0.4)", "0 0 0px rgba(26,127,212,0)"] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-xl flex items-center justify-center text-[#1A7FD4] shadow-lg relative z-10"
-              >
-                <Cloud className="w-6 h-6 sm:w-8 sm:h-8" />
-              </motion.div>
+            {/* Main Glass Panel */}
+            <div className="absolute inset-0 bg-white/70 backdrop-blur-2xl rounded-[32px] sm:rounded-[48px] border border-white shadow-[0_8px_32px_rgba(26,127,212,0.1),inset_0_0_0_1px_rgba(255,255,255,1)] overflow-hidden flex flex-col items-center justify-center p-6 sm:p-10 transition-transform duration-700 group-hover:-translate-y-2">
+              
+              {/* Decorative Grid */}
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(26,127,212,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(26,127,212,0.05)_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_70%)] pointer-events-none" />
 
-              {/* Connection Lines (Top) */}
-              <svg className="absolute top-10 sm:top-[60px] w-full h-[50px] sm:h-[70px] -z-0" viewBox="0 0 200 60" preserveAspectRatio="none">
-                <motion.path 
-                  d="M 100 0 L 30 60" 
-                  stroke="#1A7FD4" strokeWidth="1" strokeDasharray="4 4" fill="none" opacity="0.3"
-                />
-                <motion.path 
-                  d="M 100 0 L 100 60" 
-                  stroke="#1A7FD4" strokeWidth="1" strokeDasharray="4 4" fill="none" opacity="0.3"
-                />
-                <motion.path 
-                  d="M 100 0 L 170 60" 
-                  stroke="#1A7FD4" strokeWidth="1" strokeDasharray="4 4" fill="none" opacity="0.3"
-                />
-                {/* Data Dots */}
-                {[0, 1, 2].map((i) => (
-                  <motion.circle
-                    key={`top-${i}`}
-                    r="2"
-                    fill="#1A7FD4"
-                    animate={{ 
-                      offsetDistance: ["0%", "100%"],
-                      opacity: [0, 1, 0]
-                    }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.5, ease: "linear" }}
-                    style={{ offsetPath: `path('${i === 0 ? "M 100 0 L 30 60" : i === 1 ? "M 100 0 L 100 60" : "M 100 0 L 170 60"}')` }}
-                  />
-                ))}
-              </svg>
-
-              {/* Server Blocks */}
-              <div className="flex gap-3 sm:gap-5 w-full justify-center relative z-10">
-                {["Web", "API", "DB"].map((label, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="bg-[#E8F0F8] rounded-lg p-2 sm:p-3 shadow-[4px_4px_8px_rgba(163,185,210,0.6),-4px_-4px_8px_rgba(255,255,255,0.9)] flex flex-col items-center gap-1 sm:gap-1.5 min-w-[56px] sm:min-w-[70px]"
+              <div className="relative w-full h-full flex flex-col items-center justify-between z-10 pt-4 pb-8 sm:pt-6 sm:pb-10">
+                
+                {/* TOP: Cloud */}
+                <div className="relative flex justify-center w-full z-20">
+                  <motion.div 
+                    animate={{ y: [-5, 5, -5] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                    className="relative"
                   >
-                    <Server className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#1A7FD4]" />
-                    <span className="text-[8px] sm:text-[9px] font-bold text-[#0D1B2A]">{label}</span>
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                    {/* Halo */}
+                    <div className="absolute inset-0 bg-blue-400 blur-xl opacity-20 animate-pulse rounded-full" />
+                    <div className="w-14 h-14 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-50 to-white rounded-2xl sm:rounded-[28px] border border-blue-100/50 shadow-[0_10px_25px_rgba(26,127,212,0.15),inset_0_1px_2px_rgba(255,255,255,1)] flex items-center justify-center relative z-10">
+                      <Cloud className="w-7 h-7 sm:w-10 sm:h-10 text-blue-600 drop-shadow-sm" />
+                    </div>
                   </motion.div>
-                ))}
+                </div>
+
+                {/* CONNECTION LINES (Cloud to Servers) */}
+                <div className="absolute top-[25%] left-0 w-full h-[25%] pointer-events-none -z-0 flex items-center justify-center">
+                  <svg className="w-full h-full" viewBox="0 0 400 100" preserveAspectRatio="none">
+                    {/* Base lines */}
+                    <path d="M 200 0 L 100 100" stroke="#E2E8F0" strokeWidth="2" fill="none" />
+                    <path d="M 200 0 L 200 100" stroke="#E2E8F0" strokeWidth="2" fill="none" />
+                    <path d="M 200 0 L 300 100" stroke="#E2E8F0" strokeWidth="2" fill="none" />
+                    
+                    {/* Animated paths */}
+                    <path d="M 200 0 L 100 100" stroke="#3B82F6" strokeWidth="2.5" strokeDasharray="6 8" fill="none" className="animate-data-flow" opacity="0.6" />
+                    <path d="M 200 0 L 200 100" stroke="#3B82F6" strokeWidth="2.5" strokeDasharray="6 8" fill="none" className="animate-data-flow" opacity="0.6" />
+                    <path d="M 200 0 L 300 100" stroke="#3B82F6" strokeWidth="2.5" strokeDasharray="6 8" fill="none" className="animate-data-flow" opacity="0.6" />
+                  </svg>
+                </div>
+
+                {/* MIDDLE: Servers */}
+                <div className="flex gap-4 sm:gap-6 w-full justify-center relative z-20">
+                  {["Web", "API", "DB"].map((label, i) => (
+                    <motion.div
+                      key={i}
+                      whileHover={{ y: -5 }}
+                      className="bg-white/90 backdrop-blur-md rounded-xl sm:rounded-[20px] p-3 sm:p-4 border border-white shadow-[0_8px_20px_rgba(26,127,212,0.08),inset_0_1px_2px_rgba(255,255,255,1)] flex flex-col items-center gap-2 sm:gap-3 min-w-[70px] sm:min-w-[90px] group/node relative"
+                    >
+                      {/* Status Dot */}
+                      <div className="absolute top-2 right-2 sm:top-3 sm:right-3 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse" />
+                      
+                      <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-blue-50/80 group-hover/node:bg-blue-100/80 transition-colors">
+                        <Server className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+                      </div>
+                      <span className="text-[10px] sm:text-[13px] font-black text-[#0D1B2A] tracking-wide">{label}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* CONNECTION LINES (Servers to Devices) */}
+                <div className="absolute top-[60%] left-0 w-full h-[25%] pointer-events-none -z-0 flex items-center justify-center">
+                  <svg className="w-full h-full" viewBox="0 0 400 100" preserveAspectRatio="none">
+                    {/* Base lines */}
+                    <path d="M 100 0 L 160 100" stroke="#E2E8F0" strokeWidth="2" fill="none" />
+                    <path d="M 200 0 L 160 100" stroke="#E2E8F0" strokeWidth="2" fill="none" />
+                    <path d="M 200 0 L 240 100" stroke="#E2E8F0" strokeWidth="2" fill="none" />
+                    <path d="M 300 0 L 240 100" stroke="#E2E8F0" strokeWidth="2" fill="none" />
+                    
+                    {/* Animated paths */}
+                    <path d="M 100 0 L 160 100" stroke="#10B981" strokeWidth="2.5" strokeDasharray="6 8" fill="none" className="animate-data-flow" opacity="0.6" />
+                    <path d="M 200 0 L 160 100" stroke="#10B981" strokeWidth="2.5" strokeDasharray="6 8" fill="none" className="animate-data-flow" opacity="0.6" />
+                    <path d="M 200 0 L 240 100" stroke="#10B981" strokeWidth="2.5" strokeDasharray="6 8" fill="none" className="animate-data-flow" opacity="0.6" />
+                    <path d="M 300 0 L 240 100" stroke="#10B981" strokeWidth="2.5" strokeDasharray="6 8" fill="none" className="animate-data-flow" opacity="0.6" />
+                  </svg>
+                </div>
+
+                {/* BOTTOM: Devices */}
+                <div className="flex gap-5 sm:gap-8 w-full justify-center relative z-20">
+                  {[Laptop, Smartphone].map((Icon, i) => (
+                    <motion.div 
+                      key={i}
+                      whileHover={{ scale: 1.05 }} 
+                      className="bg-white/90 backdrop-blur-md rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white shadow-[0_8px_20px_rgba(26,127,212,0.08),inset_0_1px_2px_rgba(255,255,255,1)] flex items-center justify-center text-[#4A6080] relative overflow-hidden group/device"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-t from-blue-500/10 to-transparent opacity-0 group-hover/device:opacity-100 transition-opacity" />
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 relative z-10" />
+                    </motion.div>
+                  ))}
+                </div>
+
               </div>
 
-              {/* Connection Lines (Bottom) */}
-              <svg className="absolute top-[135px] sm:top-[185px] w-full h-[45px] sm:h-[60px] -z-0" viewBox="0 0 200 60" preserveAspectRatio="none">
-                <motion.path 
-                  d="M 30 0 L 70 60" 
-                  stroke="#34C98A" strokeWidth="1" strokeDasharray="4 4" fill="none" opacity="0.3"
-                />
-                <motion.path 
-                  d="M 100 0 L 130 60" 
-                  stroke="#34C98A" strokeWidth="1" strokeDasharray="4 4" fill="none" opacity="0.3"
-                />
-                <motion.path 
-                  d="M 170 0 L 130 60" 
-                  stroke="#34C98A" strokeWidth="1" strokeDasharray="4 4" fill="none" opacity="0.3"
-                />
-                {/* Data Dots up */}
-                {[0, 1, 2].map((i) => (
-                  <motion.circle
-                    key={`bot-${i}`}
-                    r="2"
-                    fill="#34C98A"
-                    animate={{ 
-                      offsetDistance: ["100%", "0%"],
-                      opacity: [0, 1, 0]
-                    }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.5, ease: "linear" }}
-                    style={{ offsetPath: `path('${i === 0 ? "M 30 0 L 70 60" : i === 1 ? "M 100 0 L 130 60" : "M 170 0 L 130 60"}')` }}
-                  />
-                ))}
-              </svg>
-
-              {/* End User Devices */}
-              <div className="flex gap-3 sm:gap-5 w-full justify-center pt-2 relative z-10">
-                 <motion.div whileHover={{ scale: 1.05 }} className="bg-white rounded-lg p-2.5 shadow-sm border border-slate-100 flex items-center justify-center text-[#4A6080]">
-                   <Laptop className="w-4 h-4 sm:w-5 sm:h-5" />
-                 </motion.div>
-                 <motion.div whileHover={{ scale: 1.05 }} className="bg-white rounded-lg p-2.5 shadow-sm border border-slate-100 flex items-center justify-center text-[#4A6080]">
-                   <Smartphone className="w-4 h-4 sm:w-5 sm:h-5" />
-                 </motion.div>
+              <div className="absolute bottom-4 sm:bottom-6 text-[9px] sm:text-[11px] text-[#1A7FD4]/50 font-bold tracking-[2px] uppercase">
+                Cloud Architecture Blueprint
               </div>
-            </div>
 
-            <div className="absolute bottom-3 sm:bottom-6 text-[9px] sm:text-[11px] text-[#1A7FD4]/40 font-inter">
-              Cloud Architecture Blueprint
-            </div>
-
-            <div className="absolute top-[-10px] sm:top-[-12px] right-2 sm:right-4 px-2.5 py-1 sm:px-3 sm:py-1.5 bg-[#1A7FD4] text-white rounded-full font-bold text-[8px] sm:text-[10px] shadow-lg flex items-center gap-1.5">
-              <CheckCircle2 className="w-3 h-3" /> <span>End-to-End Cloud</span>
+              {/* Top Right Badge */}
+              <div className="absolute top-0 right-0 m-4 sm:m-6 px-3 py-1.5 sm:px-4 sm:py-2 bg-[#1A7FD4] text-white rounded-full font-bold text-[8px] sm:text-[10px] shadow-[0_8px_16px_rgba(26,127,212,0.25)] flex items-center gap-1.5 transform hover:scale-105 transition-transform">
+                <CheckCircle2 className="w-3.5 h-3.5" /> <span>End-to-End Cloud</span>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -281,6 +278,13 @@ const CloudHero = () => {
         }
         .animate-gradient-sweep {
           animation: sweep 4s linear infinite;
+        }
+        @keyframes data-flow {
+          from { stroke-dashoffset: 14; }
+          to { stroke-dashoffset: 0; }
+        }
+        .animate-data-flow {
+          animation: data-flow 1s linear infinite;
         }
       `}</style>
     </section>

@@ -113,8 +113,8 @@ const Hero = () => {
               <Briefcase className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
             </div>
             <div className="flex flex-col">
-              <span className="text-base sm:text-xl xl:text-2xl font-nunito font-black text-[#1A7FD4]">50+</span>
-              <span className="text-[9px] sm:text-[11px] xl:text-xs text-[#4A6080] font-medium tracking-wide">Projects Delivered</span>
+              <span className="text-base sm:text-xl xl:text-2xl font-nunito font-black text-[#1A7FD4]">10+</span>
+              <span className="text-[9px] sm:text-[11px] xl:text-xs text-[#4A6080] font-medium tracking-wide">Clients Transformed in 2026</span>
             </div>
           </div>
           

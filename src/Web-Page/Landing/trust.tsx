@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import { motion, useInView, animate } from "framer-motion";
-import { TrendingUp, Globe2, Briefcase } from "lucide-react";
+import { TrendingUp, Globe2, Briefcase, Users } from "lucide-react";
 
 const stats = [
   { 
@@ -17,12 +17,20 @@ const stats = [
     id: 2, 
     value: 25, 
     suffix: "+", 
-    label: "Projects Completed",
+    label: "Projects Delivered",
     description: "Successful delivery of complex enterprise solutions.",
     icon: <Briefcase className="w-4 h-4 sm:w-6 sm:h-6 text-indigo-400" />
   },
   { 
     id: 3, 
+    value: 10, 
+    suffix: "+", 
+    label: "Clients in 2026",
+    description: "Digitally transformed 10+ clients in 2026.",
+    icon: <Users className="w-4 h-4 sm:w-6 sm:h-6 text-violet-400" />
+  },
+  { 
+    id: 4, 
     value: 300, 
     suffix: "%", 
     label: "Average ROI",
@@ -102,7 +110,7 @@ const Trust = () => {
           transition={{ duration: 1, delay: 0.2 }}
           className="relative rounded-[1.5rem] sm:rounded-[3rem] border border-white/60 bg-white/30 backdrop-blur-2xl shadow-[15px_15px_30px_rgba(15,23,42,0.04),-8px_-8px_20px_rgba(255,255,255,0.35)] p-4 sm:p-8 lg:p-12"
         >
-          <div className="grid grid-cols-3 gap-2 sm:gap-6 relative z-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-6 relative z-10">
             {stats.map((stat, index) => (
               <div key={stat.id} className="relative group flex flex-col items-center">
                 {/* Vertical Divider for all viewports since they're on a single line */}

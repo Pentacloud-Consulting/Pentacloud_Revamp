@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Code2, Atom, FileCode, Paintbrush, Sparkles, Server, Database, Cloud, Globe, PenTool } from "lucide-react";
+import { Code2, Atom, FileCode, Paintbrush, Wand2, Server, Database, Cloud, Globe, PenTool } from "lucide-react";
 
 const TechCard = ({ tech, index }: { tech: any, index: number }) => {
   return (
@@ -63,7 +63,7 @@ const WebTechnology = () => {
     { name: "React.js", sub: "UI Library", icon: Atom, color: "#29C6E0", level: 95, desc: "Component-driven interfaces with smooth interactions and performance." },
     { name: "TypeScript", sub: "Type Safety", icon: FileCode, color: "#1A7FD4", level: 90, desc: "Strongly-typed codebase reducing bugs and improving maintainability." },
     { name: "Tailwind", sub: "CSS System", icon: Paintbrush, color: "#29C6E0", level: 95, desc: "Pixel-perfect responsive designs built with consistent design tokens." },
-    { name: "Framer", sub: "Animations", icon: Sparkles, color: "#8B5CF6", level: 88, desc: "Silky smooth micro-animations that make your site feel premium." }
+    { name: "Framer", sub: "Animations", icon: Wand2, color: "#8B5CF6", level: 88, desc: "Silky smooth micro-animations that make your site feel premium." }
   ];
 
   const backend = [

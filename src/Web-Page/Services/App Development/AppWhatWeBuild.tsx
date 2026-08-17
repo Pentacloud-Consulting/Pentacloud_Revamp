@@ -188,18 +188,7 @@ const AppWhatWeBuild = () => {
                 )}
 
                 {app.visual === "active" && (
-                  <div className="flex items-center justify-between">
-                    <div className="flex -space-x-2">
-                       {[
-                         "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=50",
-                         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=50",
-                         "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=50"
-                       ].map((src, j) => (
-                         <div key={j} className="w-8 h-8 rounded-full border-2 border-white bg-slate-200 overflow-hidden shrink-0 shadow-sm">
-                            <img src={src} className="w-full h-full object-cover" alt="" />
-                         </div>
-                       ))}
-                    </div>
+                  <div className="flex items-center justify-end">
                     <div className="text-[10px] font-black text-[#F59E0B] uppercase tracking-tighter text-right">
                        <span className="block text-[14px] text-[#0D1B2A] leading-none mb-0.5">1.2k+</span>
                        Live Users
@@ -214,9 +203,9 @@ const AppWhatWeBuild = () => {
         {/* Stats Section */}
         <div className="mt-12 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
-              { label: "Successful Deployments", value: "30+" },
+              { label: "Successful Deployments", value: "25+" },
               { label: "Crash-Free Rate", value: "99.9%" },
-              { label: "Active App Users", value: "100k+" },
+              { label: "Active App Users", value: "10k+" },
               { label: "On-Time Delivery", value: "100%" }
             ].map((stat, i) => (
               <motion.div

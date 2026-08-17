@@ -34,7 +34,7 @@ const ConsultingHero = () => {
            </span>
            <span className="text-gray-300 hidden sm:inline">|</span>
            <span className="text-[#4A6080] text-[10px] sm:text-xs font-bold flex items-center gap-1.5">
-             <Users className="w-3 h-3 text-[#1A7FD4] shrink-0" /> 500+ Trained
+             <Users className="w-3 h-3 text-[#1A7FD4] shrink-0" /> 50+ Trained
            </span>
            <span className="text-gray-300 hidden sm:inline">|</span>
            <span className="text-[#1A7FD4] text-[10px] sm:text-xs font-black flex items-center gap-1.5">

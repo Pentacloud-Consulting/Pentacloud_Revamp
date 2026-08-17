@@ -59,7 +59,7 @@ const CTA = () => {
               viewport={{ once: true }}
               className="font-['Inter'] text-xs sm:text-sm text-white/80 leading-relaxed"
             >
-              Join 50+ companies that trust Pentacloud to drive their digital transformation journey. Let's build something extraordinary.
+              Join the 10+ clients we digitally transformed in 2026 — and let Pentacloud build something extraordinary for you too.
             </motion.p>
           </div>
 

@@ -66,7 +66,7 @@ const DigitalHero = () => {
              className="absolute top-3 left-2 sm:top-6 sm:-left-4 p-2 sm:p-4 bg-white rounded-xl sm:rounded-2xl shadow-xl border border-blue-50/50 z-20 w-[95px] sm:w-[150px]"
            >
               <p className="text-[7px] sm:text-[9px] uppercase font-bold text-slate-500 tracking-wider mb-0.5">Avg ROI Delivered</p>
-              <p className="text-sm sm:text-2xl font-black text-[#1A7FD4]">300% ↑</p>
+              <p className="text-sm sm:text-2xl font-black text-[#1A7FD4]">300% ▲</p>
            </motion.div>
 
            <motion.div 
@@ -74,8 +74,8 @@ const DigitalHero = () => {
              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
              className="absolute bottom-4 right-2 sm:bottom-10 sm:-right-4 p-2 sm:p-4 bg-white rounded-xl sm:rounded-2xl shadow-xl border border-[#EEF3FF]/50 z-20 w-[95px] sm:w-[150px]"
            >
-              <p className="text-[7px] sm:text-[9px] uppercase font-bold text-slate-500 tracking-wider mb-0.5">Campaigns Managed</p>
-              <p className="text-sm sm:text-2xl font-black text-[#1A7FD4]">50+ Active</p>
+              <p className="text-[7px] sm:text-[9px] uppercase font-bold text-slate-500 tracking-wider mb-0.5">Clients Transformed</p>
+              <p className="text-sm sm:text-2xl font-black text-[#1A7FD4]">10+ in 2026</p>
            </motion.div>
 
            <motion.div 
@@ -84,7 +84,7 @@ const DigitalHero = () => {
              className="absolute -top-3 right-4 sm:-top-4 sm:right-8 p-2 sm:p-4 bg-white rounded-xl sm:rounded-2xl shadow-xl border border-blue-50/50 z-20 w-[95px] sm:w-[150px]"
            >
               <p className="text-[7px] sm:text-[9px] uppercase font-bold text-slate-500 tracking-wider mb-0.5">Avg Email Open Rate</p>
-              <p className="text-sm sm:text-xl font-black text-[#34C98A]">42% ↑</p>
+              <p className="text-sm sm:text-xl font-black text-[#34C98A]">42% ▲</p>
            </motion.div>
         </div>
       </motion.div>
@@ -93,3 +93,4 @@ const DigitalHero = () => {
 };
 
 export default DigitalHero;
+

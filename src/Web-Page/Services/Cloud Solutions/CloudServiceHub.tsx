@@ -49,8 +49,8 @@ const CloudServiceHub = () => {
     },
     {
       icon: Rocket,
-      color: "#34C98A",
-      bg: "#E8FFE8",
+      color: "#1A7FD4",
+      bg: "#EEF3FF",
       title: "Startup Infrastructure",
       desc: "Fast-track your cloud journey with CI/CD pipelines, containerised deployments, and cost-optimised infrastructure that scales with your growth.",
       tags: ["Docker", "K8s", "CI/CD"],
@@ -60,7 +60,7 @@ const CloudServiceHub = () => {
            <motion.div
              animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-             className="w-20 h-20 bg-[#34C98A] rounded-3xl flex items-center justify-center text-white shadow-2xl relative z-10"
+             className="w-20 h-20 bg-[#1A7FD4] rounded-3xl flex items-center justify-center text-white shadow-2xl relative z-10"
            >
              <Rocket size={40} />
            </motion.div>
@@ -70,7 +70,7 @@ const CloudServiceHub = () => {
                   key={i}
                   animate={{ y: [0, 40], opacity: [0.6, 0], scale: [1, 0.5] }}
                   transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
-                  className="w-3 h-3 bg-[#34C98A]/30 rounded-full blur-[2px]"
+                  className="w-3 h-3 bg-[#1A7FD4]/30 rounded-full blur-[2px]"
                 />
              ))}
            </div>
@@ -79,8 +79,8 @@ const CloudServiceHub = () => {
     },
     {
       icon: Brain,
-      color: "#8B5CF6",
-      bg: "#F3E8FF",
+      color: "#1A7FD4",
+      bg: "#EEF3FF",
       title: "AI & Automation",
       desc: "Integrate intelligent workflows and ML pipelines into your core infrastructure to drive efficiency and proactive system management.",
       tags: ["MLOps", "Auto-Scale", "AI Ops"],
@@ -90,7 +90,7 @@ const CloudServiceHub = () => {
           <motion.div 
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 4, repeat: Infinity }}
-            className="text-[#8B5CF6] z-10"
+            className="text-[#1A7FD4] z-10"
           >
             <Brain size={80} strokeWidth={1.5} />
           </motion.div>
@@ -101,7 +101,7 @@ const CloudServiceHub = () => {
                 cx={`${50 + 35 * Math.cos(i * 30 * Math.PI / 180)}%`}
                 cy={`${50 + 35 * Math.sin(i * 30 * Math.PI / 180)}%`}
                 r="3"
-                fill="#8B5CF6"
+                fill="#1A7FD4"
                 animate={{ opacity: [0.2, 0.8, 0.2], scale: [1, 1.5, 1] }}
                 transition={{ duration: 2, repeat: Infinity, delay: i * 0.15 }}
               />
@@ -112,8 +112,8 @@ const CloudServiceHub = () => {
     },
     {
       icon: GitMerge,
-      color: "#29C6E0",
-      bg: "#E0F7FF",
+      color: "#1A7FD4",
+      bg: "#EEF3FF",
       title: "DevOps & Security",
       desc: "Infrastructure as Code with zero-trust policies. We ensure your pipelines are secure, compliant, and fully automated.",
       tags: ["Terraform", "Ansible", "IaC"],
@@ -123,26 +123,26 @@ const CloudServiceHub = () => {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="w-48 h-48 border-2 border-dashed border-[#29C6E0]/30 rounded-full flex items-center justify-center"
+            className="w-48 h-48 border-2 border-dashed border-[#1A7FD4]/30 rounded-full flex items-center justify-center"
           >
-             <div className="w-40 h-40 border border-[#29C6E0]/20 rounded-full" />
+             <div className="w-40 h-40 border border-[#1A7FD4]/20 rounded-full" />
           </motion.div>
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             className="absolute w-48 h-48"
           >
-            <div className="w-6 h-6 bg-[#29C6E0] rounded-full absolute -top-3 left-1/2 -translate-x-1/2 shadow-lg shadow-[#29C6E0]/40" />
-            <div className="w-4 h-4 bg-[#29C6E0] rounded-full absolute -bottom-2 left-1/2 -translate-x-1/2" />
+            <div className="w-6 h-6 bg-[#1A7FD4] rounded-full absolute -top-3 left-1/2 -translate-x-1/2 shadow-lg shadow-[#1A7FD4]/40" />
+            <div className="w-4 h-4 bg-[#1A7FD4] rounded-full absolute -bottom-2 left-1/2 -translate-x-1/2" />
           </motion.div>
-          <GitMerge size={48} className="text-[#29C6E0] absolute" />
+          <GitMerge size={48} className="text-[#1A7FD4] absolute" />
         </div>
       )
     },
     {
       icon: ShieldCheck,
-      color: "#EC4899",
-      bg: "#FFE8F0",
+      color: "#1A7FD4",
+      bg: "#EEF3FF",
       title: "Cybersecurity (GRC)",
       desc: "Compliance-ready architecture (ISO 27001, GDPR) with advanced vulnerability testing and threat mitigation.",
       tags: ["VAPT", "ISO 27001", "GRC"],
@@ -153,14 +153,14 @@ const CloudServiceHub = () => {
             initial={{ scale: 0.8 }}
             animate={{ scale: [1, 1.1, 1] }}
             transition={{ duration: 3, repeat: Infinity }}
-            className="w-32 h-32 bg-[#EC4899]/10 rounded-full flex items-center justify-center border-4 border-[#EC4899]/20"
+            className="w-32 h-32 bg-[#1A7FD4]/10 rounded-full flex items-center justify-center border-4 border-[#1A7FD4]/20"
           >
-            <ShieldCheck size={64} className="text-[#EC4899]" />
+            <ShieldCheck size={64} className="text-[#1A7FD4]" />
           </motion.div>
           <motion.div 
             animate={{ y: ["-100%", "100%"] }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="absolute w-40 h-0.5 bg-[#EC4899]/30 blur-[2px]"
+            className="absolute w-40 h-0.5 bg-[#1A7FD4]/30 blur-[2px]"
           />
         </div>
       )
@@ -196,7 +196,7 @@ const CloudServiceHub = () => {
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-40">
         <div className="absolute top-[-10%] right-[-10%] w-125 h-125 bg-[#1A7FD4]/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-125 h-125 bg-[#34C98A]/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-125 h-125 bg-[#1A7FD4]/5 rounded-full blur-[120px]" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Globe, Zap, TrendingUp, Handshake, ShieldCheck, Award, MapPin, Sparkles, Layers } from "lucide-react";
+import { Globe, Zap, TrendingUp, Handshake, ShieldCheck, Award, MapPin, Compass, Layers } from "lucide-react";
 
 const WhoWeAre = () => {
   const [cards, setCards] = useState([0, 1, 2]); // Indices of the cards in order
@@ -45,7 +45,7 @@ const WhoWeAre = () => {
         <span className="text-[10px] uppercase tracking-[3px] font-bold text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20">
           Our Core Vision
         </span>
-        <Sparkles className="w-5 h-5 text-blue-400 animate-pulse" />
+        <Compass className="w-5 h-5 text-blue-400 animate-pulse" />
       </div>
 
       <div className="font-nunito font-extrabold italic text-lg sm:text-2xl md:text-[25px] leading-snug mt-4 mb-4 sm:mt-6 sm:mb-6 text-slate-100 relative z-10 drop-shadow-sm">
@@ -111,7 +111,7 @@ const WhoWeAre = () => {
           <span className="text-[7px] sm:text-[9px] text-slate-400 font-bold uppercase tracking-wider mt-1">Certs</span>
         </div>
         <div className="flex flex-col border-x border-slate-100">
-          <span className="text-xs sm:text-base text-indigo-500 font-black leading-none">50+</span>
+          <span className="text-xs sm:text-base text-indigo-500 font-black leading-none">25+</span>
           <span className="text-[7px] sm:text-[9px] text-slate-400 font-bold uppercase tracking-wider mt-1">Clients</span>
         </div>
         <div className="flex flex-col">

@@ -21,12 +21,12 @@ const AppHowWeBuild = () => {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#29C6E0] blur-[130px] opacity-[0.05] pointer-events-none translate-y-1/2 -translate-x-1/4" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-12 sm:mb-20 flex flex-col items-center">
+        <div className="text-center mb-10 sm:mb-14 flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="px-4 py-1.5 bg-white/40 backdrop-blur-md rounded-full border border-white/60 shadow-[2px_2px_8px_rgba(163,185,210,0.15)] text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-[3px] uppercase mb-4 sm:mb-6"
+            className="px-3 py-1.5 bg-white/40 backdrop-blur-md rounded-full border border-white/60 shadow-[2px_2px_8px_rgba(163,185,210,0.15)] text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-[3px] uppercase mb-4 sm:mb-5"
           >
             OUR PROCESS
           </motion.div>
@@ -34,17 +34,17 @@ const AppHowWeBuild = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-nunito font-black text-2xl sm:text-[40px] md:text-[52px] text-[#0D1B2A] leading-[1.1] mb-5 sm:mb-6"
+            className="font-nunito font-black text-2xl sm:text-[36px] md:text-[44px] text-[#0D1B2A] leading-[1.1] mb-4 sm:mb-5"
           >
             From Idea to <br className="hidden sm:block"/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1A7FD4] to-[#29C6E0]">App Store in 6 Steps</span>
           </motion.h2>
-          <p className="font-inter text-[#4A6080] max-w-xl text-xs sm:text-lg leading-relaxed font-medium px-4">
+          <p className="font-inter text-[#4A6080] max-w-xl text-xs sm:text-sm leading-relaxed font-medium px-4">
             We follow a rigorous, transparent development cycle to ensure your app is built correctly, tested thoroughly, and launched successfully.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
           {steps.map((step, i) => (
             <motion.div
               key={i}
@@ -53,48 +53,48 @@ const AppHowWeBuild = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
               whileHover={{ y: -8 }}
-              className="group relative bg-white/40 backdrop-blur-sm rounded-[32px] p-6 sm:p-7 border border-white/60 shadow-[15px_15px_30px_rgba(163,185,210,0.15),-15px_-15px_30px_rgba(255,255,255,0.6)] hover:shadow-[25px_25px_50px_rgba(163,185,210,0.25)] transition-all duration-500 flex flex-col overflow-hidden h-full"
+              className="group relative bg-white/40 backdrop-blur-sm rounded-[20px] sm:rounded-[24px] p-5 sm:p-6 border border-white/60 shadow-[10px_10px_20px_rgba(163,185,210,0.15),-10px_-10px_20px_rgba(255,255,255,0.6)] hover:shadow-[20px_20px_40px_rgba(163,185,210,0.2)] transition-all duration-500 flex flex-col overflow-hidden h-full"
             >
               {/* Step Number Backdrop */}
-              <div className="absolute top-4 right-6 text-6xl sm:text-7xl font-nunito font-black text-[#1A7FD4] opacity-[0.03] group-hover:opacity-[0.06] pointer-events-none transition-opacity">
+              <div className="absolute top-3 right-5 text-5xl sm:text-6xl font-nunito font-black text-[#1A7FD4] opacity-[0.03] group-hover:opacity-[0.06] pointer-events-none transition-opacity">
                 {`0${i + 1}`}
               </div>
 
               {/* Decorative Glow */}
               <div 
-                className="absolute -top-16 -right-16 w-32 h-32 rounded-full blur-[60px] opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none"
+                className="absolute -top-16 -right-16 w-32 h-32 rounded-full blur-[50px] opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none"
                 style={{ backgroundColor: step.color }}
               />
 
               <div 
-                className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center mb-6 rounded-xl bg-white shadow-[6px_6px_12px_rgba(163,185,210,0.1),-6px_-6px_12px_rgba(255,255,255,0.7)] group-hover:scale-105 group-hover:rotate-3 transition-all duration-500 shrink-0"
+                className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center mb-4 rounded-[10px] sm:rounded-xl bg-white shadow-[4px_4px_10px_rgba(163,185,210,0.1),-4px_-4px_10px_rgba(255,255,255,0.7)] group-hover:scale-105 group-hover:rotate-3 transition-all duration-500 shrink-0"
                 style={{ color: step.color }}
               >
-                <step.icon size={26} strokeWidth={2.5} className="sm:w-7 sm:h-7" />
+                <step.icon size={20} strokeWidth={2.5} className="sm:w-5 sm:h-5" />
               </div>
 
-              <h3 className="font-nunito font-black text-xl text-[#0D1B2A] mb-2 group-hover:text-[#1A7FD4] transition-colors duration-300 leading-tight">
+              <h3 className="font-nunito font-black text-lg sm:text-[19px] text-[#0D1B2A] mb-2 group-hover:text-[#1A7FD4] transition-colors duration-300 leading-tight">
                 {step.title}
               </h3>
 
-              <div className="px-2.5 py-0.5 bg-white/60 rounded-full border border-white shadow-sm text-[9px] font-nunito font-black text-[#1A7FD4] uppercase tracking-widest w-fit mb-4">
+              <div className="px-2 py-0.5 bg-white/60 rounded-md border border-white shadow-sm text-[8.5px] font-nunito font-black text-[#1A7FD4] uppercase tracking-widest w-fit mb-3">
                 {step.duration}
               </div>
               
-              <p className="font-inter text-[13px] text-[#4A6080] leading-relaxed mb-6 font-medium flex-1">
+              <p className="font-inter text-[12px] sm:text-[13px] text-[#4A6080] leading-relaxed mb-4 font-medium flex-1">
                 {step.desc}
               </p>
 
               <div 
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white shadow-sm border border-white text-[10px] font-nunito font-black uppercase tracking-wider mb-8 w-fit group-hover:bg-white transition-colors"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[10px] bg-white shadow-sm border border-white text-[9px] font-nunito font-black uppercase tracking-wider mb-5 w-fit group-hover:bg-white transition-colors"
                 style={{ color: step.color }}
               >
-                <step.icon size={14} strokeWidth={3} className="shrink-0" />
+                <step.icon size={12} strokeWidth={3} className="shrink-0" />
                 <span className="truncate">{step.deliverable}</span>
               </div>
 
               {/* Enhanced Visual Footer */}
-              <div className="pt-6 border-t border-white/40 mt-auto flex items-center justify-center h-16 sm:h-20 overflow-hidden">
+              <div className="pt-4 border-t border-white/40 mt-auto flex items-center justify-center h-14 sm:h-16 overflow-hidden">
                 {step.visual === "validate" && (
                   <motion.div 
                     animate={{ scale: [1, 1.05, 1], opacity: [0.7, 1, 0.7] }} 

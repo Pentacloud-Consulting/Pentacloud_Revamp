@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Sliders, ArrowRight, ChevronDown, ShieldCheck, Zap, Sparkles } from "lucide-react";
+import { Sliders, ArrowRight, ChevronDown, ShieldCheck, Zap, Star } from "lucide-react";
 
 const CLAY_BUTTON = "rounded-[50px] shadow-[0_8px_20px_rgba(26,127,212,0.30),inset_0_-3px_0_rgba(0,0,0,0.12)]";
 
@@ -107,8 +107,8 @@ const SalesforceConsultingHero = () => {
             </span>
             <span>·</span>
             <span className="flex items-center gap-1 sm:gap-1.5 shrink-0">
-               <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#29C6E0]" />
-               <span className="truncate">50+ Projects</span>
+               <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#29C6E0]" />
+               <span className="truncate">10+ Clients in 2026</span>
             </span>
           </motion.div>
         </div>

@@ -75,18 +75,18 @@ const WebWhatWeBuild = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-24 bg-[#E8F0F8] relative overflow-hidden px-4 sm:px-6">
+    <section className="py-12 sm:py-16 bg-[#E8F0F8] relative overflow-hidden px-4 sm:px-6">
       {/* Background Decor */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#1A7FD4] blur-[130px] opacity-[0.05] pointer-events-none -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#29C6E0] blur-[130px] opacity-[0.05] pointer-events-none translate-x-1/2 translate-y-1/2" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-12 sm:mb-20 flex flex-col items-center">
+        <div className="text-center mb-10 sm:mb-14 flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="px-4 py-1.5 bg-white/40 backdrop-blur-md rounded-full border border-white/60 shadow-[2px_2px_8px_rgba(163,185,210,0.15)] text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-[4px] uppercase mb-4 sm:mb-6"
+            className="px-3 py-1.5 bg-white/40 backdrop-blur-md rounded-full border border-white/60 shadow-[2px_2px_8px_rgba(163,185,210,0.15)] text-[#1A7FD4] text-[9px] sm:text-[10px] font-black tracking-[4px] uppercase mb-4 sm:mb-5"
           >
             WHAT WE BUILD
           </motion.div>
@@ -94,17 +94,17 @@ const WebWhatWeBuild = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-nunito font-black text-2xl sm:text-[40px] md:text-[52px] text-[#0D1B2A] leading-[1.1] mb-5 sm:mb-6"
+            className="font-nunito font-black text-2xl sm:text-[36px] md:text-[44px] text-[#0D1B2A] leading-[1.1] mb-4 sm:mb-5"
           >
             Web Experiences <br className="hidden sm:block"/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1A7FD4] to-[#29C6E0]">Built for Results</span>
           </motion.h2>
-          <p className="font-inter text-[#4A6080] max-w-xl text-xs sm:text-lg leading-relaxed font-medium px-4">
+          <p className="font-inter text-[#4A6080] max-w-xl text-xs sm:text-sm leading-relaxed font-medium px-4">
             From marketing sites to complex enterprise portals, we engineer digital assets that generate leads and build brand trust.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
           {services.map((service, i) => (
             <motion.div
               key={i}
@@ -113,34 +113,34 @@ const WebWhatWeBuild = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
               whileHover={{ y: -8 }}
-              className={`group relative bg-white/40 backdrop-blur-sm rounded-[32px] p-6 sm:p-8 border border-white/60 shadow-[15px_15px_30px_rgba(163,185,210,0.15),-15px_-15px_30px_rgba(255,255,255,0.6)] hover:shadow-[25px_25px_50px_rgba(163,185,210,0.25)] transition-all duration-500 flex flex-col overflow-hidden h-full ${service.isWide ? 'sm:col-span-2' : ''}`}
+              className={`group relative bg-white/40 backdrop-blur-sm rounded-[20px] sm:rounded-[24px] p-5 sm:p-6 border border-white/60 shadow-[10px_10px_20px_rgba(163,185,210,0.15),-10px_-10px_20px_rgba(255,255,255,0.6)] hover:shadow-[20px_20px_40px_rgba(163,185,210,0.2)] transition-all duration-500 flex flex-col overflow-hidden h-full ${service.isWide ? 'sm:col-span-2' : ''}`}
             >
               {/* Decorative Glow */}
               <div 
-                className="absolute -top-16 -right-16 w-32 h-32 rounded-full blur-[60px] opacity-0 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none"
+                className="absolute -top-16 -right-16 w-32 h-32 rounded-full blur-[50px] opacity-0 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none"
                 style={{ backgroundColor: service.color }}
               />
 
               <div 
-                className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center mb-6 rounded-xl bg-white shadow-[6px_6px_12px_rgba(163,185,210,0.1),-6px_-6px_12px_rgba(255,255,255,0.7)] group-hover:scale-105 group-hover:rotate-3 transition-all duration-500 shrink-0"
+                className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center mb-4 rounded-[10px] sm:rounded-xl bg-white shadow-[4px_4px_10px_rgba(163,185,210,0.1),-4px_-4px_10px_rgba(255,255,255,0.7)] group-hover:scale-105 group-hover:rotate-3 transition-all duration-500 shrink-0"
                 style={{ color: service.color }}
               >
-                <service.icon size={26} strokeWidth={2.5} className="sm:w-7 sm:h-7" />
+                <service.icon size={20} strokeWidth={2.5} className="sm:w-5 sm:h-5" />
               </div>
 
-              <h3 className="font-nunito font-black text-xl text-[#0D1B2A] mb-3 group-hover:text-[#1A7FD4] transition-colors duration-300 leading-tight">
+              <h3 className="font-nunito font-black text-lg sm:text-[19px] text-[#0D1B2A] mb-2 group-hover:text-[#1A7FD4] transition-colors duration-300 leading-tight">
                 {service.title}
               </h3>
               
-              <p className="font-inter text-[13px] text-[#4A6080] leading-relaxed mb-6 font-medium flex-1">
+              <p className="font-inter text-[12px] sm:text-[13px] text-[#4A6080] leading-relaxed mb-4 font-medium flex-1">
                 {service.desc}
               </p>
 
-              <div className="flex flex-wrap gap-2 mb-8 content-start">
+              <div className="flex flex-wrap gap-1.5 mb-5 content-start">
                 {service.tags.map((tag, j) => (
                   <span 
                     key={j} 
-                    className="px-2.5 py-1 bg-white/60 rounded-lg border border-white shadow-sm text-[9px] font-nunito font-black text-[#1A7FD4] uppercase tracking-wider group-hover:bg-white transition-colors"
+                    className="px-2 py-0.5 bg-white/60 rounded-md border border-white shadow-sm text-[8.5px] font-nunito font-black text-[#1A7FD4] uppercase tracking-wider group-hover:bg-white transition-colors"
                   >
                     {tag}
                   </span>
@@ -148,7 +148,7 @@ const WebWhatWeBuild = () => {
               </div>
 
               {/* Enhanced Visual Footer */}
-              <div className="pt-6 border-t border-white/40 mt-auto">
+              <div className="pt-4 border-t border-white/40 mt-auto">
                 {service.visual === "browser" && (
                    <div className="w-full flex items-center justify-between bg-white/30 p-2.5 rounded-2xl border border-white/50">
                       <div className="flex gap-1">
@@ -215,9 +215,9 @@ const WebWhatWeBuild = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-12 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="mt-10 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
-              { label: "Sites Delivered", value: "50+" },
+              { label: "Sites Delivered", value: "25+" },
               { label: "Avg Load Time", value: "< 1.5s" },
               { label: "PageSpeed Score", value: "98+" },
               { label: "Mobile Responsive", value: "100%" }
@@ -228,13 +228,13 @@ const WebWhatWeBuild = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="bg-white/40 backdrop-blur-md rounded-[24px] p-5 sm:p-6 border border-white/60 shadow-[10px_10px_20px_rgba(163,185,210,0.1)] hover:shadow-[15px_15px_30px_rgba(163,185,210,0.2)] transition-all duration-300 flex flex-col items-center text-center group"
+                whileHover={{ y: -3 }}
+                className="bg-white/40 backdrop-blur-md rounded-[16px] sm:rounded-[20px] p-4 sm:p-5 border border-white/60 shadow-[8px_8px_16px_rgba(163,185,210,0.1)] hover:shadow-[12px_12px_24px_rgba(163,185,210,0.15)] transition-all duration-300 flex flex-col items-center text-center group"
               >
-                <div className="text-2xl sm:text-[32px] font-nunito font-black text-[#1A7FD4] leading-none mb-2 group-hover:scale-110 transition-transform">
+                <div className="text-xl sm:text-[28px] font-nunito font-black text-[#1A7FD4] leading-none mb-1.5 group-hover:scale-105 transition-transform">
                   <Counter from={0} to={stat.value} />
                 </div>
-                <div className="text-[9px] sm:text-[10px] font-black text-[#4A6080]/60 uppercase tracking-[2px] leading-tight">{stat.label}</div>
+                <div className="text-[8px] sm:text-[9px] font-black text-[#4A6080]/60 uppercase tracking-[1.5px] leading-tight">{stat.label}</div>
               </motion.div>
             ))}
         </div>

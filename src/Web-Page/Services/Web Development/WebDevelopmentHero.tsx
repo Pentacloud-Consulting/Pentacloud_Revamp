@@ -136,7 +136,7 @@ const WebDevelopmentHero = () => {
                     className="w-12 h-12 sm:w-20 sm:h-20 rounded-lg sm:rounded-xl overflow-hidden shadow-sm flex-shrink-0"
                   >
                     <img 
-                      src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=400" 
+                      src="/Images/Web Development images/WebDevelopment-why-1.webp" 
                       alt="Coding" 
                       className="w-full h-full object-cover"
                     />
@@ -155,9 +155,9 @@ const WebDevelopmentHero = () => {
                 
                 <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-3 sm:mt-6">
                   {[
-                    { url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=300", tag: "UI Design", label: "Custom UI/UX" },
-                    { url: "https://images.unsplash.com/photo-1551033406-611cf9a28f67?auto=format&fit=crop&q=80&w=300", tag: "Full Stack", label: "Robust Backend" },
-                    { url: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=300", tag: "Security", label: "SSL + Secure" }
+                    { url: "/Images/App Devlopment Images/AppDevelopment-Question-1.webp", tag: "UI Design", label: "Custom UI/UX" },
+                    { url: "/Images/Salesforce/Sales-Queston-3.webp", tag: "Full Stack", label: "Robust Backend" },
+                    { url: "/Images/Data Migration Images/data migration-question-1.webp", tag: "Security", label: "SSL + Secure" }
                   ].map((img, i) => (
                     <motion.div 
                       key={i} 

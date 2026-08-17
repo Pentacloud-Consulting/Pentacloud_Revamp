@@ -55,8 +55,8 @@ const DigitalServices = () => {
     },
     {
       icon: TrendingUp,
-      color: "#29C6E0",
-      bg: "#E0F7FF",
+      color: "#1A7FD4",
+      bg: "#EEF3FF",
       title: "Search Engine Marketing",
       desc: "We manage high-performance Google Ads and Bing Ads campaigns, keyword research, ad copy, landing page alignment, bid strategy, and conversion tracking, ensuring every rupee of ad spend generates maximum leads.",
       tags: ["Google Ads", "Conversion Tracking", "A/B Testing"],
@@ -68,7 +68,7 @@ const DigitalServices = () => {
             transition={{ duration: 2, repeat: Infinity }}
             className="bg-white p-4 rounded-2xl shadow-xl z-10"
           >
-            <TrendingUp size={48} className="text-[#29C6E0]" />
+            <TrendingUp size={48} className="text-[#1A7FD4]" />
           </motion.div>
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none"
@@ -78,7 +78,7 @@ const DigitalServices = () => {
             <motion.path
               d="M0 100 L 30 60 L 60 70 L 100 20"
               fill="none"
-              stroke="#29C6E0"
+              stroke="#1A7FD4"
               strokeWidth="2"
               strokeDasharray="200"
               animate={{ strokeDashoffset: [200, 0] }}
@@ -90,8 +90,8 @@ const DigitalServices = () => {
     },
     {
       icon: Share2,
-      color: "#8B5CF6",
-      bg: "#F3E8FF",
+      color: "#1A7FD4",
+      bg: "#EEF3FF",
       title: "Social Media Management",
       desc: "We manage your brand's presence across LinkedIn, Instagram, Facebook, and X, creating content calendars, designing posts, writing captions, scheduling, and community management. Every post serves a strategic purpose.",
       tags: ["Content Calendar", "Community Mgmt", "LinkedIn & Insta"],
@@ -104,18 +104,18 @@ const DigitalServices = () => {
             className="relative z-10 w-48 h-48 flex items-center justify-center"
           >
             <div className="absolute bg-white p-4 rounded-2xl shadow-xl z-20">
-              <Share2 size={48} className="text-[#8B5CF6]" />
+              <Share2 size={48} className="text-[#1A7FD4]" />
             </div>
             {[0, 120, 240].map((angle, i) => (
               <div
                 key={angle}
-                className="absolute w-32 h-0.5 bg-[#8B5CF6]/20 origin-center"
+                className="absolute w-32 h-0.5 bg-[#1A7FD4]/20 origin-center"
                 style={{ transform: `rotate(${angle}deg)` }}
               >
                 <motion.div
                   animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-                  className="absolute right-0 w-4 h-4 rounded-full bg-[#8B5CF6] -translate-y-1/2 translate-x-1/2 shadow-lg"
+                  className="absolute right-0 w-4 h-4 rounded-full bg-[#1A7FD4] -translate-y-1/2 translate-x-1/2 shadow-lg"
                 />
               </div>
             ))}
@@ -125,8 +125,8 @@ const DigitalServices = () => {
     },
     {
       icon: FileText,
-      color: "#F59E0B",
-      bg: "#FFF8E0",
+      color: "#1A7FD4",
+      bg: "#EEF3FF",
       title: "Content Marketing",
       desc: "Content is the foundation of every successful digital strategy. We create SEO-optimised blogs, whitepapers, case studies, email newsletters, LinkedIn articles, and website copy that educates your audience and builds authority.",
       tags: ["SEO Blogging", "Whitepapers", "Website Copy"],
@@ -138,13 +138,13 @@ const DigitalServices = () => {
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity }}
           >
-            <FileText size={24} className="text-[#F59E0B] mb-2" />
+            <FileText size={24} className="text-[#1A7FD4] mb-2" />
             {[1, 0.8, 0.6, 0.9].map((width, i) => (
               <motion.div
                 key={i}
                 animate={{ width: ["0%", `${width * 100}%`] }}
                 transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-                className="h-2 bg-[#F59E0B]/30 rounded-full"
+                className="h-2 bg-[#1A7FD4]/30 rounded-full"
               />
             ))}
           </motion.div>
@@ -153,8 +153,8 @@ const DigitalServices = () => {
     },
     {
       icon: Mail,
-      color: "#EC4899",
-      bg: "#FFE8F0",
+      color: "#1A7FD4",
+      bg: "#EEF3FF",
       title: "Email Marketing",
       desc: "Email remains the highest ROI digital channel, averaging $42 return per $1 spent. We design email campaigns, build automated nurture sequences, segment your lists, and A/B test subject lines to improve conversions.",
       tags: ["Automated Nurtures", "A/B Testing", "List Segmentation"],
@@ -162,7 +162,7 @@ const DigitalServices = () => {
       visual: (
         <div className="relative w-full h-full flex items-center justify-center">
           <div className="relative z-10 bg-white p-4 rounded-2xl shadow-xl">
-            <Mail size={48} className="text-[#EC4899]" />
+            <Mail size={48} className="text-[#1A7FD4]" />
           </div>
           {[1, -1].map((dir, i) => (
             <motion.div
@@ -174,7 +174,7 @@ const DigitalServices = () => {
                 scale: [0.5, 1, 0.5],
               }}
               transition={{ duration: 3, repeat: Infinity, delay: i * 1.5 }}
-              className="absolute text-[#EC4899]/40"
+              className="absolute text-[#1A7FD4]/40"
             >
               <Mail size={32} />
             </motion.div>
@@ -184,8 +184,8 @@ const DigitalServices = () => {
     },
     {
       icon: Megaphone,
-      color: "#34C98A",
-      bg: "#E8FFE8",
+      color: "#1A7FD4",
+      bg: "#EEF3FF",
       title: "Paid Social Advertising",
       desc: "We run performance-driven paid campaigns across Meta (Facebook + Instagram), LinkedIn, and YouTube, audience research, creative strategy, ad design, copywriting, and pixel setup. We focus on qualified lead generation.",
       tags: ["Meta Ads", "LinkedIn Lead Gen", "Pixel Setup"],
@@ -197,7 +197,7 @@ const DigitalServices = () => {
             animate={{ rotate: [-5, 5, -5] }}
             transition={{ duration: 0.5, repeat: Infinity }}
           >
-            <Megaphone size={48} className="text-[#34C98A]" />
+            <Megaphone size={48} className="text-[#1A7FD4]" />
           </motion.div>
           <div className="flex gap-2">
             {[1, 2, 3].map((i) => (
@@ -208,7 +208,7 @@ const DigitalServices = () => {
                   opacity: [0.3, 1, 0.3],
                 }}
                 transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.2 }}
-                className="w-3 bg-[#34C98A] rounded-full"
+                className="w-3 bg-[#1A7FD4] rounded-full"
               />
             ))}
           </div>

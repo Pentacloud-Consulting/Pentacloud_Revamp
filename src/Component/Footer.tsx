@@ -294,13 +294,13 @@ const Footer = () => {
             {/* Links - Right */}
             <div className="flex-1 flex justify-center lg:justify-end">
               <div className="flex items-center gap-4 text-xs sm:text-sm text-white/90">
-                <span className="transition-colors duration-300">
+                <Link href="/terms-of-service" className="transition-colors duration-300 hover:text-white">
                   Terms of Service
-                </span>
+                </Link>
                 <span className="text-white/40">|</span>
-                <span className="transition-colors duration-300">
+                <Link href="/privacy-policy" className="transition-colors duration-300 hover:text-white">
                   Privacy Policy
-                </span>
+                </Link>
               </div>
             </div>
           </div>

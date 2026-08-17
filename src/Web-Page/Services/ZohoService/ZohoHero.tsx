@@ -104,10 +104,10 @@ const ZohoHero = () => {
                    <Briefcase className="w-3 h-3 sm:w-5 sm:h-5 text-indigo-500" />
                  </div>
                  <div className="flex flex-col items-center">
-                   <h4 className="text-sm sm:text-[32px] font-nunito font-black text-[#0D1B2A] leading-none mb-0.5 sm:mb-1">
-                     25<span className="text-blue-500">+</span>
-                   </h4>
-                   <p className="text-[6px] sm:text-[11px] font-bold text-[#0D1B2A] leading-none text-center">Projects Completed</p>
+                    <h4 className="text-sm sm:text-[24px] font-nunito font-black text-[#0D1B2A] leading-none mb-0.5 sm:mb-1">
+                      10<span className="text-blue-500">+</span>
+                    </h4>
+                    <p className="text-[6px] sm:text-[10px] font-bold text-[#0D1B2A] leading-tight text-center">Clients Transformed<br/>in 2026</p>
                  </div>
               </motion.div>
 
