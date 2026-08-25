@@ -1,7 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from 'nodemailer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  host: 'smtp.office365.com',
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: process.env.MICROSOFT_EMAIL_USER, // your contactus@pentacloudconsulting.com email
+    pass: process.env.MICROSOFT_EMAIL_PASSWORD, // your app password or normal password
+  },
+  tls: {
+    ciphers: 'SSLv3'
+  }
+});
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,14 +27,13 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { data, error } = await resend.emails.send({
-      // Use "onboarding@resend.dev" for testing before domain verification
-      // Once your domain is verified, change to: "contactus@pentacloudconsulting.com"
-      from: "Pentacloud Consulting <onboarding@resend.dev>",
-      to: [process.env.CONTACT_EMAIL_TO ?? "zuhaib@pentacloudconsulting.com"],
-      replyTo: email,
-      subject: `📩 New Enquiry from ${name} — ${service}`,
-      html: `
+    try {
+      await transporter.sendMail({
+        from: `"Pentacloud Consulting" <${process.env.MICROSOFT_EMAIL_USER}>`,
+        to: "contactus@pentacloudconsulting.com",
+        replyTo: email,
+        subject: `📩 New Enquiry from ${name} — ${service}`,
+        html: `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -79,7 +89,7 @@ export async function POST(req: NextRequest) {
                     <td style="background:#f8fafc;border-top:1px solid #e8edf2;padding:20px 40px;text-align:center;">
                       <p style="margin:0;color:#94a3b8;font-size:12px;">
                         This email was sent from the contact form at 
-                        <a href="https://pentacloudconsulting.com" style="color:#1A7FD4;text-decoration:none;">pentacloudconsulting.com</a>
+                        <a href="https://pentacloud.me" style="color:#1A7FD4;text-decoration:none;">pentacloud.me</a>
                       </p>
                     </td>
                   </tr>
@@ -91,14 +101,14 @@ export async function POST(req: NextRequest) {
         </body>
         </html>
       `,
-    });
-
-    if (error) {
-      console.error("Resend error:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      });
+      console.log('✅ Email sent via Nodemailer');
+    } catch (emailErr) {
+      console.error("Nodemailer error:", emailErr);
+      return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true, id: data?.id });
+    return NextResponse.json({ success: true });
   } catch (err: unknown) {
     console.error("API route error:", err);
     const message = err instanceof Error ? err.message : "Internal server error";

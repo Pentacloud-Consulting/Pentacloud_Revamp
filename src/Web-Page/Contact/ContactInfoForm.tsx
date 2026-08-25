@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { CLAY_CARD, CLAY_INPUT } from "./Constants";
 import ContactLocations from "./ContactLocations";
+import { supabase } from "../../lib/supabaseClient";
 
 const CustomSelect = ({ label, options, placeholder, value, onChange }: any) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ const CustomSelect = ({ label, options, placeholder, value, onChange }: any) => 
       <label className="font-nunito font-black text-[#0D1B2A] text-xs sm:text-sm ml-2">{label}</label>
       <div 
         onClick={() => setIsOpen(!isOpen)}
-        className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm flex items-center justify-between cursor-pointer group`}
+        className={`${CLAY_INPUT} px-4 py-2.5 sm:px-5 sm:py-3.5 text-xs sm:text-sm flex items-center justify-between cursor-pointer group`}
       >
         <span className={value ? "text-[#0D1B2A]" : "text-[#4A6080]/60"}>
           {value || placeholder}
@@ -32,7 +33,7 @@ const CustomSelect = ({ label, options, placeholder, value, onChange }: any) => 
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             className="absolute z-50 left-0 right-0 top-[calc(100%+6px)] bg-background rounded-2xl shadow-[10px_10px_30px_rgba(163,185,210,0.4),-10px_-10px_30px_rgba(255,255,255,0.9)] border border-white/50 overflow-hidden"
           >
-            <div className="max-h-[200px] sm:max-h-[240px] overflow-y-auto custom-scrollbar">
+            <div className="max-h-[200px] sm:max-h-[240px] overflow-y-auto custom-scrollbar grid grid-cols-2 p-2 gap-1">
               {options.map((opt: string) => (
                 <div
                   key={opt}
@@ -40,7 +41,7 @@ const CustomSelect = ({ label, options, placeholder, value, onChange }: any) => 
                     onChange(opt);
                     setIsOpen(false);
                   }}
-                  className="px-4 py-2.5 sm:px-6 sm:py-3 font-inter text-xs sm:text-sm text-[#4A6080] hover:bg-[#1A7FD4] hover:text-white transition-colors cursor-pointer"
+                  className="px-3 py-2.5 sm:px-4 sm:py-3 font-inter text-xs sm:text-sm text-[#4A6080] hover:bg-[#1A7FD4] hover:text-white rounded-lg transition-colors cursor-pointer flex items-center"
                 >
                   {opt}
                 </div>
@@ -53,21 +54,57 @@ const CustomSelect = ({ label, options, placeholder, value, onChange }: any) => 
   );
 };
 
-const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setFormData, errorMessage }: any) => {
+const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setFormData, errorMessage, handleReset }: any) => {
+  const isFormValid = Boolean(
+    agreed &&
+    formData.name && formData.name.trim().length > 0 &&
+    formData.email && formData.email.trim().length > 0 &&
+    formData.service && formData.service.trim().length > 0
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className={`${CLAY_CARD} p-4 sm:p-8 md:p-12 rounded-[20px] sm:rounded-[32px]`}
+      className={`${CLAY_CARD} p-4 sm:p-8 md:p-10 rounded-[20px] sm:rounded-[32px]`}
     >
-      <div className="mb-6 sm:mb-10">
-        <h3 className="text-xl sm:text-3xl font-nunito font-black text-[#0D1B2A] mb-2 sm:mb-3">Send Us a Message</h3>
-        <p className="text-[#4A6080] font-inter text-xs sm:text-sm leading-relaxed">Fill in the form below and one of our consultants will reach out within 24 hours.</p>
-      </div>
+      {formStatus === "success" ? (
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+          className="text-center py-8"
+        >
+          <motion.div 
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.1 }}
+            className="w-16 h-16 sm:w-24 sm:h-24 bg-background shadow-[inset_3px_3px_8px_rgba(163,185,210,0.3),inset_-3px_-3px_8px_rgba(255,255,255,0.7)] text-[#34C98A] rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8"
+          >
+             <CheckCircle2 className="w-8 h-8 sm:w-12 sm:h-12" />
+          </motion.div>
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-nunito font-black text-[#0D1B2A] mb-4 sm:mb-6">Message Sent! 🎉</h2>
+          <p className="text-[#4A6080] text-xs sm:text-base md:text-lg font-inter mb-6 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
+            Thank you for reaching out. One of our consultants will contact you within 24 business hours. In the meantime, feel free to explore our services or connect with us on LinkedIn.
+          </p>
+          <button 
+            onClick={handleReset}
+            type="button"
+            className="bg-[#1A7FD4] text-white px-6 py-3.5 sm:px-10 sm:py-5 rounded-xl sm:rounded-2xl font-nunito font-black text-sm sm:text-xl shadow-[0_10px_20px_rgba(26,127,212,0.25)] hover:-translate-y-1 transition-all"
+          >
+            Close
+          </button>
+        </motion.div>
+      ) : (
+        <>
+          <div className="mb-5 sm:mb-8">
+            <h3 className="text-xl sm:text-3xl font-nunito font-black text-[#0D1B2A] mb-2 sm:mb-3">Send Us a Message</h3>
+            <p className="text-[#4A6080] font-inter text-xs sm:text-sm leading-relaxed">Fill in the form below and one of our consultants will reach out within 24 hours.</p>
+          </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-8">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6">
           <div className="space-y-1.5">
             <label className="font-nunito font-black text-[#0D1B2A] text-xs sm:text-sm ml-2">Full Name *</label>
             <input
@@ -77,7 +114,7 @@ const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setF
               placeholder="Your full name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`}
+              className={`${CLAY_INPUT} px-4 py-2.5 sm:px-5 sm:py-3.5 text-xs sm:text-sm`}
             />
           </div>
           <div className="space-y-1.5">
@@ -88,12 +125,12 @@ const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setF
               placeholder="your@company.com"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`}
+              className={`${CLAY_INPUT} px-4 py-2.5 sm:px-5 sm:py-3.5 text-xs sm:text-sm`}
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6">
           <div className="space-y-1.5">
             <label className="font-nunito font-black text-[#0D1B2A] text-xs sm:text-sm ml-2">Phone Number</label>
             <input
@@ -101,7 +138,7 @@ const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setF
               placeholder="+91 or +971 ..."
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`}
+              className={`${CLAY_INPUT} px-4 py-2.5 sm:px-5 sm:py-3.5 text-xs sm:text-sm`}
             />
           </div>
           <div className="space-y-1.5">
@@ -111,7 +148,7 @@ const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setF
               placeholder="Your company name"
               value={formData.company}
               onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-              className={`${CLAY_INPUT} px-4 py-3 sm:px-6 sm:py-4 text-xs sm:text-sm`}
+              className={`${CLAY_INPUT} px-4 py-2.5 sm:px-5 sm:py-3.5 text-xs sm:text-sm`}
             />
           </div>
         </div>
@@ -149,10 +186,10 @@ const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setF
 
         <button 
           type="submit"
-          disabled={formStatus === "loading" || !agreed}
-          className={`w-full py-3.5 sm:py-5 rounded-xl sm:rounded-2xl font-nunito font-black text-sm sm:text-xl flex items-center justify-center gap-2.5 transition-all ${
-            agreed 
-              ? "bg-[#1A7FD4] text-white shadow-[0_10px_20px_rgba(26,127,212,0.25)] hover:-translate-y-0.5 active:translate-y-0" 
+          disabled={formStatus === "loading" || !isFormValid}
+          className={`w-full py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-nunito font-black text-sm sm:text-xl flex items-center justify-center gap-2.5 transition-all ${
+            isFormValid
+              ? "bg-[#1A7FD4] text-white shadow-[0_10px_20px_rgba(26,127,212,0.25)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer" 
               : "bg-slate-200 text-slate-400 cursor-not-allowed"
           }`}
         >
@@ -162,12 +199,14 @@ const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setF
             <>Send Message <Send size={20} /></>
           )}
         </button>
-      </form>
+          </form>
+        </>
+      )}
     </motion.div>
   );
 };
 
-const ContactInfoForm = () => {
+const ContactInfoForm = ({ activeTab, onTabChange }: any) => {
   const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [agreed, setAgreed] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -179,22 +218,51 @@ const ContactInfoForm = () => {
     service: "",
   });
 
+  const handleReset = () => {
+    setFormStatus("idle");
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      company: "",
+      service: "",
+    });
+    setAgreed(false);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus("loading");
     setErrorMessage("");
 
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      // Call our own server-side API route (avoids browser network restrictions)
+      const res = await fetch('/api/contact/submit-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          company: formData.company,
+          service: formData.service,
+        }),
       });
 
       const data = await res.json();
 
-      if (!res.ok || data.error) {
-        throw new Error(data.error || "Something went wrong. Please try again.");
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to send message.');
+      }
+
+      // Also save to localStorage so dashboard shows it immediately
+      if (data.lead) {
+        try {
+          const stored = localStorage.getItem('MOCK_LEADS');
+          const leads = stored ? JSON.parse(stored) : [];
+          leads.unshift(data.lead);
+          localStorage.setItem('MOCK_LEADS', JSON.stringify(leads));
+        } catch (_) {}
       }
 
       setFormStatus("success");
@@ -206,30 +274,9 @@ const ContactInfoForm = () => {
   };
 
   return (
-    <div className="bg-background min-h-screen pt-24 sm:pt-28 pb-4 sm:pb-12 px-4 sm:px-6">
+    <div className="bg-background min-h-screen pt-16 sm:pt-24 pb-4 sm:pb-12 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
-        {formStatus === "success" ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className={`${CLAY_CARD} p-8 sm:p-12 md:p-24 text-center max-w-4xl mx-auto rounded-[20px] sm:rounded-[32px]`}
-          >
-            <div className="w-16 h-16 sm:w-24 sm:h-24 bg-background shadow-[inset_3px_3px_8px_rgba(163,185,210,0.3),inset_-3px_-3px_8px_rgba(255,255,255,0.7)] text-[#34C98A] rounded-full flex items-center justify-center mx-auto mb-6 sm:mb-8">
-               <CheckCircle2 className="w-8 h-8 sm:w-12 sm:h-12" />
-            </div>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-nunito font-black text-[#0D1B2A] mb-4 sm:mb-6">Message Sent! 🎉</h2>
-            <p className="text-[#4A6080] text-xs sm:text-base md:text-lg font-inter mb-6 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
-              Thank you for reaching out. One of our consultants will contact you within 24 business hours. In the meantime, feel free to explore our services or connect with us on LinkedIn.
-            </p>
-            <button 
-              onClick={() => window.location.href = '/'}
-              className="bg-[#1A7FD4] text-white px-6 py-3.5 sm:px-10 sm:py-5 rounded-xl sm:rounded-2xl font-nunito font-black text-sm sm:text-xl shadow-[0_10px_20px_rgba(26,127,212,0.25)] hover:-translate-y-1 transition-all"
-            >
-              Back to Home
-            </button>
-          </motion.div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-10 items-start">
             
             {/* LEFT SIDE: HERO + INFO + SOCIAL */}
             <motion.div
@@ -244,9 +291,10 @@ const ContactInfoForm = () => {
                   GET IN TOUCH
                 </div>
                 
-                <h1 className="font-nunito font-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-[#0D1B2A] mb-4 sm:mb-6 leading-[1.2] lg:leading-[1.1]">
+                <h1 className="font-nunito font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#0D1B2A] mb-4 sm:mb-6 leading-[1.2] lg:leading-[1.1]">
                   Let's Build Something <br/>
-                  <span className="text-[#1A7FD4]">Extraordinary Together.</span>
+                  <span className="text-[#1A7FD4]">Extraordinary</span> <br/>
+                  Together.
                 </h1>
                 
                 <p className="font-inter text-[#4A6080] text-xs sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 max-w-xl">
@@ -279,6 +327,7 @@ const ContactInfoForm = () => {
                   formData={formData}
                   setFormData={setFormData}
                   errorMessage={errorMessage}
+                  handleReset={handleReset}
                 />
               </div>
 
@@ -296,6 +345,30 @@ const ContactInfoForm = () => {
                     </div>
                     <span className="font-nunito font-black text-[#0D1B2A] text-xs sm:text-sm">+971 545 132 807</span>
                  </div>
+              </div>
+
+              {/* Form Toggles */}
+              <div className="flex flex-wrap gap-4 pt-4 pb-4 border-b border-[#1A7FD4]/10 mb-4">
+                <button 
+                  onClick={() => onTabChange && onTabChange('message')}
+                  className={`px-5 py-2.5 rounded-full font-nunito font-black text-xs sm:text-sm transition-all ${
+                    activeTab === 'message' || !activeTab
+                    ? 'bg-[#1A7FD4] text-white shadow-[0_5px_15px_rgba(26,127,212,0.3)]' 
+                    : 'bg-white/60 text-[#4A6080] border border-[#1A7FD4]/20 hover:bg-white'
+                  }`}
+                >
+                  Send Message
+                </button>
+                <button 
+                  onClick={() => onTabChange && onTabChange('resume')}
+                  className={`px-5 py-2.5 rounded-full font-nunito font-black text-xs sm:text-sm transition-all ${
+                    activeTab === 'resume' 
+                    ? 'bg-[#1A7FD4] text-white shadow-[0_5px_15px_rgba(26,127,212,0.3)]' 
+                    : 'bg-white/60 text-[#4A6080] border border-[#1A7FD4]/20 hover:bg-white'
+                  }`}
+                >
+                  Send Resume
+                </button>
               </div>
 
               {/* Follow Us Section - aligned in exactly 1 line */}
@@ -388,10 +461,10 @@ const ContactInfoForm = () => {
                 formData={formData}
                 setFormData={setFormData}
                 errorMessage={errorMessage}
+                handleReset={handleReset}
               />
             </div>
           </div>
-        )}
         
         {/* Office Locations Section */}
         <div className="mt-8 sm:mt-12">

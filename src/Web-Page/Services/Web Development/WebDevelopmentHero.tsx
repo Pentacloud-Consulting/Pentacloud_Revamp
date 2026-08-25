@@ -124,7 +124,7 @@ const WebDevelopmentHero = () => {
                   <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-green-400" />
                 </div>
                 <div className="flex-1 max-w-[250px] mx-auto h-4 sm:h-5 bg-white/60 rounded border border-[#1A7FD4]/05 flex items-center px-2 text-[7px] sm:text-[9px] text-[#8BA4BE] font-inter truncate">
-                  pentacloudconsulting.com
+                  pentacloud.me
                 </div>
               </div>
 

@@ -1,10 +1,24 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { usePathname } from 'next/navigation';
 import SplashAnimation from "./SplashAnimation";
 
 export default function SplashWrapper({ children }: { children: React.ReactNode }) {
   const [splashDone, setSplashDone] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // Only show splash on the root homepage. Skip on all other routes, or if already played this session.
+    if (pathname !== '/' || sessionStorage.getItem('splash_shown')) {
+      setSplashDone(true);
+    }
+  }, [pathname]);
+
+  const handleComplete = () => {
+    sessionStorage.setItem('splash_shown', 'true');
+    setSplashDone(true);
+  };
 
   // We want to immediately check local storage to prevent flicker if splash already done
   // However, local storage is only available on the client side.
@@ -17,7 +31,7 @@ export default function SplashWrapper({ children }: { children: React.ReactNode 
 
   return (
     <>
-      {!splashDone && <SplashAnimation onComplete={() => setSplashDone(true)} />}
+      {!splashDone && <SplashAnimation onComplete={handleComplete} />}
       <div
         className={`w-full flex-grow flex flex-col transition-opacity duration-700 ${
           splashDone ? "opacity-100" : "opacity-0 h-0 overflow-hidden"

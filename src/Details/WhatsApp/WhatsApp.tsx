@@ -3,12 +3,15 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const WhatsApp = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
   const phoneNumber = "971545132807";
   const message = "Hi Pentacloud! I'd like to learn more about your services.";
+
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +33,10 @@ const WhatsApp = () => {
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };
+
+  if (pathname?.startsWith('/dashboard')) {
+    return null;
+  }
 
   return (
     <AnimatePresence>
