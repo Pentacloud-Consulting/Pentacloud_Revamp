@@ -7,7 +7,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer 
 } from 'recharts';
 import { 
-  BarChart2, TrendingUp, Hash, Edit2, RefreshCw
+  BarChart2, TrendingUp, Hash, Edit2, RefreshCw, ExternalLink
 } from 'lucide-react';
 import { SeoScoreBadge } from '../../components/SeoScoreBadge';
 import Link from 'next/link';
@@ -364,38 +364,33 @@ export function Analytics() {
     localStorage.setItem('pentacloud_tracked_keywords', JSON.stringify(keywordStrings));
   }, [newlyAddedKeywords]);
 
-  // --- Chart Data ---
+  // --- Chart Data: driven by keywordMode toggle ---
   const chartData = useMemo(() => {
-    const months: Record<string, number> = {};
-    for (let i = 5; i >= 0; i--) {
-      const d = new Date();
-      d.setMonth(d.getMonth() - i);
-      const monthStr = d.toLocaleString('default', { month: 'short', year: 'numeric' });
-      months[monthStr] = 0;
-    }
-    
-    if (isGSCConnected) {
-      if (gscData.length > 0) return gscData;
-      // Fallback while loading
-      return Object.keys(months).map((label) => ({ label, value: 0 }));
-    }
-    
-    blogs.forEach(b => {
-      const dateStr = b.created_at || b.published_at || '';
-      const d = new Date(dateStr);
-      if (dateStr && !isNaN(d.getTime())) {
+    // AUTO mode: Show GSC organic clicks (or publishing velocity fallback)
+    if (keywordMode === 'auto') {
+      if (isGSCConnected && gscData.length > 0) return gscData;
+      // Fallback while loading or not connected
+      const months: Record<string, number> = {};
+      for (let i = 5; i >= 0; i--) {
+        const d = new Date();
+        d.setMonth(d.getMonth() - i);
         const monthStr = d.toLocaleString('default', { month: 'short', year: 'numeric' });
-        if (months[monthStr] !== undefined) {
-          months[monthStr]++;
-        }
+        months[monthStr] = 0;
       }
-    });
-    
-    return Object.keys(months).map(label => ({
-      label,
-      value: months[label]
-    }));
-  }, [blogs, isGSCConnected]);
+      blogs.forEach(b => {
+        const dateStr = b.created_at || b.published_at || '';
+        const d = new Date(dateStr);
+        if (dateStr && !isNaN(d.getTime())) {
+          const monthStr = d.toLocaleString('default', { month: 'short', year: 'numeric' });
+          if (months[monthStr] !== undefined) months[monthStr]++;
+        }
+      });
+      return Object.keys(months).map(label => ({ label, value: months[label] }));
+    }
+
+    // MANUAL mode: Show avg. position trend from manually tracked keywords
+    return manualKeywordData.lineData.map(p => ({ label: p.date, value: p.value }));
+  }, [keywordMode, isGSCConnected, gscData, blogs, manualKeywordData]);
 
   const avgSeoScore = Math.round(totalSeoScore / (blogs.length || 1));
 
@@ -418,7 +413,7 @@ export function Analytics() {
 
       {/* 4. SUMMARY CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {isGSCConnected && gscSummary ? (
+        {keywordMode === 'auto' && isGSCConnected && gscSummary ? (
           <>
             <div className="bg-white p-5 rounded-xl border border-blue-200 shadow-sm flex flex-col ring-1 ring-blue-100">
               <div className="flex items-center justify-between mb-2">
@@ -455,8 +450,70 @@ export function Analytics() {
               <span className="text-xs text-purple-600 mt-1 font-medium">Live from Google Search Console</span>
             </div>
           </>
+        ) : keywordMode === 'manual' ? (
+          <>
+            {/* Manual Mode: Show manually tracked keyword stats */}
+            <div className="bg-white p-5 rounded-xl border border-blue-200 shadow-sm flex flex-col ring-1 ring-blue-100">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-500">Tracked Keywords</span>
+                <div className="p-2 bg-blue-50 text-blue-600 rounded-lg"><BarChart2 size={18} /></div>
+              </div>
+              <span className="text-3xl font-bold text-gray-900">{newlyAddedKeywords.length}</span>
+              <span className="text-xs text-blue-600 mt-1 font-medium">Manually added keywords</span>
+            </div>
+            <div className="bg-white p-5 rounded-xl border border-emerald-200 shadow-sm flex flex-col ring-1 ring-emerald-100">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-500">Avg. Position</span>
+                <div className="p-2 bg-emerald-50 text-emerald-600 rounded-lg"><Hash size={18} /></div>
+              </div>
+              <span className="text-3xl font-bold text-gray-900">
+                {manualKeywordData.stats.currentAvg > 0 ? `#${manualKeywordData.stats.currentAvg.toFixed(1)}` : '—'}
+              </span>
+              <span className="text-xs text-emerald-600 mt-1 font-medium">Average across all keywords</span>
+            </div>
+            <div className="bg-white p-5 rounded-xl border border-amber-200 shadow-sm flex flex-col ring-1 ring-amber-100">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-500">Top 10 Rankings</span>
+                <div className="p-2 bg-amber-50 text-amber-600 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                </div>
+              </div>
+              <span className="text-3xl font-bold text-gray-900">
+                {newlyAddedKeywords.filter(k => typeof k.pos === 'number' && k.pos <= 10).length}
+              </span>
+              <span className="text-xs text-amber-600 mt-1 font-medium">Keywords ranking in top 10</span>
+            </div>
+            <div className="bg-white p-5 rounded-xl border border-purple-200 shadow-sm flex flex-col ring-1 ring-purple-100">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-medium text-gray-500">Blog Posts</span>
+                <div className="p-2 bg-purple-50 text-purple-600 rounded-lg"><TrendingUp size={18} /></div>
+              </div>
+              {/* 2-column split: Published vs Draft */}
+              <div className="grid grid-cols-2 divide-x divide-purple-100">
+                <div className="flex flex-col pr-4">
+                  <span className="text-2xl font-bold text-gray-900">
+                    {blogs.filter(b => b.status === 'published').length}
+                  </span>
+                  <span className="text-[11px] text-emerald-600 font-semibold mt-0.5 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+                    Published
+                  </span>
+                </div>
+                <div className="flex flex-col pl-4">
+                  <span className="text-2xl font-bold text-gray-900">
+                    {blogs.filter(b => b.status === 'draft' || !b.status).length}
+                  </span>
+                  <span className="text-[11px] text-amber-500 font-semibold mt-0.5 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span>
+                    Drafts
+                  </span>
+                </div>
+              </div>
+            </div>
+          </>
         ) : (
           <>
+            {/* Auto mode but GSC not connected — show blog stats */}
             <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium text-gray-500">Total Blogs</span>
@@ -495,13 +552,28 @@ export function Analytics() {
       <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
           <div>
-            <h3 className="text-lg font-bold text-gray-900">
-              {isGSCConnected ? 'Organic Search Traffic' : 'Publishing Activity Velocity'}
+            <h3 className="text-lg font-bold text-gray-900 flex items-center gap-3">
+              <span>
+                {keywordMode === 'auto'
+                  ? (isGSCConnected ? 'Organic Search Traffic' : 'Publishing Activity Velocity')
+                  : 'Manual Keyword Avg. Position Trend'}
+              </span>
+              <a 
+                href="https://search.google.com/u/4/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fpentacloud.me%2F&breakdown=query"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50/80 text-blue-700 hover:bg-blue-100 border border-blue-200/60 rounded-md text-[10px] font-bold tracking-widest uppercase transition-colors shadow-sm"
+                title="Open in Google Search Console"
+              >
+                GSC <ExternalLink size={12} className="opacity-80 -mt-[1px]" />
+              </a>
             </h3>
             <p className="text-sm text-gray-500 mt-1">
-              {isGSCConnected
-                ? `Live clicks from Google Search Console — last ${timeRange === '7d' ? '7 days' : timeRange === '3m' ? '90 days' : timeRange === '6m' ? '6 months' : '30 days'}.`
-                : 'Showing publishing activity. Connect Google Search Console for live ranking/traffic trends.'}
+              {keywordMode === 'auto'
+                ? (isGSCConnected
+                    ? `Live clicks from Google Search Console — last ${timeRange === '7d' ? '7 days' : timeRange === '3m' ? '90 days' : timeRange === '6m' ? '6 months' : '30 days'}.`
+                    : 'Showing publishing activity. Connect Google Search Console for live traffic trends.')
+                : `Average position trend for your ${newlyAddedKeywords.length} manually tracked keyword${newlyAddedKeywords.length !== 1 ? 's' : ''}.`}
             </p>
           </div>
           <div className="flex items-center gap-3">

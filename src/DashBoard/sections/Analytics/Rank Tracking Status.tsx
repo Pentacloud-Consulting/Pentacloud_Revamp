@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Plus, Download, RefreshCw, Trash2, SlidersHorizontal, Monitor } from 'lucide-react';
+import { Plus, Download, RefreshCw, Trash2, SlidersHorizontal, Monitor, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { exportKeywordsToCSV } from './Export To CSV';
 import { AddKeywordModal } from './Add Keyword';
@@ -69,6 +69,15 @@ export function RankTrackingStatus({ keywords = [], onAddKeywords, onDeleteKeywo
             <RefreshCw size={10} className={isUpdating ? "animate-spin" : ""} /> 
             {isUpdating ? "Fetching Google Data..." : "Update SEO Difficulty"} <span className="font-normal">▼</span>
           </button>
+          <a 
+            href="https://search.google.com/u/4/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fpentacloud.me%2F&breakdown=query"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-3 py-1 border border-blue-600 text-white bg-blue-600 hover:bg-blue-700 font-bold text-[10px] rounded uppercase shadow-sm transition-colors"
+            title="Open in Google Search Console"
+          >
+            GSC <ExternalLink size={10} className="opacity-90" />
+          </a>
         </div>
         
         <div className="flex flex-wrap items-center gap-2">
