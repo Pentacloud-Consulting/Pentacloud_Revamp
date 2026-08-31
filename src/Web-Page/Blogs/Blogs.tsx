@@ -260,7 +260,7 @@ export default function Blogs() {
 
             {/* ══ BLOG GRID ══════════════════════════════════════════ */}
             <AnimatePresence mode="wait">
-              {visible.length > 0 ? (
+              {visible.length > 0 && (
                 <motion.div
                   key={activeCategory + searchQuery}
                   initial={{ opacity: 0 }}
@@ -273,7 +273,9 @@ export default function Blogs() {
                     <BlogCard key={blog.id} blog={blog} index={i} />
                   ))}
                 </motion.div>
-              ) : (
+              )}
+              
+              {visible.length === 0 && (!isDefaultView || !featured) && (
                 <motion.div
                   key="empty"
                   initial={{ opacity: 0 }}
