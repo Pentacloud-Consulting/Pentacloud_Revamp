@@ -292,64 +292,63 @@ export function Analytics() {
     return { keywords, lineData, pieData, stats };
   }, [uniqueBlogs, timeRange, deletedKeywordIds, isGSCConnected, gscQueries]);
 
-  // --- Manual keyword data for RankTracker (formatted for the table) ---
+  // --- Manual keyword data: only shows keywords with a matching PUBLISHED blog ---
   const manualKeywordData = useMemo(() => {
-    const timeMultiplier = timeRange === '7d' ? 0.4 : timeRange === '3m' ? 1.8 : timeRange === '6m' ? 3.5 : 1;
-    let upCount = 0, downCount = 0, unchangedCount = 0;
     let top3 = 0, top10 = 0, top100 = 0, notRanking = 0;
 
-    const keywords = newlyAddedKeywords.map((kw, idx) => {
-      // Newly added keywords have no real position yet
-      const pos = typeof kw.pos === 'number' ? kw.pos : 100;
-      const pseudoRandom = idx + 1;
-      const changeAmount = Math.round(((pseudoRandom % 5) - 2) * timeMultiplier);
-      const oldPos = Math.max(1, pos - changeAmount);
-      const actualChange = oldPos - pos;
+    const publishedBlogs = blogs.filter(b => (b.status || '').toLowerCase() === 'published');
 
-      if (actualChange > 0) upCount++;
-      else if (actualChange < 0) downCount++;
-      else unchangedCount++;
+    const keywords = newlyAddedKeywords
+      .map((kw, idx) => {
+        const kwLower = (kw.keyword || '').toLowerCase().trim();
 
-      if (pos <= 3) top3++;
-      else if (pos <= 10) top10++;
-      else if (pos <= 100) top100++;
-      else notRanking++;
+        // Only show this keyword if a published blog targets it as focus_keyword
+        const matchedBlog = publishedBlogs.find(b =>
+          (b.focus_keyword || '').toLowerCase().trim() === kwLower
+        );
+        if (!matchedBlog) return null; // no blog written yet — hide from table
 
-      const hash = kw.keyword ? kw.keyword.split('').reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0) : idx;
-      const generatedVol = 10000 + ((hash * 123) % 40000); // High volume (10k-50k)
-      const generatedDiff = 12 + (hash % 18); // Low difficulty (12-29)
+        const blogUrl = `https://pentacloud.me/blogs/${matchedBlog.slug}`;
 
-      return {
-        id: `manual-${idx}`,
-        pos,
-        keyword: kw.keyword,
-        oldPos,
-        change: Math.abs(actualChange),
-        up: actualChange > 0,
-        down: actualChange < 0,
-        vol: kw.vol ? Number(kw.vol).toLocaleString() : generatedVol.toLocaleString(),
-        diff: kw.diff || generatedDiff,
-        diffTime: 'Manually Added',
-        url: `https://pentacloud.me/`
-      };
-    });
+        // Look up real GSC position for this keyword
+        let gscPos: number | null = null;
+        if (isGSCConnected && gscQueries.length > 0) {
+          const gscMatch = gscQueries.find(q =>
+            (q.keys[0] || '').toLowerCase().includes(kwLower) ||
+            kwLower.includes((q.keys[0] || '').toLowerCase())
+          );
+          if (gscMatch) gscPos = Math.round(gscMatch.position * 10) / 10;
+        }
 
-    const avgPos = keywords.length > 0 ? keywords.reduce((acc, k) => acc + k.pos, 0) / keywords.length : 0;
-    const oldAvg = avgPos + (3.2 * timeMultiplier);
+        const pos = gscPos ?? null;
 
-    let labels = [];
-    if (timeRange === '7d') labels = ['6 days ago', '4 days ago', '2 days ago', 'Yesterday', 'Today'];
-    else if (timeRange === '30d') labels = ['4 Wks Ago', '3 Wks Ago', '2 Wks Ago', 'Last Week', 'This Week'];
-    else if (timeRange === '3m') labels = ['3 Mos Ago', '2 Mos Ago', 'Last Month', '2 Wks Ago', 'This Week'];
-    else labels = ['6 Mos Ago', '4 Mos Ago', '2 Mos Ago', 'Last Month', 'This Week'];
+        if (pos === null) notRanking++;
+        else if (pos <= 3) top3++;
+        else if (pos <= 10) top10++;
+        else if (pos <= 100) top100++;
+        else notRanking++;
 
-    const lineData = [
-      { date: labels[0], value: Number((avgPos + (3.2 * timeMultiplier)).toFixed(2)) },
-      { date: labels[1], value: Number((avgPos + (2.1 * timeMultiplier)).toFixed(2)) },
-      { date: labels[2], value: Number((avgPos + (1.5 * timeMultiplier)).toFixed(2)) },
-      { date: labels[3], value: Number((avgPos + (0.8 * timeMultiplier)).toFixed(2)) },
-      { date: labels[4], value: Number(avgPos.toFixed(2)) },
-    ];
+        return {
+          id: `manual-${idx}`,
+          pos,
+          keyword: kw.keyword,
+          location: kw.location || 'Dubai, UAE',
+          oldPos: null,
+          change: null,
+          up: false,
+          down: false,
+          vol: kw.vol ? Number(kw.vol).toLocaleString() : '—',
+          diff: kw.diff ?? '—',
+          diffTime: gscPos !== null ? 'Live from GSC' : 'Not indexed yet',
+          url: blogUrl,
+        };
+      })
+      .filter(Boolean);
+
+    const rankedOnly = keywords.filter(k => k!.pos !== null);
+    const avgPos = rankedOnly.length > 0
+      ? rankedOnly.reduce((acc, k) => acc + (k!.pos ?? 0), 0) / rankedOnly.length
+      : 0;
 
     const pieData = [
       { name: 'Top 3', value: top3, color: '#6EE7B7' },
@@ -358,8 +357,12 @@ export function Analytics() {
       { name: 'Not ranking', value: notRanking, color: '#FCA5A5' },
     ];
 
-    return { keywords, lineData, pieData, stats: { up: upCount, down: downCount, unchanged: unchangedCount, currentAvg: avgPos, oldAvg } };
-  }, [newlyAddedKeywords, timeRange]);
+    const lineData = rankedOnly.length > 0
+      ? [{ date: 'Now', value: Number(avgPos.toFixed(2)) }]
+      : [];
+
+    return { keywords, lineData, pieData, stats: { up: 0, down: 0, unchanged: keywords.length, currentAvg: avgPos, oldAvg: avgPos } };
+  }, [newlyAddedKeywords, blogs, gscQueries, isGSCConnected]);
 
   // --- Sync ONLY manual keywords to localStorage for Blog Editor validation ---
   useEffect(() => {

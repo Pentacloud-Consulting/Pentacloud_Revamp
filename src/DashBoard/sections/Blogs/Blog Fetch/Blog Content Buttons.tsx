@@ -77,7 +77,7 @@ export const BlogContentButtons: React.FC<BlogContentButtonsProps> = ({
   };
 
   return (
-    <div className="flex gap-2 mb-2 p-2 border border-gray-200 rounded-t-md bg-gray-50 flex-wrap">
+    <div className="flex gap-2 mb-2 p-2 border border-gray-200 rounded-t-md bg-gray-50 flex-wrap sticky top-0 z-[40] shadow-sm">
       {/* Hidden File Input for Image Upload */}
       <input 
         type="file" 

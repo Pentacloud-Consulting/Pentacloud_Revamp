@@ -9,14 +9,15 @@ interface AddKeywordProps {
 
 export function AddKeywordModal({ isOpen, onClose, onAdd }: AddKeywordProps) {
   const [inputText, setInputText] = useState('');
-  const [location, setLocation] = useState('English / India');
+  const [location, setLocation] = useState('Dubai, UAE');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const locations = [
-    'English / India',
-    'English / United States',
-    'English / United Kingdom',
-    'Arabic / UAE'
+    'Dubai, UAE',
+    'Qatar',
+    'UAE (All Emirates)',
+    'India',
+    'Global / Worldwide'
   ];
 
   if (!isOpen) return null;
@@ -67,7 +68,7 @@ export function AddKeywordModal({ isOpen, onClose, onAdd }: AddKeywordProps) {
           </div>
 
           <div className="relative">
-            <label className="block text-sm font-semibold text-gray-800 mb-2">Location & Language</label>
+            <label className="block text-sm font-semibold text-gray-800 mb-2">Location</label>
             <div className="relative">
               <button 
                 type="button"

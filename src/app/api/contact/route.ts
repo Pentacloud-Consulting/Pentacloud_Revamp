@@ -1,18 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.office365.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: process.env.MICROSOFT_EMAIL_USER, // your contactus@pentacloudconsulting.com email
-    pass: process.env.MICROSOFT_EMAIL_PASSWORD, // your app password or normal password
-  },
-  tls: {
-    ciphers: 'SSLv3'
-  }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   try {
@@ -28,9 +17,9 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-      await transporter.sendMail({
-        from: `"Pentacloud Consulting" <${process.env.MICROSOFT_EMAIL_USER}>`,
-        to: "contactus@pentacloudconsulting.com",
+      await resend.emails.send({
+        from: `Pentacloud Website <notifications@pentacloud.me>`,
+        to: process.env.MICROSOFT_EMAIL_USER || "contactus@pentacloudconsulting.com",
         replyTo: email,
         subject: `📩 New Enquiry from ${name} — ${service}`,
         html: `
@@ -102,9 +91,9 @@ export async function POST(req: NextRequest) {
         </html>
       `,
       });
-      console.log('✅ Email sent via Nodemailer');
+      console.log('✅ Email sent via Resend');
     } catch (emailErr) {
-      console.error("Nodemailer error:", emailErr);
+      console.error("Resend error:", emailErr);
       return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
     }
 

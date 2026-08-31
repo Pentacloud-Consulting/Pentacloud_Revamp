@@ -1,25 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp.office365.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: process.env.MICROSOFT_EMAIL_USER, // your contactus@pentacloudconsulting.com email
-    pass: process.env.MICROSOFT_EMAIL_PASSWORD, // your app password or normal password
-  },
-  tls: {
-    ciphers: 'SSLv3'
-  }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest) {
   try {
@@ -50,11 +38,11 @@ export async function POST(req: NextRequest) {
       console.warn('⚠️ Supabase unreachable (DNS propagating). Application stored in response only.', dbErr);
     }
 
-    // Send Email via Nodemailer (Microsoft)
+    // Send Email via Resend
     try {
-      await transporter.sendMail({
-        from: `"Pentacloud Consulting" <${process.env.MICROSOFT_EMAIL_USER}>`,
-        to: "contactus@pentacloudconsulting.com",
+      await resend.emails.send({
+        from: `Pentacloud Careers <notifications@pentacloud.me>`,
+        to: process.env.MICROSOFT_EMAIL_USER || "contactus@pentacloudconsulting.com",
         replyTo: email,
         subject: `💼 New Job Application from ${name} — ${position}`,
         html: `
@@ -68,9 +56,9 @@ export async function POST(req: NextRequest) {
           </div>
         `
       });
-      console.log('✅ Email sent via Nodemailer');
+      console.log('✅ Email sent via Resend');
     } catch (emailErr) {
-      console.warn('⚠️ Failed to send email via Nodemailer:', emailErr);
+      console.warn('⚠️ Failed to send email via Resend:', emailErr);
     }
 
     return NextResponse.json({ success: true, application: payload }, { status: 200 });

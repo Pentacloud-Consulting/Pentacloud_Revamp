@@ -25,6 +25,8 @@ export async function POST(request: NextRequest) {
 
     // Remove fields that don't belong in the DB row
     delete payload._last_saved;
+    delete payload.location;   // UI-only field, not a DB column
+    delete payload.seoScore;   // computed field, not stored
 
     // Only use as targetId if it's a real Supabase UUID — ignore fake timestamp IDs
     const targetId = isValidUUID(id) ? id : (isValidUUID(blogData.id) ? blogData.id : null);

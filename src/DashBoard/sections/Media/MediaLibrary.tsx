@@ -99,21 +99,60 @@ export function MediaLibrary({ onSelect }: MediaLibraryProps = {}) {
     setSelectedIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
   };
 
-  const handleBulkDelete = () => {
+  const handleBulkDelete = async () => {
+    const currentMedia = activeTab === 'uploads' ? uploadMedia : publicMedia;
+    const toDelete = currentMedia.filter(m => selectedIds.includes(m.id));
+    
+    // Optimistically remove from UI immediately
     if (activeTab === 'uploads') {
       setUploadMedia(prev => prev.filter(m => !selectedIds.includes(m.id)));
     } else {
       setPublicMedia(prev => prev.filter(m => !selectedIds.includes(m.id)));
     }
     setSelectedIds([]);
+
+    // Permanently delete from Supabase storage + DB
+    for (const item of toDelete) {
+      try {
+        // Extract storage path from URL (e.g. /storage/v1/object/public/media/uploads/file.webp -> uploads/file.webp)
+        const urlParts = item.url.split('/media/');
+        const storagePath = urlParts.length > 1 ? urlParts[1] : item.filename;
+        await supabase.storage.from('media').remove([storagePath]);
+        await supabase.from('media').delete().eq('id', item.id);
+      } catch (err) {
+        console.warn('Failed to delete item from Supabase:', item.id, err);
+      }
+    }
+
+    // Update cache
+    const remaining = [...uploadMedia, ...publicMedia].filter(m => !toDelete.map(d => d.id).includes(m.id));
+    localStorage.setItem('MOCK_MEDIA_CACHE', JSON.stringify(remaining));
   };
 
-  const handleDelete = (id: string) => {
-    if (!confirm('Delete this image?')) return;
+  const handleDelete = async (id: string) => {
+    if (!confirm('Delete this image permanently? This cannot be undone.')) return;
+    const item = activeTab === 'uploads'
+      ? uploadMedia.find(m => m.id === id)
+      : publicMedia.find(m => m.id === id);
+    
+    // Optimistically remove from UI
     if (activeTab === 'uploads') {
       setUploadMedia(prev => prev.filter(m => m.id !== id));
     } else {
       setPublicMedia(prev => prev.filter(m => m.id !== id));
+    }
+
+    if (item) {
+      try {
+        const urlParts = item.url.split('/media/');
+        const storagePath = urlParts.length > 1 ? urlParts[1] : item.filename;
+        await supabase.storage.from('media').remove([storagePath]);
+        await supabase.from('media').delete().eq('id', id);
+        const allCached = JSON.parse(localStorage.getItem('MOCK_MEDIA_CACHE') || '[]');
+        localStorage.setItem('MOCK_MEDIA_CACHE', JSON.stringify(allCached.filter((m: any) => m.id !== id)));
+      } catch (err) {
+        console.warn('Failed to permanently delete from Supabase:', err);
+      }
     }
   };
 
@@ -258,6 +297,20 @@ export function MediaLibrary({ onSelect }: MediaLibraryProps = {}) {
           </button>
           
           <div className="h-6 w-px bg-gray-300 mx-1 hidden sm:block"></div>
+          
+          {/* Select All toggle */}
+          {filteredMedia.length > 0 && (
+            <button
+              onClick={() => {
+                const allIds = filteredMedia.map(m => m.id);
+                const allSelected = allIds.every(id => selectedIds.includes(id));
+                setSelectedIds(allSelected ? [] : allIds);
+              }}
+              className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-gray-200 bg-white text-slate-600 hover:bg-gray-50 transition-colors shadow-sm"
+            >
+              {filteredMedia.every(m => selectedIds.includes(m.id)) ? 'Deselect All' : 'Select All'}
+            </button>
+          )}
           
           <button onClick={() => handleRefresh()} disabled={isRefreshing} className="text-gray-500 bg-white hover:bg-gray-50 p-2 rounded-lg transition-colors border border-gray-200 shadow-sm disabled:opacity-50" title="Refresh">
             <RefreshCw size={16} className={isRefreshing ? "animate-spin" : ""} />
