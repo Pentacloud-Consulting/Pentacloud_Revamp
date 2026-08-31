@@ -229,6 +229,23 @@ The objective is to completely revamp the Pentacloud Admin Dashboard into a high
 
 ---
 
+## 🚀 Accomplished Milestones: Keyword Tracking, Media Management & UI Polish
+
+### 1. Intelligent Keyword Tracker Engine
+*   **Published-Blog Filtering:** Updated the SEO dashboard's keyword tracker to only display keywords that have been actively used in a *published* blog, hiding raw un-published keywords to keep the table actionable.
+*   **Real Data Integration:** Swapped out mock data columns. The table now displays actual Google Search Console ranking positions, the true live URL of the published blog, and user-defined search volume and SEO difficulty.
+
+### 2. Deep Media Deletion & Bulk Management
+*   **True Permanent Deletion:** Completely rewired the bulk-delete action in the Media Library. Deleting an image now actively runs `supabase.storage.from('media').remove()` and deletes the database record, ensuring it is permanently wiped from the cloud rather than just hiding from the UI.
+*   **Bulk Selection Tools:** Added a "Select All" / "Deselect All" toolbar toggle to easily manage and purge large batches of media assets.
+
+### 3. Bulletproof Sticky UI (Blog Editor)
+*   **Dashboard Layout Fix:** Re-architected the `DashboardShell` layout wrapper. Changing it from `min-h-screen` to `h-screen overflow-hidden` forced the `main` container to handle its own scrolling.
+*   **Sticky SEO Panel:** The "Blog SEO Review" checklist now perfectly sticks to the right-hand side of the screen as the user scrolls down a long blog post.
+*   **Sticky Editor Toolbar:** The rich-text formatting buttons (Bold, Italic, H2, etc.) now stick flawlessly to the top edge of the editor view. Also removed top padding conflicts from the main layout so scrolling text vanishes cleanly behind the toolbar instead of bleeding above it.
+
+---
+
 ## 📋 Pending — Only 1 Item Remaining
 
 ### ⚠️ Email Notifications (SMTP Blocker — Needs Boss Action)
