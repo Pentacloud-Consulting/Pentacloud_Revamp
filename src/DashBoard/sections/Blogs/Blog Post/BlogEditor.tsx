@@ -27,6 +27,7 @@ export function BlogEditor({ id }: BlogEditorProps) {
   const [blog, setBlog] = useState(defaultBlogState);
   const [showSeoPanel, setShowSeoPanel] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [locationError, setLocationError] = useState(false);
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -113,6 +114,12 @@ export function BlogEditor({ id }: BlogEditorProps) {
   }, [id, editor]);
 
   const handleSave = async (status = blog.status) => {
+    // Block publishing without a location
+    if (status === 'published' && !(blog.location || '').trim()) {
+      setLocationError(true);
+      setTimeout(() => setLocationError(false), 4000);
+      return;
+    }
     setSaving(true);
     const updatedBlog = await saveBlogDetails(blog, id, status);
     setBlog(updatedBlog);
@@ -184,7 +191,25 @@ export function BlogEditor({ id }: BlogEditorProps) {
         </button>
       </div>
 
+      {/* Location missing — publish error banner */}
+      <AnimatePresence>
+        {locationError && (
+          <motion.div
+            key="location-error"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="flex items-center gap-3 px-4 py-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm font-medium"
+          >
+            <span className="text-base">📍</span>
+            <span><strong>Location is required before publishing.</strong> Go to the <strong>Details</strong> tab and set a target location for local SEO.</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Split layout */}
+
       <div className="flex gap-4 items-start">
         {/* Left: Blog form */}
         <div className={`min-w-0 transition-all duration-300 ${showSeoPanel ? 'w-[calc(100%-24rem)]' : 'w-full'}`}>

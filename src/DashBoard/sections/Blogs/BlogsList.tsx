@@ -112,7 +112,7 @@ export function BlogsList() {
   const handleRefresh = async (silent = false) => {
     if (!silent) setIsLoading(true);
     try {
-      const { data, error } = await supabase.from('blogs').select('*').order('updated_at', { ascending: false });
+      const { data, error } = await supabase.from('blogs').select('*').order('created_at', { ascending: false });
       if (error) throw error;
       
       const finalData = data || [];
@@ -309,13 +309,53 @@ export function BlogsList() {
       />
       
       <div className="relative min-h-[300px]">
-        {isLoading && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/50 backdrop-blur-[1px] rounded-lg">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          </div>
-        )}
-        <div className={`transition-opacity duration-300 ${isLoading ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
-          {viewMode === 'list' ? (
+        {isLoading ? (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full">
+            {viewMode === 'list' ? (
+              <div className="w-full bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden animate-pulse">
+                <div className="h-12 bg-gray-50 border-b border-gray-200"></div>
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="flex items-center px-6 py-4 border-b border-gray-100 last:border-0 gap-6">
+                    <div className="w-4 h-4 rounded bg-gray-200 shrink-0"></div>
+                    <div className="flex-1">
+                      <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                      <div className="h-3 bg-gray-100 rounded w-1/4"></div>
+                    </div>
+                    <div className="w-16 h-6 bg-gray-200 rounded-full shrink-0 hidden sm:block"></div>
+                    <div className="w-24 h-6 bg-gray-200 rounded-full shrink-0 hidden md:block"></div>
+                    <div className="w-24 h-4 bg-gray-200 rounded shrink-0 hidden lg:block"></div>
+                    <div className="w-20 h-4 bg-gray-200 rounded shrink-0 hidden xl:block"></div>
+                    <div className="w-8 h-8 bg-gray-200 rounded shrink-0"></div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-pulse">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm h-[380px] flex flex-col">
+                    <div className="h-48 bg-gray-200 w-full shrink-0"></div>
+                    <div className="p-5 flex flex-col flex-1 gap-3">
+                      <div className="flex justify-between items-center">
+                        <div className="w-1/3 h-4 bg-gray-200 rounded"></div>
+                        <div className="w-16 h-5 bg-gray-200 rounded-full"></div>
+                      </div>
+                      <div className="w-full h-5 bg-gray-200 rounded mt-1"></div>
+                      <div className="w-3/4 h-5 bg-gray-200 rounded"></div>
+                      <div className="w-full h-3 bg-gray-100 rounded mt-2"></div>
+                      <div className="w-5/6 h-3 bg-gray-100 rounded"></div>
+                      <div className="mt-auto pt-4 border-t border-gray-100 flex justify-between">
+                        <div className="w-20 h-6 bg-gray-200 rounded-full"></div>
+                        <div className="w-16 h-6 bg-gray-200 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </motion.div>
+        ) : (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="transition-opacity duration-300">
+            {viewMode === 'list' ? (
             <DataTable data={filteredBlogs} columns={columns} keyExtractor={(b) => b.id} />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -394,7 +434,8 @@ export function BlogsList() {
               )}
             </div>
           )}
-        </div>
+        </motion.div>
+        )}
       </div>
       
       <BlogDelete 

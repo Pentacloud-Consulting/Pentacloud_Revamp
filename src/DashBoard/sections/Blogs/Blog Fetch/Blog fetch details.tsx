@@ -7,7 +7,7 @@ export const defaultBlogState = {
   meta_title: '', meta_description: '',
   og_title: '', og_description: '', og_image: '',
   canonical_url: '', focus_keyword: '', meta_robots: 'index, follow',
-  status: 'draft', content: '', faqs: [],
+  status: 'draft', content: '', faqs: [], location: '',
   cta_heading: 'Ready to Transform Your Business?',
   cta_description: 'Join the 10+ clients we digitally transformed in 2026 — and let Pentacloud build something extraordinary for you too.',
   cta_button_text: 'Start Your Journey →',

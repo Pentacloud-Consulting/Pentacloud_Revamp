@@ -17,7 +17,9 @@ export function NewBlogForm({ blog, setBlog, editor, seoScore, handleGenerateSlu
   const [contentType, setContentType] = useState<'manual' | 'html'>('manual');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const [isLocationDropdownOpen, setIsLocationDropdownOpen] = useState(false);
   const [isStatusDropdownOpen, setIsStatusDropdownOpen] = useState(false);
+  const [locationCustom, setLocationCustom] = useState(false);
   const [isSlugMessageOpen, setIsSlugMessageOpen] = useState(false);
   const [isFocusKeyNotFoundOpen, setIsFocusKeyNotFoundOpen] = useState(false);
   const [invalidKeyword, setInvalidKeyword] = useState('');
@@ -27,7 +29,7 @@ export function NewBlogForm({ blog, setBlog, editor, seoScore, handleGenerateSlu
   const savedSelectionRef = useRef<{ from: number; to: number } | null>(null);
   
   // Validation state
-  const [detailsErrors, setDetailsErrors] = useState({ title: false, slug: false, category: false });
+  const [detailsErrors, setDetailsErrors] = useState({ title: false, slug: false, category: false, location: false });
 
   // Auto-fill CTA fields for old drafts
   useEffect(() => {
@@ -53,12 +55,14 @@ export function NewBlogForm({ blog, setBlog, editor, seoScore, handleGenerateSlu
   const titleRef = useRef<HTMLInputElement>(null);
   const slugRef = useRef<HTMLInputElement>(null);
   const categoryRef = useRef<HTMLButtonElement>(null);
+  const locationRef = useRef<HTMLButtonElement>(null);
 
   const handleNextFromDetails = () => {
     const errors = {
       title: !(blog.title || '').trim(),
       slug: !(blog.slug || '').trim(),
-      category: !(blog.category || '').trim()
+      category: !(blog.category || '').trim(),
+      location: !(blog.location || '').trim(),
     };
     setDetailsErrors(errors);
     
@@ -70,6 +74,8 @@ export function NewBlogForm({ blog, setBlog, editor, seoScore, handleGenerateSlu
       slugRef.current?.focus();
     } else if (errors.category) {
       categoryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else if (errors.location) {
+      locationRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
       setActiveTab('CONTENT');
     }
@@ -184,6 +190,16 @@ export function NewBlogForm({ blog, setBlog, editor, seoScore, handleGenerateSlu
     'Digital Marketing',
     'Data Migration',
     'Consulting And Training'
+  ];
+
+  // Location options — preset + custom entry
+  const predefinedLocations = [
+    { label: 'Dubai, UAE', value: 'Dubai' },
+    { label: 'Qatar', value: 'Qatar' },
+    { label: 'UAE (All Emirates)', value: 'UAE' },
+    { label: 'India', value: 'India' },
+    { label: 'Global / Worldwide', value: 'Global' },
+    { label: '✏️  Custom…', value: '__custom__' },
   ];
 
   const handleLibraryClick = (target: 'cover_image_url' | 'thumbnail_url' | 'og_image') => {
@@ -346,6 +362,90 @@ export function NewBlogForm({ blog, setBlog, editor, seoScore, handleGenerateSlu
         </div>
       </div>
 
+      {/* Location — required for local SEO geo targeting */}
+      <div>
+        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Location *</label>
+        <p className="text-xs text-gray-400 mb-2">
+          Required for local SEO. Sets <code className="bg-gray-100 px-1 rounded text-blue-600 font-mono">geo.placename</code>,
+          {' '}<code className="bg-gray-100 px-1 rounded text-blue-600 font-mono">og:locale</code>, and Article schema <code className="bg-gray-100 px-1 rounded text-blue-600 font-mono">areaServed</code>.
+        </p>
+        <div className="relative z-20">
+          {!locationCustom ? (
+            <>
+              <button
+                ref={locationRef}
+                type="button"
+                onClick={() => setIsLocationDropdownOpen(!isLocationDropdownOpen)}
+                className={`w-full flex items-center justify-between px-4 py-3 border rounded-md bg-white hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 text-left ${detailsErrors.location ? 'border-red-500' : 'border-gray-300'}`}
+              >
+                <span className={blog.location ? 'text-gray-900' : 'text-gray-400'}>
+                  {blog.location || 'Select a location'}
+                </span>
+                <ChevronDown size={16} className={`text-gray-400 transition-transform ${isLocationDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {detailsErrors.location && <p className="text-red-500 text-xs mt-1">Location is required before publishing.</p>}
+
+              <AnimatePresence>
+                {isLocationDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden py-1 z-50"
+                  >
+                    {predefinedLocations.map(loc => (
+                      <button
+                        key={loc.value}
+                        type="button"
+                        onClick={() => {
+                          if (loc.value === '__custom__') {
+                            setLocationCustom(true);
+                            setBlog({ ...blog, location: '' });
+                          } else {
+                            setBlog({ ...blog, location: loc.value });
+                            if (detailsErrors.location) setDetailsErrors({ ...detailsErrors, location: false });
+                          }
+                          setIsLocationDropdownOpen(false);
+                        }}
+                        className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                          blog.location === loc.value
+                            ? 'bg-blue-50 text-blue-700 font-bold'
+                            : 'text-gray-700 hover:bg-gray-50'
+                        }`}
+                      >
+                        {loc.label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </>
+          ) : (
+            <div className="flex gap-2">
+              <input
+                type="text"
+                autoFocus
+                value={blog.location || ''}
+                onChange={e => {
+                  setBlog({ ...blog, location: e.target.value });
+                  if (detailsErrors.location) setDetailsErrors({ ...detailsErrors, location: false });
+                }}
+                placeholder="e.g. Abu Dhabi, Riyadh, London…"
+                className={`flex-1 px-4 py-3 border rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${detailsErrors.location ? 'border-red-500' : 'border-gray-300'}`}
+              />
+              <button
+                type="button"
+                onClick={() => { setLocationCustom(false); setBlog({ ...blog, location: '' }); }}
+                className="px-4 py-2 bg-gray-100 border border-gray-300 text-gray-600 rounded-md text-xs font-bold hover:bg-gray-200 transition-colors"
+              >
+                Back
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Excerpt */}
       <div>
         <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Excerpt / Short Description</label>
@@ -380,9 +480,10 @@ export function NewBlogForm({ blog, setBlog, editor, seoScore, handleGenerateSlu
         </div>
       </div>
 
-      {/* Featured Image */}
+      {/* Featured Image — used as hero on the individual blog post page */}
       <div>
-        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Featured Image (Hero)</label>
+        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Featured Image (Blog Post Hero)</label>
+        <p className="text-xs text-gray-400 mb-3">🖼️ This image appears as the <strong>full-width hero</strong> at the top of the individual blog post page only.</p>
         <div className="flex flex-col md:flex-row gap-4 items-stretch p-4 border border-gray-200 rounded-lg bg-gray-50/50">
           <div className="w-48 h-32 bg-white border border-gray-300 rounded-md flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
             {blog.cover_image_url ? (
@@ -427,9 +528,10 @@ export function NewBlogForm({ blog, setBlog, editor, seoScore, handleGenerateSlu
         </div>
       </div>
 
-      {/* Blog Thumbnail */}
+      {/* Blog Thumbnail — used as card image on the blogs listing page */}
       <div>
-        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Blog Thumbnail (Optional)</label>
+        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Blog Thumbnail (Listing Card)</label>
+        <p className="text-xs text-gray-400 mb-3">🃏 This image appears on the <strong>Blogs listing page cards</strong>. If left empty, the Featured Image above is used as fallback.</p>
         <div className="flex flex-col md:flex-row gap-4 items-stretch p-4 border border-gray-200 rounded-lg bg-gray-50/50">
           <div className="w-48 h-32 bg-white border border-gray-300 rounded-md flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
             {blog.thumbnail_url ? (

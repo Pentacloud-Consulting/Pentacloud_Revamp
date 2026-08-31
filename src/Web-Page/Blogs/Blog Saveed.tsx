@@ -61,7 +61,9 @@ function normalizeRow(row: any, index: number): PublicBlog {
     gradient: style.gradient,
     accent: style.accent,
     featured: index === 0,
-    image: row.cover_image_url || row.thumbnail_url || 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800',
+    // Card image: prefer thumbnail_url (the dedicated listing card image),
+    // fall back to cover_image_url (the blog post hero) if no thumbnail is set.
+    image: row.thumbnail_url || row.cover_image_url || 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800',
   };
 }
 

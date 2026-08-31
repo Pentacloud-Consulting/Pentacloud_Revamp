@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   CheckCircle2, XCircle, AlertCircle, ChevronRight,
   Image as ImageIcon, FileText, Tag, Link, Search,
-  Share2, Calendar, User, Hash, Layers
+  Share2, Calendar, User, Hash, Layers, MapPin
 } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -26,6 +26,7 @@ function buildSections(blog: any): Section[] {
   const title = (blog.title || '').trim();
   const slug = (blog.slug || '').trim();
   const category = (blog.category || '').trim();
+  const location = (blog.location || '').trim();
   const author = (blog.author || '').trim();
   const excerpt = (blog.excerpt || '').trim();
   const cover = (blog.cover_image_url || '').trim();
@@ -78,6 +79,7 @@ function buildSections(blog: any): Section[] {
         { label: 'Blog Title', done: !!title, hint: title ? `"${title.slice(0, 40)}${title.length > 40 ? '…' : ''}"` : 'Add a compelling blog title' },
         { label: 'URL Slug', done: !!slug, hint: slug ? `/${slug}` : 'Generate or type a URL slug' },
         { label: 'Category', done: !!category, hint: category || 'Select a category from the dropdown' },
+        { label: 'Location (Local SEO)', done: !!location, hint: location ? `📍 ${location}` : '⚠️ Required — select a location for geo targeting (Dubai, Qatar, UAE…)' },
         { label: 'Author', done: !!author, hint: author || 'Add an author name' },
         { label: 'Excerpt / Summary', done: !!excerpt, warn: !!excerpt && excerpt.length < 50, hint: excerpt ? `${excerpt.length} chars` : 'Write a short summary of the post' },
       ],
