@@ -8,6 +8,17 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
+
+const CustomImage = Image.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      width: { default: null },
+      height: { default: null },
+    };
+  },
+});
+
 import { NewBlogTop } from './New Blog Top';
 import { NewBlogForm } from './New Blog';
 import { BlogFetchView } from '../Blog Fetch/Blog fetch View';
@@ -67,7 +78,7 @@ export function BlogEditor({ id }: BlogEditorProps) {
   const editor = useEditor({
     extensions: [
       StarterKit, 
-      Image, 
+      CustomImage, 
       Link.configure({ 
         openOnClick: false,
         autolink: true,
@@ -120,6 +131,13 @@ export function BlogEditor({ id }: BlogEditorProps) {
       setTimeout(() => setLocationError(false), 4000);
       return;
     }
+
+    if (status === 'published' && !(blog.cover_image_alt || '').trim()) {
+      alert("Alt Text is required before publishing! Please add a descriptive sentence that naturally includes your Focus Keyword.");
+      // Optional: switch back to DETAILS tab if it was a real parent-child tab setup, but alert is fine for now
+      return;
+    }
+
     setSaving(true);
     const updatedBlog = await saveBlogDetails(blog, id, status);
     setBlog(updatedBlog);
@@ -143,7 +161,7 @@ export function BlogEditor({ id }: BlogEditorProps) {
     // 2. Focus keyword not in tracked list → show "not found" popup
     try {
       const stored = JSON.parse(localStorage.getItem('pentacloud_tracked_keywords') || '[]') as string[];
-      if (stored.length > 0 && !stored.includes(kw.toLowerCase())) {
+      if (!stored.includes(kw.toLowerCase())) {
         return 'invalid'; // keyword typed but not tracked
       }
     } catch {}

@@ -12,6 +12,8 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const file = formData.get('file') as File;
+    const focusKeyword = formData.get('focusKeyword') as string | null;
+    const suffix = formData.get('suffix') as string | null;
 
     if (!file) {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
@@ -21,9 +23,20 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(bytes);
 
     // Build a clean filename
-    const nameWithoutExt = file.name.substring(0, file.name.lastIndexOf('.'));
     const ext = file.name.substring(file.name.lastIndexOf('.') + 1).toLowerCase();
-    const slug = nameWithoutExt.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    
+    let slug = '';
+    if (focusKeyword) {
+      slug = focusKeyword.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      if (suffix) {
+        const cleanSuffix = suffix.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        slug += `-${cleanSuffix}`;
+      }
+    } else {
+      const nameWithoutExt = file.name.substring(0, file.name.lastIndexOf('.'));
+      slug = nameWithoutExt.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
+    
     const finalFileName = `${slug}-${Date.now()}.${ext}`;
 
     // 1. Upload file to Supabase Storage bucket "media"

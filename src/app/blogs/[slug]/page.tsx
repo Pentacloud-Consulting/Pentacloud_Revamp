@@ -30,12 +30,27 @@ function buildArticleSchema(blog: any) {
   const geo = getGeo(blog.location);
   const url = blog.canonical_url || `https://pentacloud.me/blogs/${blog.slug}`;
 
+  // Extract all images from content
+  const contentImages: string[] = [];
+  if (blog.content) {
+    const imgRegex = /<img[^>]+src="([^">]+)"/g;
+    let match;
+    while ((match = imgRegex.exec(blog.content)) !== null) {
+      if (match[1] && !contentImages.includes(match[1])) {
+        contentImages.push(match[1]);
+      }
+    }
+  }
+  
+  const heroImage = blog.og_image || blog.cover_image_url;
+  const allImages = heroImage ? Array.from(new Set([heroImage, ...contentImages])) : contentImages;
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: blog.meta_title || blog.title,
     description: blog.meta_description || blog.excerpt || '',
-    image: blog.og_image || blog.cover_image_url || '',
+    image: allImages.length > 0 ? allImages : '',
     url,
     datePublished: blog.publish_date || undefined,
     dateModified: blog.last_modified_date || blog.publish_date || undefined,

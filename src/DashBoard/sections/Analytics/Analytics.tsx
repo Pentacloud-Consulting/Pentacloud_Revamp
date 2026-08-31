@@ -68,23 +68,22 @@ export function Analytics() {
 
   const [keywordsLoading, setKeywordsLoading] = useState(false);
 
-  // Load manual keywords from Supabase on mount
+  // Load manual keywords from Server API on mount to bypass DNS blocks
   useEffect(() => {
     async function loadKeywords() {
       setKeywordsLoading(true);
       try {
-        const { data, error } = await supabase
-          .from('tracked_keywords')
-          .select('*')
-          .order('created_at', { ascending: false });
-        if (!error && data) {
-          setNewlyAddedKeywords(data);
+        const response = await fetch('/api/dashboard/keywords');
+        const result = await response.json();
+        
+        if (result.success && result.data) {
+          setNewlyAddedKeywords(result.data);
           // Sync to localStorage as fast cache for blog editor validation
-          const kwStrings = data.map((k: any) => (k.keyword || '').toLowerCase().trim()).filter(Boolean);
+          const kwStrings = result.data.map((k: any) => (k.keyword || '').toLowerCase().trim()).filter(Boolean);
           localStorage.setItem('pentacloud_tracked_keywords', JSON.stringify(kwStrings));
         }
       } catch (err) {
-        console.warn('Could not load tracked keywords from Supabase', err);
+        console.warn('Could not load tracked keywords from API', err);
       } finally {
         setKeywordsLoading(false);
       }
@@ -737,27 +736,34 @@ export function Analytics() {
             onAddKeywords={async (newKws, loc) => {
               const rows = newKws.map(k => ({ keyword: k, location: loc }));
               try {
-                const { data, error } = await supabase
-                  .from('tracked_keywords')
-                  .insert(rows)
-                  .select();
-                if (!error && data) {
+                const response = await fetch('/api/dashboard/keywords', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ keywords: rows })
+                });
+                const result = await response.json();
+                
+                if (result.success && result.data) {
                   // Use real DB records (have UUIDs) for correct deletion later
-                  setNewlyAddedKeywords(prev => [...data.map((d: any) => ({ ...d, isNew: true })), ...prev]);
+                  setNewlyAddedKeywords(prev => [...result.data.map((d: any) => ({ ...d, isNew: true })), ...prev]);
                   // Update localStorage cache for blog editor
-                  const allKws = [...data.map((d: any) => d.keyword.toLowerCase().trim()), ...newlyAddedKeywords.map((k: any) => (k.keyword || '').toLowerCase().trim())].filter(Boolean);
+                  const allKws = [...result.data.map((d: any) => d.keyword.toLowerCase().trim()), ...newlyAddedKeywords.map((k: any) => (k.keyword || '').toLowerCase().trim())].filter(Boolean);
                   localStorage.setItem('pentacloud_tracked_keywords', JSON.stringify(allKws));
                 }
               } catch (err) {
-                console.warn('Failed to save keywords to Supabase', err);
+                console.warn('Failed to save keywords via API', err);
               }
               setKeywordMode('manual');
             }}
             onDeleteKeywords={async (ids) => {
               try {
-                await supabase.from('tracked_keywords').delete().in('id', ids);
+                await fetch('/api/dashboard/keywords', {
+                  method: 'DELETE',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ ids })
+                });
               } catch (err) {
-                console.warn('Failed to delete keywords from Supabase', err);
+                console.warn('Failed to delete keywords via API', err);
               }
               setNewlyAddedKeywords(prev => prev.filter((kw: any) => !ids.includes(kw.id)));
               setDeletedKeywordIds(prev => [...prev, ...ids]);

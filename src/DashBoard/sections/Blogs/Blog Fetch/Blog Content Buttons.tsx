@@ -2,6 +2,7 @@ import React, { MutableRefObject, useRef, useState } from 'react';
 import { Bold, Italic, Heading2, Heading3, Heading4, Quote, List as ListIcon, Link as LinkIcon, Image as ImageIcon, Loader2 } from 'lucide-react';
 import { Editor } from '@tiptap/react';
 import { uploadMediaFile } from './Blog fetch details';
+import { convertToWebP } from '../../../components/image Converts WEBP';
 
 interface LinkData {
   url: string;
@@ -15,6 +16,7 @@ interface BlogContentButtonsProps {
   savedSelectionRef: MutableRefObject<{ from: number; to: number } | null>;
   setLinkInitialData: (data: LinkData) => void;
   setIsLinkPopupOpen: (isOpen: boolean) => void;
+  focusKeyword?: string;
 }
 
 export const BlogContentButtons: React.FC<BlogContentButtonsProps> = ({
@@ -23,6 +25,7 @@ export const BlogContentButtons: React.FC<BlogContentButtonsProps> = ({
   savedSelectionRef,
   setLinkInitialData,
   setIsLinkPopupOpen,
+  focusKeyword,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -33,11 +36,35 @@ export const BlogContentButtons: React.FC<BlogContentButtonsProps> = ({
 
     try {
       setIsUploading(true);
-      // Upload to real Supabase backend
-      const url = await uploadMediaFile(file);
+
+      // Prompt for secondary keyword / alt text
+      const altText = prompt(
+        "Enter a descriptive Alt Text for this image.\n\n" +
+        "💡 Pro Tip: Use a secondary keyword related to this section instead of repeating the main focus keyword to maximize Image Search ranking."
+      );
       
-      // Insert image into editor
-      editor.chain().focus().setImage({ src: url, alt: file.name }).run();
+      const finalAlt = altText?.trim() || file.name;
+
+      // Convert to WebP first
+      const webpFile = await convertToWebP(file);
+
+      // Upload to real Supabase backend with focusKeyword and 'content' suffix
+      const url = await uploadMediaFile(webpFile, focusKeyword, 'content');
+      
+      // Get image dimensions to prevent CLS
+      const img = new window.Image();
+      img.onload = () => {
+        // Insert image into editor with width and height
+        editor.chain().focus().setImage({ 
+          src: url, 
+          alt: finalAlt, 
+          title: finalAlt,
+          width: img.width,
+          height: img.height
+        }).run();
+      };
+      img.src = URL.createObjectURL(webpFile);
+
     } catch (err) {
       console.error("Failed to upload image:", err);
       alert("Image upload failed. Please try again.");

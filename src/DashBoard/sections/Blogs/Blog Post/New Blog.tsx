@@ -232,7 +232,8 @@ export function NewBlogForm({ blog, setBlog, editor, seoScore, handleGenerateSlu
         setBlog({ ...blog, [mediaTarget]: localUrl });
         
         // Upload to media library behind the scenes
-        const serverUrl = await uploadMediaFile(webpFile);
+        const suffix = mediaTarget === 'cover_image_url' ? 'hero' : (mediaTarget === 'thumbnail_url' ? 'thumbnail' : 'og');
+        const serverUrl = await uploadMediaFile(webpFile, blog.focus_keyword, suffix);
         
         // Update with server URL once uploaded
         setBlog((prev: any) => ({ ...prev, [mediaTarget]: serverUrl }));
@@ -781,6 +782,7 @@ export function NewBlogForm({ blog, setBlog, editor, seoScore, handleGenerateSlu
                 savedSelectionRef={savedSelectionRef}
                 setLinkInitialData={setLinkInitialData}
                 setIsLinkPopupOpen={setIsLinkPopupOpen}
+                focusKeyword={blog.focus_keyword}
               />
             )}
             <div className="-mt-3">
@@ -841,7 +843,7 @@ export function NewBlogForm({ blog, setBlog, editor, seoScore, handleGenerateSlu
                 if (!kw) return;
                 try {
                   const stored = JSON.parse(localStorage.getItem('pentacloud_tracked_keywords') || '[]') as string[];
-                  if (stored.length > 0 && !stored.includes(kw)) {
+                  if (!stored.includes(kw)) {
                     setInvalidKeyword(blog.focus_keyword || '');
                     setIsFocusKeyNotFoundOpen(true);
                   }

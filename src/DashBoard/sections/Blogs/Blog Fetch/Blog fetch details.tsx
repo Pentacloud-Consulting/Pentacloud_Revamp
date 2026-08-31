@@ -3,7 +3,7 @@ import { supabase } from '../../../../lib/supabaseClient';
 // Define the default blog structure with all fields required by the editor
 export const defaultBlogState = {
   title: '', slug: '', excerpt: '', category: '', author: '',
-  cover_image_url: '', thumbnail_url: '',
+  cover_image_url: '', thumbnail_url: '', cover_image_alt: '',
   meta_title: '', meta_description: '',
   og_title: '', og_description: '', og_image: '',
   canonical_url: '', focus_keyword: '', meta_robots: 'index, follow',
@@ -88,10 +88,12 @@ export const saveBlogDetails = async (blogData: any, id?: string, status?: strin
 /**
  * Uploads a local file using our resilient /api/media/upload route
  */
-export const uploadMediaFile = async (file: File) => {
+export const uploadMediaFile = async (file: File, focusKeyword?: string, suffix?: string) => {
   try {
     const formData = new FormData();
     formData.append('file', file);
+    if (focusKeyword) formData.append('focusKeyword', focusKeyword);
+    if (suffix) formData.append('suffix', suffix);
 
     const response = await fetch('/api/media/upload', {
       method: 'POST',

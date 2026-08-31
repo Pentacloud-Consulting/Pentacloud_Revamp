@@ -45,7 +45,15 @@ function buildSections(blog: any): Section[] {
   const publishDate = (blog.publish_date || '').trim();
   const status = (blog.status || '').trim();
 
-  const kw = focusKw.toLowerCase();
+  let isValidFocusKw = false;
+  if (focusKw) {
+    try {
+      const stored = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('pentacloud_tracked_keywords') || '[]') : [];
+      isValidFocusKw = stored.includes(focusKw.toLowerCase());
+    } catch {}
+  }
+
+  const kw = isValidFocusKw ? focusKw.toLowerCase() : '';
   const kwCount = kw ? (content.toLowerCase().split(kw).length - 1) : 0;
   const kwWordCount = kw ? kw.split(/\s+/).filter(Boolean).length : 0;
   const density = wordCount > 0 ? ((kwCount * kwWordCount) / wordCount) * 100 : 0;
@@ -90,7 +98,7 @@ function buildSections(blog: any): Section[] {
       items: [
         { label: 'Meta Title', done: !!metaTitle, warn: !!metaTitle && (metaTitle.length < 50 || metaTitle.length > 60), hint: metaTitle ? `${metaTitle.length}/60 chars` : 'Add a meta title (50–60 chars ideal)' },
         { label: 'Meta Description', done: !!metaDesc, warn: !!metaDesc && (metaDesc.length < 120 || metaDesc.length > 160), hint: metaDesc ? `${metaDesc.length}/160 chars` : 'Add a meta description (120–160 chars)' },
-        { label: 'Focus Keyword', done: !!focusKw, hint: focusKw || 'Add your primary keyword' },
+        { label: 'Focus Keyword', done: isValidFocusKw, warn: !!focusKw && !isValidFocusKw, hint: isValidFocusKw ? focusKw : (focusKw ? '⚠️ Not in your Rank Tracker' : 'Add your primary keyword') },
         { label: 'Canonical URL', done: !!canonical, hint: canonical || 'Auto-generated from slug if empty' },
       ],
     },
@@ -121,7 +129,7 @@ function buildSections(blog: any): Section[] {
         { label: 'Add an image with your Focus Keyword as alt text', done: !!hasAltKw, hint: hasAltKw ? 'Found in image alt text' : 'Add Focus Keyword as alt text to an image' },
         { label: 'Link out to external resources', done: hasExternalLink, hint: hasExternalLink ? 'External links found' : 'Add a link to an external website' },
         { label: 'Add internal links in your content', done: hasInternalLink, hint: hasInternalLink ? 'Internal links found' : 'Add a link to another page on your site (pentacloud.me)' },
-        { label: 'Set a Focus Keyword for this content', done: !!focusKw, hint: focusKw ? 'Focus keyword is set' : 'Define a focus keyword' },
+        { label: 'Set a valid tracked Focus Keyword', done: isValidFocusKw, warn: !!focusKw && !isValidFocusKw, hint: isValidFocusKw ? 'Valid focus keyword is set' : 'Must match a keyword from your Rank Tracker' },
       ],
     },
     {
