@@ -248,14 +248,13 @@ The objective is to completely revamp the Pentacloud Admin Dashboard into a high
 
 ## 📋 Pending — Only 1 Item Remaining
 
-### ⚠️ Email Notifications (SMTP Blocker — Needs Boss Action)
+### ⚠️ Email Notifications (Resend Integration — Domain Verification Needed)
 
-*   **Status:** The contact forms and job application forms save perfectly to the Supabase database. Email notification sending is blocked by a Microsoft/GoDaddy SMTP authentication error (`535 5.7.139`).
-*   **Root Cause:** The current password in `.env.local` (`MICROSOFT_EMAIL_PASSWORD`) is incorrect or the account does not have SMTP AUTH enabled.
+*   **Status:** The contact forms and job application forms save perfectly to the Supabase database. The codebase has been fully refactored to use **Resend** for email notifications instead of the blocked Microsoft/GoDaddy SMTP.
 *   **What is needed from Boss / Admin:**
-    1.  Log in to GoDaddy / Microsoft 365 Admin Portal.
-    2.  Enable **SMTP AUTH** for the mailbox `contactus@pentacloudconsulting.com`.
-    3.  Generate a fresh **App Password** (under Security → App Passwords) and share it.
-    4.  Paste it as `MICROSOFT_EMAIL_PASSWORD` in `.env.local` — done instantly.
+    1.  Log in to **[Resend](https://resend.com)**.
+    2.  Go to **Domains** and add `pentacloud.me`.
+    3.  Add the provided DNS records (TXT, MX) to GoDaddy to verify the domain.
+    4.  Generate an API Key and add it to `.env.local` as `RESEND_API_KEY`.
 
 > **Everything else on the platform is 100% complete and production-ready.**
