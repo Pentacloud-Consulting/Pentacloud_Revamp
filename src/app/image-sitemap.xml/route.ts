@@ -48,9 +48,10 @@ export async function GET() {
       const fallbackRegex = /<img[^>]+src="([^">]+)"/g;
       let matchFallback: RegExpExecArray | null;
       while ((matchFallback = fallbackRegex.exec(blog.content)) !== null) {
-        if (matchFallback[1] && !images.some(img => img.loc === matchFallback[1])) {
+        const m = matchFallback;
+        if (m[1] && !images.some(img => img.loc === m[1])) {
           images.push({
-            loc: matchFallback[1],
+            loc: m[1],
             caption: blog.title, // fallback caption
           });
         }
