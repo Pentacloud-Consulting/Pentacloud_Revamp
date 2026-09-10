@@ -7,9 +7,26 @@ export async function POST(request: Request) {
 
     const response = NextResponse.json({ success: true });
 
+    // Check for default admin or SEO demo credentials fallback (.me)
+    const cleanEmail = email?.trim().toLowerCase();
+    if (
+      (cleanEmail === 'arshad@adminpentacloud.me' && password === 'Arshad@khan') ||
+      (cleanEmail === 'seo@teamworkpentacloud.me' && password === 'Seo@Team')
+    ) {
+      response.cookies.set('sb-access-token', 'mock-token', { path: '/' });
+      return response;
+    }
+
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      return NextResponse.json({ success: false, error: "Supabase environment variables are missing." }, { status: 401 });
+    }
+
     const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      supabaseUrl,
+      supabaseAnonKey,
       {
         cookies: {
           get(name: string) {
@@ -36,6 +53,6 @@ export async function POST(request: Request) {
 
     return response;
   } catch (error: any) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    return NextResponse.json({ success: false, error: error.message || "An internal error occurred." }, { status: 500 });
   }
 }
