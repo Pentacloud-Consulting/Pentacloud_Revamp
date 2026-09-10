@@ -13,7 +13,8 @@ export async function POST(request: Request) {
       (cleanEmail === 'arshad@adminpentacloud.me' && password === 'Arshad@khan') ||
       (cleanEmail === 'seo@teamworkpentacloud.me' && password === 'Seo@Team')
     ) {
-      response.cookies.set('sb-access-token', 'mock-token', { path: '/' });
+      // Set the cookie the proxy middleware actually checks
+      response.cookies.set('dashboard_mock_auth', '1', { path: '/', httpOnly: false, maxAge: 60 * 60 * 24 });
       return response;
     }
 
