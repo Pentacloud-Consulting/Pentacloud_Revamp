@@ -1,7 +1,9 @@
+import { Login } from '../../../DashBoard/sections/Login/Login';
+
 export const metadata = {
-  title: 'Login | Pentacloud Admin',
+  title: 'Admin Login | Pentacloud',
 };
 
 export default function LoginPage() {
-  return null;
+  return <Login />;
 }

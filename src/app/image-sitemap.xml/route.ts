@@ -46,7 +46,7 @@ export async function GET() {
       
       // Fallback if alt is not defined but src is
       const fallbackRegex = /<img[^>]+src="([^">]+)"/g;
-      let matchFallback: RegExpExecArray | null;
+      let matchFallback;
       while ((matchFallback = fallbackRegex.exec(blog.content)) !== null) {
         if (matchFallback[1] && !images.some(img => img.loc === matchFallback[1])) {
           images.push({
