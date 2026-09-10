@@ -32,8 +32,8 @@ print("\n=== STEP 2: Install dependencies ===")
 run(f"cd {APP_DIR} && npm install --legacy-peer-deps 2>&1")
 
 print("\n=== STEP 3: Build Next.js app (this takes a few minutes) ===")
-build_out = run(f"cd {APP_DIR} && npm run build 2>&1", timeout=480)
-if "error" in build_out.lower() and "failed" in build_out.lower():
+build_out = run(f"cd {APP_DIR} && NODE_OPTIONS='--max-old-space-size=4096' npm run build 2>&1", timeout=600)
+if "Build error occurred" in build_out or "build worker exited with code: 1" in build_out or "Failed to compile" in build_out:
     print("\n[BUILD FAILED] Checking for errors...")
     run(f"cd {APP_DIR} && cat .next/build-manifest.json 2>/dev/null | head -5 || echo 'No build manifest'")
     sys.exit(1)
