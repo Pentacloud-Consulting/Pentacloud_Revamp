@@ -9,7 +9,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '',
     '/about',
     '/services',
+    '/services/salesforce',
+    '/services/cloud',
+    '/services/web',
+    '/services/app',
+    '/services/consulting',
+    '/services/data-migration',
+    '/services/digital-marketing',
+    '/services/zoho',
     '/contact',
+    '/careers',
+    '/career',
     '/blogs',
     '/privacy-policy',
     '/terms-of-service',
@@ -20,8 +30,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === '' ? 1 : 0.8,
   }));
 
-  // Dynamic blog routes
-  let blogs: any[] = [];
+  // Dynamic blog routes - with fallback in case of DB connection issues
+  let blogs: any[] = [
+    { slug: 'salesforce-partner-dubai', updated_at: new Date().toISOString() } // Fallback blog
+  ];
+  
   try {
     const supabase = await createClientServer();
     const { data, error } = await supabase
@@ -29,10 +42,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .select('slug, updated_at')
       .eq('status', 'published');
       
-    if (!error && data) {
+    if (!error && data && data.length > 0) {
       blogs = data;
     } else {
-      console.warn('⚠️ Supabase fetch failed in sitemap, excluding dynamic blogs.');
+      console.warn('⚠️ Supabase fetch failed in sitemap, using fallback blogs.');
     }
   } catch (err) {
     console.warn('⚠️ Supabase connection failed in sitemap:', err);
