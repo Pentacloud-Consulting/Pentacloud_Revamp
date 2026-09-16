@@ -48,7 +48,7 @@ const CloudCTA = () => {
     }
   ];
 
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
     <section className="bg-background">
@@ -161,7 +161,7 @@ const CloudCTA = () => {
 
       {/* --- FAQ ACCORDION --- */}
       <div className="py-10 px-4 sm:px-6 bg-[#E8F0F8]">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 sm:mb-16">
             <span className="text-[#1A7FD4] text-[9px] sm:text-xs font-bold tracking-[2px] uppercase">COMMON QUESTIONS</span>
             <h2 className="text-2xl sm:text-4xl md:text-5xl font-nunito font-black text-[#0D1B2A] mt-2 sm:mt-4 leading-tight">
@@ -170,41 +170,88 @@ const CloudCTA = () => {
             </h2>
           </div>
 
-          <div className="flex flex-col gap-3.5 sm:gap-4">
-            {faqs.map((faq, i) => (
-              <div key={i} className="group">
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className={`w-full text-left p-4 sm:p-8 rounded-xl sm:rounded-[24px] transition-all flex items-center justify-between gap-3 min-w-0 ${
-                    faq.type === 'clay' 
-                      ? 'bg-white border border-[#1A7FD4]/10 shadow-sm hover:shadow-md' 
-                      : 'bg-[#E8F0F8] shadow-[4px_4px_10px_rgba(163,185,210,0.4),-4px_-4px_10px_rgba(255,255,255,0.85)] hover:shadow-[6px_6px_12px_rgba(163,185,210,0.5)]'
-                  } ${openFaq === i ? 'ring-2 ring-[#1A7FD4]/20' : ''}`}
-                >
-                  <span className="font-nunito font-bold text-[#0D1B2A] text-sm sm:text-lg leading-tight truncate pr-2 flex-1">{faq.q}</span>
-                  <motion.div
-                    animate={{ rotate: openFaq === i ? 180 : 0 }}
-                    className="shrink-0 text-[#1A7FD4]"
-                  >
-                    <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </motion.div>
-                </button>
-                <AnimatePresence>
-                  {openFaq === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden"
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-start">
+            {/* Left Column */}
+            <div className="flex flex-col gap-3.5 sm:gap-4">
+              {faqs
+                .map((faq, originalIndex) => ({ faq, originalIndex }))
+                .filter((_, idx) => idx % 2 === 0)
+                .map(({ faq, originalIndex }) => (
+                  <div key={originalIndex} className="group">
+                    <button
+                      onClick={() => setOpenFaq(openFaq === originalIndex ? null : originalIndex)}
+                      className={`w-full text-left p-4 sm:p-6 rounded-xl sm:rounded-[24px] transition-all flex items-center justify-between gap-3 min-w-0 ${
+                        faq.type === 'clay' 
+                          ? 'bg-white border border-[#1A7FD4]/10 shadow-sm hover:shadow-md' 
+                          : 'bg-[#E8F0F8] shadow-[4px_4px_10px_rgba(163,185,210,0.4),-4px_-4px_10px_rgba(255,255,255,0.85)] hover:shadow-[6px_6px_12px_rgba(163,185,210,0.5)]'
+                      } ${openFaq === originalIndex ? 'ring-2 ring-[#1A7FD4]/20' : ''}`}
                     >
-                      <div className={`p-4 pt-0 sm:p-8 sm:pt-0 text-[#4A6080] font-inter text-xs sm:text-base leading-relaxed ${faq.type === 'neuro' ? 'bg-[#E8F0F8] rounded-b-xl sm:rounded-b-[24px] -mt-4 pt-6 sm:-mt-6 sm:pt-10 shadow-[inset_4px_4px_8px_rgba(163,185,210,0.3)]' : ''}`}>
-                        {faq.a}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
+                      <span className="font-nunito font-bold text-[#0D1B2A] text-sm sm:text-base leading-tight pr-2 flex-1">{faq.q}</span>
+                      <motion.div
+                        animate={{ rotate: openFaq === originalIndex ? 180 : 0 }}
+                        className="shrink-0 text-[#1A7FD4]"
+                      >
+                        <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6" />
+                      </motion.div>
+                    </button>
+                    <AnimatePresence>
+                      {openFaq === originalIndex && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className={`p-4 sm:p-6 text-[#4A6080] font-inter text-xs sm:text-sm leading-relaxed ${faq.type === 'neuro' ? 'bg-[#E8F0F8] rounded-b-xl sm:rounded-b-[24px] -mt-2 pt-4 shadow-[inset_4px_4px_8px_rgba(163,185,210,0.3)]' : ''}`}>
+                            {faq.a}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+            </div>
+
+            {/* Right Column */}
+            <div className="flex flex-col gap-3.5 sm:gap-4">
+              {faqs
+                .map((faq, originalIndex) => ({ faq, originalIndex }))
+                .filter((_, idx) => idx % 2 === 1)
+                .map(({ faq, originalIndex }) => (
+                  <div key={originalIndex} className="group">
+                    <button
+                      onClick={() => setOpenFaq(openFaq === originalIndex ? null : originalIndex)}
+                      className={`w-full text-left p-4 sm:p-6 rounded-xl sm:rounded-[24px] transition-all flex items-center justify-between gap-3 min-w-0 ${
+                        faq.type === 'clay' 
+                          ? 'bg-white border border-[#1A7FD4]/10 shadow-sm hover:shadow-md' 
+                          : 'bg-[#E8F0F8] shadow-[4px_4px_10px_rgba(163,185,210,0.4),-4px_-4px_10px_rgba(255,255,255,0.85)] hover:shadow-[6px_6px_12px_rgba(163,185,210,0.5)]'
+                      } ${openFaq === originalIndex ? 'ring-2 ring-[#1A7FD4]/20' : ''}`}
+                    >
+                      <span className="font-nunito font-bold text-[#0D1B2A] text-sm sm:text-base leading-tight pr-2 flex-1">{faq.q}</span>
+                      <motion.div
+                        animate={{ rotate: openFaq === originalIndex ? 180 : 0 }}
+                        className="shrink-0 text-[#1A7FD4]"
+                      >
+                        <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6" />
+                      </motion.div>
+                    </button>
+                    <AnimatePresence>
+                      {openFaq === originalIndex && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className={`p-4 sm:p-6 text-[#4A6080] font-inter text-xs sm:text-sm leading-relaxed ${faq.type === 'neuro' ? 'bg-[#E8F0F8] rounded-b-xl sm:rounded-b-[24px] -mt-2 pt-4 shadow-[inset_4px_4px_8px_rgba(163,185,210,0.3)]' : ''}`}>
+                            {faq.a}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ const locations = [
   {
     label: "India Office",
     address: "Jagan Arcade, 4th Floor, 1st Main Road, Anandnagar, RT Nagar, Bengaluru, 560032, Karnataka, India",
-    phone: "+971 545 132 807",
+    phone: "+91 8147897286",
     iconColor: "text-[#1A7FD4]",
     // Jagan Arcade, Anandnagar, RT Nagar, Bengaluru
     lat: 13.0155,
@@ -30,14 +30,14 @@ const locations = [
   },
   {
     label: "Qatar Presence",
-    address: "Strategic presence across Doha & Qatar",
-    phone: "+971 545 132 807",
+    address: "Building 16, Zone 69, Street 169, Lusail Boulevard (next to Downtown Lusail Tram Station), Doha, Qatar",
+    phone: "+974 7200 7930",
     iconColor: "text-[#F59E0B]",
-    // Doha city centre
-    lat: 25.2854,
-    lon: 51.5310,
-    zoom: 13,
-    mapQuery: "Doha, Qatar"
+    // Lusail Boulevard, Doha
+    lat: 25.4190,
+    lon: 51.5270,
+    zoom: 15,
+    mapQuery: "Lusail Boulevard, Doha, Qatar"
   }
 ];
 

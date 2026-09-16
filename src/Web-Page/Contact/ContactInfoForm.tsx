@@ -99,7 +99,7 @@ const FormBlock = ({ handleSubmit, formStatus, agreed, setAgreed, formData, setF
       ) : (
         <>
           <div className="mb-5 sm:mb-8">
-            <h3 className="text-xl sm:text-3xl font-nunito font-black text-[#0D1B2A] mb-2 sm:mb-3">Send Us a Message</h3>
+            <h3 className="text-xl sm:text-3xl font-nunito font-black text-[#0D1B2A] mb-2 sm:mb-3">Get In Touch</h3>
             <p className="text-[#4A6080] font-inter text-xs sm:text-sm leading-relaxed">Fill in the form below and one of our consultants will reach out within 24 hours.</p>
           </div>
 
@@ -345,30 +345,6 @@ const ContactInfoForm = ({ activeTab, onTabChange }: any) => {
                     </div>
                     <span className="font-nunito font-black text-[#0D1B2A] text-xs sm:text-sm">+971 545 132 807</span>
                  </div>
-              </div>
-
-              {/* Form Toggles */}
-              <div className="flex flex-wrap gap-4 pt-4 pb-4 border-b border-[#1A7FD4]/10 mb-4">
-                <button 
-                  onClick={() => onTabChange && onTabChange('message')}
-                  className={`px-5 py-2.5 rounded-full font-nunito font-black text-xs sm:text-sm transition-all ${
-                    activeTab === 'message' || !activeTab
-                    ? 'bg-[#1A7FD4] text-white shadow-[0_5px_15px_rgba(26,127,212,0.3)]' 
-                    : 'bg-white/60 text-[#4A6080] border border-[#1A7FD4]/20 hover:bg-white'
-                  }`}
-                >
-                  Send Message
-                </button>
-                <button 
-                  onClick={() => onTabChange && onTabChange('resume')}
-                  className={`px-5 py-2.5 rounded-full font-nunito font-black text-xs sm:text-sm transition-all ${
-                    activeTab === 'resume' 
-                    ? 'bg-[#1A7FD4] text-white shadow-[0_5px_15px_rgba(26,127,212,0.3)]' 
-                    : 'bg-white/60 text-[#4A6080] border border-[#1A7FD4]/20 hover:bg-white'
-                  }`}
-                >
-                  Send Resume
-                </button>
               </div>
 
               {/* Follow Us Section - aligned in exactly 1 line */}

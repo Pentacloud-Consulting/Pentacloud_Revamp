@@ -21,7 +21,7 @@ const options = [
     cta: "Send Email",
     href: "mailto:contactus@pentacloudconsulting.com",
     color: "#1A7FD4",
-    response: "Within 24 Hours"
+    response: "Within 8 Hours"
   },
   {
     icon: Phone,

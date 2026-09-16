@@ -92,8 +92,9 @@ const Navbar = () => {
         },
       ]
     },
+    { name: "Contact Us", href: "/contact" },
+    { name: "Career", href: "/careers" },
     { name: "Blogs", href: "/blogs" },
-    { name: "Contact", href: "/contact" },
   ];
 
   return (
